@@ -1,7 +1,7 @@
 <div class="container d-flex align-items-center justify-content-between">
     <div class="logo">
 
-        <h1 class="text-light"><a href="index.html"><img src="assets/img/favicon.png" alt="" class="img-fluid"><span>SurfNautica</span></h1></a>
+        <h1 class="text-light"><a href="index.php"><img src="assets/img/favicon.png" alt="" class="img-fluid"><span>SurfNautica</span></h1></a>
     </div>
 
     <nav id="navbar" class="navbar">
@@ -28,7 +28,7 @@
                 </ul>
             </li>
             <li><a class="nav-link scrollto" href="#">Noticias</a></li>
-            <li><a class="nav-link scrollto" href="contacto.html">Contactos</a></li>
+            <li><a class="nav-link scrollto" href="contacto.php">Contactos</a></li>
             <li><a class="nav-link scrollto" href="#">Login</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>

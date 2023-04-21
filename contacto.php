@@ -23,7 +23,7 @@
         <div class="d-flex justify-content-between align-items-center">
           <h2>Contactos</h2>
           <ol>
-            <li><a href="#">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             <li>Contactos</li>
           </ol>
         </div>
