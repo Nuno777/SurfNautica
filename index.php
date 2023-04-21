@@ -9,6 +9,14 @@
 </head>
 
 <body>
+  <!-- Page Loader -->
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+
+  </div>
 
   <header id="header" class="fixed-top header-transparent">
     <?php
@@ -457,7 +465,12 @@
   <script src="assets/vendor/php-email-form/validate.js"></script>
 
   <script src="assets/js/main.js"></script>
-
+  <script src="assets/js/jquery-3.4.1.min.js"></script>
+  <script>
+    $(window).on("load", function() {
+      $('body').addClass('loaded');
+    });
+  </script>
 </body>
 
 </html>
