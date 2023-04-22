@@ -27,15 +27,9 @@
                     <li><a href="/Duarte_Lacerda/equipamentos.php">Equipamentos</a></li>
                 </ul>
             </li>
-<<<<<<< Updated upstream
-            <li><a class="nav-link scrollto" href="#">Noticias</a></li>
-            <li><a class="nav-link scrollto" href="contacto.php">Contactos</a></li>
-            <li><a class="nav-link scrollto" href="#">Login</a></li>
-=======
             <li><a class="nav-link scrollto" href="noticias.php">Noticias</a></li>
             <li><a class="nav-link scrollto" href="contacto.php">Contactos</a></li>
             <li><a class="nav-link scrollto" href="login.php">Login</a></li>
->>>>>>> Stashed changes
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
     </nav>
