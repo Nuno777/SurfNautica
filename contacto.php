@@ -6,7 +6,7 @@ $assunto = array_key_exists('assunto', $_POST) ? $_POST['assunto'] : "";
 $mensagem = array_key_exists('mensagem', $_POST) ? $_POST['mensagem'] : "";
 $msg_erro = "";
 
-if (isset($_POST["contacto"])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($email == "" || $nome == "" || $assunto == "" || $mensagem == "")
     $msg_erro = "Campos não preenchidos";
   else {
@@ -21,7 +21,7 @@ if (isset($_POST["contacto"])) {
       $assunto = $conn->real_escape_string($assunto);
       $mensagem = $conn->real_escape_string($mensagem);
 
-      $query = "INSERT INTO contacto (`email`, `nome`, `assunto`, `mensagem`) VALUES ('$email', '$nome', '$assunto', '$mensagem')";
+      $query = "INSERT INTO `contacto` (`email`, `nome`, `assunto`, `mensagem`) VALUES ('$email', '$nome', '$assunto', '$mensagem')";
 
       $sucesso_query = $conn->query($query);
       if ($sucesso_query) {
@@ -126,7 +126,6 @@ if (isset($_POST["contacto"])) {
               <div class="text-center"><button type="submit">Enviar</button></div>
             </form>
           </div>
-
         </div>
 
       </div>

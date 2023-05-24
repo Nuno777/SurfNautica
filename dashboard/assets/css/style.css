@@ -14402,7 +14402,6 @@ label {
 }
 .table thead th {
   text-transform: uppercase;
-  color: #31343d;
   border-bottom: 0;
 }
 .table.table-dark thead th {
