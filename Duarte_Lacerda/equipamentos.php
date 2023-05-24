@@ -1,5 +1,5 @@
 <?php
-require('database.php');
+require('../conexao.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,38 +54,52 @@ require('database.php');
                 </form>
             </div>
         </div>
-        <?php
-        $sql = "select name, pic, date_pub from equips;";
-        $result = mysqli_query($connection, $sql);
-
-        if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                foreach ($row as $res => $key) {
-                    $name = $row['name'];
-                    $pic = $row['pic'];
-                    $date_pub = date("d/m/Y", strtotime($row['date_pub']));
-                }
-            }
-        } else {
-            echo ("Erro ao executar o select:" . mysqli_connect_error($connection));
-        }
-
-        mysqli_close($connection);
-        ?>
         <div class="row tm-mb-90 tm-gallery">
+            <?php
+            $sql = "select name, pic, date_pub from equips;";
+            $result = mysqli_query($conn, $sql);
+
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    foreach ($row as $res => $key) {
+                        $name = $row['name'];
+                        $pic = $row['pic'];
+                        $date_pub = date("d/m/Y", strtotime($row['date_pub']));
+                    }
+                    echo ('<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                            <figure class="effect-ming tm-video-item">
+                                <img src="img/' . $pic . '" alt="Image" class="img-fluid">
+                                <figcaption class="d-flex align-items-center justify-content-center">
+                                    <h2>' . $name . '</h2>
+                                    <a href="equipamentos_detail.php">Ver Mais</a>
+                                </figcaption>
+                            </figure>
+                            <div class="d-flex justify-content-between tm-text-gray">
+                                <span class="tm-text-gray-light">' . $date_pub . '</span>
+                            </div>
+                        </div>');
+                }
+            } else {
+                echo ("Erro ao executar o select:" . mysqli_connect_error($conn));
+            }
+
+            mysqli_close($conn);
+            ?>
+        </div>
+        <!-- <div class="row tm-mb-90 tm-gallery">
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item">
-                    <img src="img/<?php echo ($pic); ?>" alt="Image" class="img-fluid">
+                    <img src="img/<?php /* echo ($pic); */ ?>" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2><?php echo ($name); ?></h2>
+                        <h2><?php /* echo ($name); */ ?></h2>
                         <a href="equipamentos_detail.php">Ver Mais</a>
                     </figcaption>
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light"><?php echo ($date_pub); ?></span>
+                    <span class="tm-text-gray-light"><?php /* echo ($date_pub); */ ?></span>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="row tm-mb-90">
             <div class="col-12 d-flex justify-content-between align-items-center tm-paging-col">
                 <a href="javascript:void(0);" class="btn btn-primary tm-btn-prev mb-2 disabled">Anterior</a>

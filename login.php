@@ -7,7 +7,7 @@ if (isset($_POST['login'])) {
     $password = hash('sha512', $password); //segurança
     $query = "SELECT * FROM users WHERE email='$email' AND pass='$password'";
     $result = mysqli_query($conn, $query);
-    header("location: /surfnautica/dashboard/dashboard.php");
+    header("location: dashboard/dashboard.php");
 }
 ?>
 <!DOCTYPE html>
