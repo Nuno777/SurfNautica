@@ -1,3 +1,41 @@
+<?php
+require_once 'conexao.php';
+$email = array_key_exists('email', $_POST) ? $_POST['email'] : "";
+$nome = array_key_exists('nome', $_POST) ? $_POST['nome'] : "";
+$assunto = array_key_exists('assunto', $_POST) ? $_POST['assunto'] : "";
+$mensagem = array_key_exists('mensagem', $_POST) ? $_POST['mensagem'] : "";
+$msg_erro = "";
+
+if (isset($_POST["contacto"])) {
+  if ($email == "" || $nome == "" || $assunto == "" || $mensagem == "")
+    $msg_erro = "Campos não preenchidos";
+  else {
+    if ($conn->connect_errno) {
+      $code = $conn->connect_errno;
+      $message = $conn->connect_error;
+      $msg_erro = "Falha na ligação à BaseDados ($code $message)!";
+    } else {
+
+      $email = $conn->real_escape_string($email);
+      $nome = $conn->real_escape_string($nome);
+      $assunto = $conn->real_escape_string($assunto);
+      $mensagem = $conn->real_escape_string($mensagem);
+
+      $query = "INSERT INTO contacto (`email`, `nome`, `assunto`, `mensagem`) VALUES ('$email', '$nome', '$assunto', '$mensagem')";
+
+      $sucesso_query = $conn->query($query);
+      if ($sucesso_query) {
+        header("Location: contacto.php");
+        exit(0);
+      } else {
+        $code = $conn->errno;
+        $message = $conn->error;
+        $msg_erro = "Falha na query! ($code $message)";
+      }
+    }
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,24 +107,22 @@
           </div>
 
           <div class="col-lg-6">
-            <form action="contacto.html" method="post" role="form" class="php-email-form" enctype="multipart/form-data">
+            <form id="contacto" action="contacto.php" method="POST" role="form" class="php-email-form" enctype="multipart/form-data">
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Nome" maxlength="30" required>
+                  <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" maxlength="30" required>
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <input type="email" class="form-control" name="email" id="email" placeholder="Email" pattern="^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3})|(aero|coop|info|museum|name))$" required>
                 </div>
               </div>
               <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="assunto" placeholder="Assunto" maxlength="60" required>
+                <input type="text" class="form-control" name="assunto" id="assunto" placeholder="Assunto" maxlength="60" required>
               </div>
               <div class="form-group mt-3">
-                <textarea class="form-control" name="mensagem" rows="8" placeholder="Mensagem" required></textarea>
+                <textarea class="form-control" name="mensagem" id="mensagem" rows="8" placeholder="Mensagem" required></textarea>
               </div>
-              <div class="my-3">
-
-              </div>
+              <br>
               <div class="text-center"><button type="submit">Enviar</button></div>
             </form>
           </div>
@@ -112,14 +148,10 @@
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <!-- <script src="assets/vendor/php-email-form/validate.js"></script> -->
   <script src="assets/js/main.js"></script>
   <script src="assets/js/jquery-3.4.1.min.js"></script>
-  <script>
-    $(window).on("load", function() {
-      $('body').addClass('loaded');
-    });
-  </script>
+
 </body>
 
 </html>
