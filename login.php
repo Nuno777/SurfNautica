@@ -7,7 +7,7 @@ if (isset($_POST['login'])) {
     $password = hash('sha512', $password); //segurança
     $query = "SELECT * FROM users WHERE email='$email' AND pass='$password'";
     $result = mysqli_query($conn, $query);
-    header("location: /Permission_level/dashboard/dashboard.php");
+    header("location: /surfnautica/dashboard/dashboard.php");
 }
 ?>
 
@@ -20,14 +20,14 @@ if (isset($_POST['login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sign In</title>
     <link href="https://fonts.googleapis.com/css?family=Karla:400,700|Roboto" rel="stylesheet">
-    <link href="/Permission_level/dashboard/assets/plugins/material/css/materialdesignicons.min.css" rel="stylesheet" />
-    <link href="/Permission_level/dashboard/assets/plugins/simplebar/simplebar.css" rel="stylesheet" />
-    <link href="/Permission_level/dashboard/assets/plugins/nprogress/nprogress.css" rel="stylesheet" />
-    <link id="main-css-href" rel="stylesheet" href="/Permission_level/dashboard/assets/css/style.css" />
+    <link href="/surfnautica/dashboard/assets/plugins/material/css/materialdesignicons.min.css" rel="stylesheet" />
+    <link href="/surfnautica/dashboard/assets/plugins/simplebar/simplebar.css" rel="stylesheet" />
+    <link href="/surfnautica/dashboard/assets/plugins/nprogress/nprogress.css" rel="stylesheet" />
+    <link id="main-css-href" rel="stylesheet" href="/surfnautica/dashboard/assets/css/style.css" />
 
-    <link href="/Permission_level/dashboard/assets/images/favicon.png" rel="shortcut icon" />
+    <link href="/surfnautica/dashboard/assets/images/favicon.png" rel="shortcut icon" />
 
-    <script src="/Permission_level/dashboard/assets/plugins/nprogress/nprogress.js"></script>
+    <script src="/surfnautica/dashboard/assets/plugins/nprogress/nprogress.js"></script>
 </head>
 
 <body class="bg-light-gray" id="body">
