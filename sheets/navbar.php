@@ -23,7 +23,7 @@
             <li class="dropdown"><a href="#" class="nav-link scrollto"><span>Info
                         Surf</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
-                    <li><a href="#">Pranchas</a></li>
+                    <li><a href="Duarte_Lacerda/equipamentos_detail.php">Pranchas</a></li>
                     <li><a href="Duarte_Lacerda/equipamentos.php">Equipamentos</a></li>
                 </ul>
             </li>
