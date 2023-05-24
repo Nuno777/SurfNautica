@@ -43,8 +43,8 @@ if ($levelperm['permission'] == 0) {
         <!-- Aplication Brand -->
         <div class="app-brand">
           <a href="../index.php">
-            <img src="assets/images/logo.png" alt="Mono">
-            <span class="brand-name">Bank.</span>
+            <img src="assets/images/favicon.png" style="height: 65px;" alt="Mono">
+            <span class="brand-name text-light">SURFNAUTICA</span>
           </a>
         </div>
         <?php

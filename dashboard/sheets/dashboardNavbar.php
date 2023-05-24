@@ -13,20 +13,6 @@ if ($user->num_rows) {
         <span class="d-none d-lg-inline-block"><?php echo $nome ?></span>
       </button>
       <ul class="dropdown-menu dropdown-menu-right">
-        <li>
-          <a class="dropdown-link-item" href="user_profile.php">
-            <i class="mdi mdi-account-outline"></i>
-            <span class="nav-text">My Profile</span>
-          </a>
-        </li>
-
-        <li>
-          <a class="dropdown-link-item" href="user_accountSettings.php">
-            <i class="mdi mdi-settings"></i>
-            <span class="nav-text">Account Setting</span>
-          </a>
-        </li>
-
         <li class="dropdown-footer">
           <a class="dropdown-link-item" href="logout.php">
             <i class="mdi mdi-logout"></i>
