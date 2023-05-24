@@ -50,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
 
 <head>
+<<<<<<< HEAD
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,6 +59,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <script src="assets/js/jquery-3.6.3.min.js"></script>
   <script src="assets/js/all.min.js"></script>
   <script defer src="assets/js/app.js"></script>
+=======
+
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign Up</title>
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,700|Roboto" rel="stylesheet">
+    <link href="/surfnautica/dashboard/assets/plugins/material/css/materialdesignicons.min.css" rel="stylesheet" />
+    <link href="/surfnautica/dashboard/assets/plugins/simplebar/simplebar.css" rel="stylesheet" />
+    <link href="/surfnautica/dashboard/assets/plugins/nprogress/nprogress.css" rel="stylesheet" />
+
+    <link id="main-css-href" rel="stylesheet" href="/surfnautica/dashboard/assets/css/style.css" />
+
+    <link href="/surfnautica/dashboard/assets/images/favicon.png" rel="shortcut icon" />
+
+    <script src="/surfnautica/dashboard/assets/plugins/nprogress/nprogress.js"></script>
+  </head>
+
+>>>>>>> main
 </head>
 
 <body>
