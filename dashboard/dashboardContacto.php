@@ -66,7 +66,7 @@ $resultdelete = mysqli_query($conn, $query);
               if (isset($_SESSION["message"])) { ?>
                 <div class='alert alert-<?php echo $_SESSION["message"]["type"] ?> alert-dismissible fade show' role='alert'>
                   <?php echo $_SESSION["message"]["content"]; ?>
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="fa fa-times"></span>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="mdi mdi-times"></span>
                   </button>
                 </div>
 
@@ -86,7 +86,6 @@ $resultdelete = mysqli_query($conn, $query);
 
                             <th scope="col">Nome</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Assunto</th>
                             <th scope="col">Mensagem</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
@@ -98,7 +97,6 @@ $resultdelete = mysqli_query($conn, $query);
                             echo "<tr>";
                             echo "<td>" . $row->nome . "</td>";
                             echo "<td>" . $row->email . "</td>";
-                            echo "<td>" . $row->assunto . "</td>";
                             echo "<td><a data-toggle='modal' data-target='#viewmensagem$row->id_cont' class='text-primary' name='Menssage'><i class='mdi mdi-comment-text-outline'></i></a></td>";
                             echo "<td><a href='editcontato.php?id_cont=$row->id_cont' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
                             echo "<td><a data-toggle='modal' data-target='#deletecontato$row->id_cont' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
@@ -116,17 +114,31 @@ $resultdelete = mysqli_query($conn, $query);
           </div>
         </div>
         <!-- End Top -->
-        
+
         <!-- Modal de ver mensagem -->
         <?php while ($row = $resultMenssage->fetch_object()) {
-          $mensagem = $row->mensagem; ?>
+          $mensagem = $row->mensagem;
+          $assunto = $row->assunto;
+        ?>
           <div class="modal fade" id='viewmensagem<?php echo $row->id_cont ?>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">Mensagem</h5><span class="span-contat"><?php echo $row->email; ?></span>
                 </div>
+                <!-- assunto -->
                 <div class="modal-body">
+                  <span>Assunto</span>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <textarea type="text" class="form-control" rows="3" style="resize: none" disabled><?= $assunto ?></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- mensagem -->
+                <div class="modal-body">
+                  <span>Mensagem</span>
                   <div class="row">
                     <div class="col-md-12">
                       <textarea type="text" class="form-control" rows="10" style="resize: none" disabled><?= $mensagem ?></textarea>
@@ -135,7 +147,7 @@ $resultdelete = mysqli_query($conn, $query);
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
-                  <?php echo "<a href='editcontato.php?id_cont=$row->id_cont' type='button' class='btn btn-primary'>Editar</a>"; ?>
+                  <?php echo "<a href='editcontato.php?id_cont=$row->id_cont' type='button' class='btn btn-primary'>Responder</a>"; ?>
                 </div>
               </div>
             </div>

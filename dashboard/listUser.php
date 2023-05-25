@@ -4,25 +4,33 @@ if (!isset($_SESSION['authenticated'])) {
   header('Location: ../login.php');
   exit(0);
 }
+
 require_once '../conexao.php';
 $query = "SELECT permission from users where email = '{$_SESSION['email']}'";
 $perms = mysqli_query($conn, $query);
 $levelperm = mysqli_fetch_assoc($perms);
 if ($levelperm['permission'] == 0) {
-  header('Location: ../index.php');
+  header('Location: /Permission_level/dashboard/profile.php');
 }
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
-  <title>Dashboard</title>
+  <title>Dashboard - Lista de Users</title>
   <?php
   require_once 'sheets/dashboardHead.php';
   ?>
 </head>
 
 <body class="navbar-fixed sidebar-fixed" id="body">
+  <script>
+    NProgress.configure({
+      showSpinner: false
+    });
+    NProgress.start();
+  </script>
+
   <div class="wrapper">
     <aside class="left-sidebar sidebar-dark" id="left-sidebar">
       <div id="sidebar" class="sidebar sidebar-with-footer">
@@ -58,7 +66,7 @@ if ($levelperm['permission'] == 0) {
 
       <div class="content-wrapper">
         <div class="content">
-          <!-- Alerta - Operações (LOGIN) -->
+          <!-- Alerta - Operações (DELETE) -->
           <?php
           if (isset($_SESSION["message"])) { ?>
             <div class='alert alert-<?php echo $_SESSION["message"]["type"] ?> alert-dismissible fade show' role='alert'>
@@ -71,100 +79,77 @@ if ($levelperm['permission'] == 0) {
           }
           ?>
           <!-- Top -->
-          <div class="row">
-            <div class="col-xl-3 col-sm-6">
-              <div class="card card-default card-mini">
-                <div class="card-header">
-                  <h2>Novo Admin</h2>
-                  <div class="sub-title">
-                    <a href="newAdmin.php"><span class="mr-1">Criar novo Admin</span></a>
-                  </div>
-                </div>
-                <div class="card-body">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="header-title">Lita de Users</h4>
+              <span class="span-contat">Total</span>
+              <br>
+              <br>
 
-                  <div class="chart-wrapper">
-                  </div>
-                </div>
-              </div>
-            </div>
+              <div class="single-table">
+                <div class="table-responsive">
+                  <table class="table text-center">
+                    <thead class="text-uppercase bg-dark">
+                      <tr class="text-white">
 
-            <div class="col-xl-3 col-sm-6">
-              <div class="card card-default card-mini">
-                <div class="card-header">
-                  <h2>Atualizar permissão</h2>
-                  <div class="sub-title">
-                    <a href="listPerms.php"><span class="mr-1">Alterar a permissão</span></a>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <?php
-                  $query = "SELECT id FROM users ORDER BY id";
-                  $total = mysqli_query($conn, $query);
-                  $total = mysqli_num_rows($total);
-                  ?>
-                  <p>Total de Contas: <?php echo $total ?></p>
-                  <div class="chart-wrapper">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-xl-3 col-sm-6">
-              <div class="card card-default card-mini">
-                <div class="card-header">
-                  <h2>Lista Professores</h2>
-                  <div class="sub-title">
-                    <a href="listProf.php"><span class="mr-1">Listagem de Professores</span></a>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <?php
-                  $query = "SELECT id FROM users WHERE permission=2 ORDER BY id";
-                  $totalprof = mysqli_query($conn, $query);
-                  $prof = mysqli_num_rows($totalprof);
-                  ?>
-                  <p>Total de Professores: <?php echo $prof ?></p>
-                  <div class="chart-wrapper">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-xl-3 col-sm-6">
-              <div class="card card-default card-mini">
-                <div class="card-header">
-                  <h2>Lista Users</h2>
-                  <div class="sub-title">
-                    <a href="listUser.php"><span class="mr-1">Listagem dos Users</span></a>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <?php
-                  $query = "SELECT id FROM users WHERE permission='0' ORDER BY id";
-                  $totaluser = mysqli_query($conn, $query);
-                  $user = mysqli_num_rows($totaluser);
-                  ?>
-                  <p>Total de Users: <?php echo $user ?></p>
-                  <div class="chart-wrapper">
-                  </div>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      $query = "SELECT * FROM users WHERE permission=0 ORDER BY id";
+                      $result = mysqli_query($conn, $query);
+                      $resultdelete = mysqli_query($conn, $query);
+                      while ($row = $result->fetch_object()) {
+                      ?>
+                        <tr>
+                          <td><?php echo $row->nome ?></td>
+                          <td><?php echo $row->email ?></td>
+                          <!-- <td><a href='editUser.php?id=<?php echo $row->id ?>' class='text-primary' name='edit'> <i class="mdi mdi-square-edit-outline"></i></a></td> -->
+                          <td><a data-toggle='modal' data-target='#deleteUser<?php echo $row->id ?>' class='text-danger' name='delete'> <i class="mdi mdi-delete"></i></a></td>
+                        </tr>
+                      <?php
+                      }
+                      ?>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
           </div>
           <!-- End Top -->
-          <!-- Table -->
 
-
+          <!-- Modal para eliminar -->
+          <?php while ($row = $resultdelete->fetch_object()) { ?>
+            <div class="modal fade" id='deleteUser<?php echo $row->id ?>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Eliminar User</h5><span class="span-contat"><?php echo $row->email; ?></span>
+                  </div>
+                  <div class="modal-body">
+                    <p>Deseja eliminar este User?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                    <a href='deleteUser.php?id=<?php echo $row->id . '&email=' . $row->email ?>' type='button' class='btn btn-primary'>Sim</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <?php
+          }
+          ?>
+          <!-- Modal para eliminar fechou -->
         </div>
-
-        <!-- End Table -->
         <br>
         <footer class="footer mt-auto">
           <?php
           require_once 'sheets/dashboardFooter.php';
           ?>
         </footer>
-
 
 
       </div>

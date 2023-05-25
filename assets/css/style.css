@@ -315,6 +315,10 @@ h6 {
   transition: 0.3s;
 }
 
+.navbar a:hover{
+color: #fff;
+}
+
 .navbar a i,
 .navbar a:focus i {
   font-size: 12px;
