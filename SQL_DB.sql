@@ -159,3 +159,6 @@ INSERT INTO professor (nome, email, foto, especialidade, id)
 VALUES ('Maria Santos', 'maria@example.com', 'foto2.jpg', 'Surfista Instrutora', 2);
 INSERT INTO professor (nome, email, foto, especialidade, id) 
 VALUES ('Pedro Costa', 'pedro@example.com', 'foto3.jpg', 'Surfista Competitivo', 3);
+
+insert into equipamentos (nome, descricao, img, id_parceria) values ('Fatos', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'yyy.jpg', 1);
+insert into parcerias (nome, descricao, img) values ('RipCurl', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'www.jpg');
