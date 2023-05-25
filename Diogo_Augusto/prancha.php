@@ -34,44 +34,9 @@
 
     <!-- header -->
     <header id="header" class="fixed-top ">
-        <div class="container d-flex align-items-center justify-content-between">
-          <div class="logo">
-    
-            <h1 class="text-light"><a href="../index.html"><img src="img/favicon.png" alt=""
-                  class="img-fluid"><span>SurfNautica</span></h1></a>
-          </div>
-    
-          <nav id="navbar" class="navbar">
-            <ul>
-              <li class="dropdown"><a href="#" class="nav-link scrollto"><span>Sobre</span>
-                  <i class="bi bi-chevron-down"></i></a>
-                <ul>
-                  <li><a href="#">História do Clube</a></li>
-                  <li><a href="#">Parcerias</a></li>
-                </ul>
-              </li>
-              <li class="dropdown"><a href="#" class="nav-link scrollto"><span>Escola
-                    de Surf</span> <i class="bi bi-chevron-down"></i></a>
-                <ul>
-                  <li><a href="#">Dias Abertos</a></li>
-                  <li><a href="#">Aulas</a></li>
-                </ul>
-              </li>
-              <li class="dropdown"><a href="#" class="nav-link scrollto"><span>Info
-                    Surf</span> <i class="bi bi-chevron-down"></i></a>
-                <ul>
-                  <li><a href="#">Pranchas</a></li>
-                  <li><a href="#">Equipamentos</a></li>
-                </ul>
-              </li>
-              <li><a class="nav-link scrollto" href="#">Noticias</a></li>
-              <li><a class="nav-link scrollto" href="contacto.html">Contactos</a></li>
-              <li><a class="nav-link scrollto" href="#">Login</a></li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-          </nav>
-    
-        </div>
+    <?php
+    require_once 'sheets/navbar.php';
+    ?>
       </header>
 
 
@@ -246,72 +211,10 @@ $conn=mysqli_connect($serverName,$userName,$password,$baseDados);
 
         <!-- footer -->
         <footer id="footer">
-            <div class="footer-top">
-              <div class="container">
-                <div class="row">
-                  <div class="col-lg-2 col-md-6">
-                  </div>
-                  <div class="col-lg-3 col-md-6 footer-links">
-        
-                    <a href="index.html"><img src="img/favicon.png" alt="" height="100px"></a>
-        
-                    <div class="social-links mt-3">
-                      <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                      <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                      <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                      <a href="mailto:" target="_blank" class="google-plus"><i class="bx bx-envelope"></i></a>
-                    </div>
-        
-                  </div>
-                  <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Informações</h4>
-                    <ul>
-                      <li><i class="bx bx-chevron-right"></i> <a href="#">Dias Abertos</a></li>
-                      <li><i class="bx bx-chevron-right"></i> <a href="#">Aulas</a></li>
-                      <li><i class="bx bx-chevron-right"></i> <a href="#">Notícias</a></li>
-                    </ul>
-                  </div>
-                  <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Outros Links</h4>
-                    <ul>
-                      <li><i class="bx bx-chevron-right"></i> <a href="#">Sobre</a></li>
-                      <li><i class="bx bx-chevron-right"></i> <a href="#">Parcerias</a></li>
-                      <li><i class="bx bx-chevron-right"></i> <a href="#">Contacto</a></li>
-                    </ul>
-                  </div>
-                  <div class="credits">
-                    &copy; Copyright <strong><span>SURFNAUTICA</span></strong>. All
-                    Rights
-                    Reserved
-                  </div>
-                  <!-- 
-                      <div class="col-lg-2 col-md-6 footer-links">
-                        <h4>Informações</h4>
-                        <ul>
-                          <li><i class="bx bx-chevron-right"></i> <a href="#">Dias Abertos</a></li>
-                          <li><i class="bx bx-chevron-right"></i> <a href="#">Aulas</a></li>
-                          <li><i class="bx bx-chevron-right"></i> <a href="#">Notícias</a></li>
-                        </ul>
-                      </div>
-          
-                      <div class="col-lg-2 col-md-6 footer-links">
-                        <h4>Our Services</h4>
-                        <ul>
-                          <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                          <li><i class="bx bx-chevron-right"></i> <a href="#">Web
-                              Development</a></li>
-                          <li><i class="bx bx-chevron-right"></i> <a href="#">Product
-                              Management</a></li>
-                        </ul>
-                      </div>
-                      <div class="credits">
-                        &copy; Copyright <strong><span>SURFNAUTICA</span></strong>. All
-                        Rights
-                        Reserved
-                      </div> -->
-                </div>
-              </div>
-            </div>
+            
+        <?php
+    require_once 'sheets/footer.php';
+    ?>
         
           </footer>
         </div>
