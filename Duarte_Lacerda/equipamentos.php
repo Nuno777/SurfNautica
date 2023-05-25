@@ -9,10 +9,10 @@ require('../conexao.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Equipamentos - SurfNautica</title>
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/equips.css">
+    <link rel="stylesheet" href="css/navbar.css">
     <!-- Favicons -->
     <link href="img/favicon.ico" rel="icon">
-    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -24,9 +24,6 @@ require('../conexao.php');
     <link href="vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-    <!-- Template Main CSS File -->
-    <link href="css/navbar.css" rel="stylesheet">
 </head>
 
 <body>
@@ -56,12 +53,13 @@ require('../conexao.php');
         </div>
         <div class="row tm-mb-90 tm-gallery">
             <?php
-            $sql = "select name, pic, date_pub from equips;";
+            $sql = "SELECT id_equip, name, pic, date_pub FROM surfnautica.equips;";
             $result = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     foreach ($row as $res => $key) {
+                        $id = $row['id_equip'];
                         $name = $row['name'];
                         $pic = $row['pic'];
                         $date_pub = date("d/m/Y", strtotime($row['date_pub']));
@@ -71,7 +69,7 @@ require('../conexao.php');
                                 <img src="img/' . $pic . '" alt="Image" class="img-fluid">
                                 <figcaption class="d-flex align-items-center justify-content-center">
                                     <h2>' . $name . '</h2>
-                                    <a href="equipamentos_detail.php">Ver Mais</a>
+                                    <a href="equipamentos_detail.php?id=' . $id . '">Ver Mais</a>
                                 </figcaption>
                             </figure>
                             <div class="d-flex justify-content-between tm-text-gray">
@@ -86,20 +84,6 @@ require('../conexao.php');
             mysqli_close($conn);
             ?>
         </div>
-        <!-- <div class="row tm-mb-90 tm-gallery">
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="img/<?php /* echo ($pic); */ ?>" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2><?php /* echo ($name); */ ?></h2>
-                        <a href="equipamentos_detail.php">Ver Mais</a>
-                    </figcaption>
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light"><?php /* echo ($date_pub); */ ?></span>
-                </div>
-            </div>
-        </div> -->
         <div class="row tm-mb-90">
             <div class="col-12 d-flex justify-content-between align-items-center tm-paging-col">
                 <a href="javascript:void(0);" class="btn btn-primary tm-btn-prev mb-2 disabled">Anterior</a>
@@ -112,7 +96,7 @@ require('../conexao.php');
                 <a href="javascript:void(0);" class="btn btn-primary tm-btn-next">Seguinte</a>
             </div>
         </div>
-    </div> <!-- container-fluid, tm-container-content -->
+    </div>
 
     <?php
     include_once("footer.php");
