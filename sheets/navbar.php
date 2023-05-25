@@ -1,7 +1,7 @@
 <div class="container d-flex align-items-center justify-content-between">
     <div class="logo">
 
-        <h1 class="text-light"><a href="index.php"><img src="assets/img/favicon.png" alt="" class="img-fluid"><span>SurfNautica</span></h1></a>
+        <h1 class="text-light"><a href="../index.php"><img src="assets/img/favicon.png" alt="" class="img-fluid"><span>SurfNautica</span></h1></a>
     </div>
 
     <nav id="navbar" class="navbar">
