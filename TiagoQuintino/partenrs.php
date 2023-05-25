@@ -103,8 +103,6 @@ require('database.php');
     include_once("footer.php");
     ?>
 
-
-    <script src="assets/js/script.js"></script>
     <script src="assets/js/jquery-3.6.3.min.js"></script>
     <script src="assets/js/bootstrap.js"></script>
     <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
