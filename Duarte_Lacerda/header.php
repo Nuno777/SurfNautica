@@ -22,12 +22,13 @@
                         <ul>
                             <li><a href="#">História do Clube</a></li>
                             <li><a href="#">Parcerias</a></li>
+                            <li><a href="../Daniel_Silva/professores.php">Professores</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a href="#" class="nav-link scrollto"><span>Escola
+                    <li class="dropdown"><a href="../Tiago_Gomes/escolasurf.php" class="nav-link scrollto"><span>Escola
                                 de Surf</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
-                            <li><a href="#">Dias Abertos</a></li>
+                            <li><a href="../Tiago_Gomes/diaaberto.php">Dias Abertos</a></li>
                             <li><a href="#">Aulas</a></li>
                         </ul>
                     </li>
