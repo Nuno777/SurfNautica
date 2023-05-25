@@ -145,21 +145,4 @@ CREATE TABLE IF NOT EXISTS `surfnautica`.`noticia` (
   `foto` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id_not`))
 ENGINE = InnoDB
-<<<<<<< Updated upstream
 DEFAULT CHARACTER SET = latin1;
-
-/*
-DROP TABLE IF EXISTS `users`;
-DROP TABLE IF EXISTS `professor`;
-DROP TABLE IF EXISTS `aulas`;
-DROP TABLE IF EXISTS `diaaberto`;
-DROP TABLE IF EXISTS `parcerias`;
-DROP TABLE IF EXISTS `equipamentos`;
-DROP TABLE IF EXISTS `pranchas`;
-DROP TABLE IF EXISTS `sobre`;
-DROP TABLE IF EXISTS `contacto`;
-DROP TABLE IF EXISTS `noticia`;
-*/
-=======
-DEFAULT CHARACTER SET = latin1;
->>>>>>> Stashed changes
