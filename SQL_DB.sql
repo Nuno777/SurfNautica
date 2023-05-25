@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `surfnautica`.`noticia` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
-
+/*
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `professor`;
 DROP TABLE IF EXISTS `aulas`;
@@ -158,3 +158,4 @@ DROP TABLE IF EXISTS `pranchas`;
 DROP TABLE IF EXISTS `sobre`;
 DROP TABLE IF EXISTS `contacto`;
 DROP TABLE IF EXISTS `noticia`;
+*/
