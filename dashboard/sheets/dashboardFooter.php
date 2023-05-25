@@ -1,6 +1,6 @@
 <div class="copyright bg-white">
     <p>
-        &copy; <span id="copy-year"></span> Copyright Dashboard <span class="text-primary">Bank.</span>
+        &copy; <span id="copy-year"></span> Copyright Dashboard <span class="text-primary">SURFNAUTICA</span>
     </p>
 </div>
 <script>

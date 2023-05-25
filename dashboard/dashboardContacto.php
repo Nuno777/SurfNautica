@@ -77,14 +77,15 @@ $resultdelete = mysqli_query($conn, $query);
               <div class="card">
                 <div class="card-body">
                   <h4 class="header-title">Contactos</h4>
+                  <br>
                   <div class="single-table">
                     <div class="table-responsive">
-                      <table class="table table-hover text-center">
+                      <table class="table text-center">
                         <thead class="text-uppercase bg-dark">
                           <tr class="text-white">
 
-                            <th scope="col">Email</th>
                             <th scope="col">Nome</th>
+                            <th scope="col">Email</th>
                             <th scope="col">Assunto</th>
                             <th scope="col">Mensagem</th>
                             <th scope="col"></th>
@@ -95,11 +96,12 @@ $resultdelete = mysqli_query($conn, $query);
                           <?php
                           while ($row = $result->fetch_object()) {
                             echo "<tr>";
+                            echo "<td>" . $row->nome . "</td>";
                             echo "<td>" . $row->email . "</td>";
                             echo "<td>" . $row->assunto . "</td>";
-                            echo "<td><a data-toggle='modal' data-target='#viewmensagem$row->id_cont' class='text-primary' name='Menssage'><i class='ti-comment-alt'></i></a></td>";
-                            echo "<td><a href='editcontato.php?id_cont=$row->id_cont' class='text-secondary' name='edit'><i class='ti-pencil-alt'></i></a></td>";
-                            echo "<td><a data-toggle='modal' data-target='#deletecontato$row->id_cont' class='text-danger' name='delete'><i class='ti-trash'></i></a></td>";
+                            echo "<td><a data-toggle='modal' data-target='#viewmensagem$row->id_cont' class='text-primary' name='Menssage'><i class='mdi mdi-comment-text-outline'></i></a></td>";
+                            echo "<td><a href='editcontato.php?id_cont=$row->id_cont' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
+                            echo "<td><a data-toggle='modal' data-target='#deletecontato$row->id_cont' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
                             echo "</tr>";
                           }
 
@@ -114,7 +116,7 @@ $resultdelete = mysqli_query($conn, $query);
           </div>
         </div>
         <!-- End Top -->
-
+        
         <!-- Modal de ver mensagem -->
         <?php while ($row = $resultMenssage->fetch_object()) {
           $mensagem = $row->mensagem; ?>

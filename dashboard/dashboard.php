@@ -16,7 +16,7 @@ if ($levelperm['permission'] == 0) {
 <html lang="en" dir="ltr">
 
 <head>
-<title>Dashboard</title>
+  <title>Dashboard</title>
   <?php
   require_once 'sheets/dashboardHead.php';
   ?>
@@ -183,17 +183,18 @@ if ($levelperm['permission'] == 0) {
               </table>
             </div>
           </div>
-          <br>
-          <!-- End Table -->
-
-          <footer class="footer mt-auto">
-            <?php
-            require_once 'sheets/dashboardFooter.php';
-            ?>
-          </footer>
-
-
         </div>
+        <br>
+        <!-- End Table -->
+
+        <footer class="footer mt-auto">
+          <?php
+          require_once 'sheets/dashboardFooter.php';
+          ?>
+        </footer>
+
+
+
       </div>
       <script src="assets/plugins/jquery/jquery.min.js"></script>
       <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
