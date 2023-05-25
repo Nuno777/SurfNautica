@@ -6,8 +6,9 @@ require('conexao.php')
 <html lang="en">
 <head>
 <head>
+
   <?php
-  require_once '../sheets/head.php';
+  require_once 'sheets/head.php';
   ?>
 
   <title>SurfNautica</title>
@@ -31,7 +32,7 @@ require('conexao.php')
 
 <header id="header" class="fixed-top header-transparent">
     <?php
-    require_once '../sheets/navbar.php';
+    require_once 'sheets/navbar.php';
     ?>
 </header>
 
@@ -121,7 +122,7 @@ mysqli_close($conn);
 
 <footer id="footer">
   <?php
-  require_once '../sheets/footer.php';
+  require_once 'sheets/footer.php';
   ?>
 </footer>
 
