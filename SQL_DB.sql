@@ -160,5 +160,19 @@ VALUES ('Maria Santos', 'maria@example.com', 'foto2.jpg', 'Surfista Instrutora',
 INSERT INTO professor (nome, email, foto, especialidade, id) 
 VALUES ('Pedro Costa', 'pedro@example.com', 'foto3.jpg', 'Surfista Competitivo', 3);
 
+<<<<<<< Updated upstream
 insert into equipamentos (nome, descricao, img, id_parceria) values ('Fatos', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'yyy.jpg', 1);
 insert into parcerias (nome, descricao, img) values ('RipCurl', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'www.jpg');
+=======
+INSERT INTO diaaberto (titulo, data1, horas, id_prof) 
+VALUES ('Terças', '2023-07-16 00:00:00', '17h-18h', 4);
+INSERT INTO diaaberto (titulo, data1, horas, id_prof) 
+VALUES ('Quintas', '2023-07-18 00:00:00', '17h-18h', 5);
+INSERT INTO diaaberto (titulo, data1, horas, id_prof) 
+VALUES ('Sábado', '2023-07-20 00:00:00', '17h-18h', 6);
+
+
+
+
+
+>>>>>>> Stashed changes

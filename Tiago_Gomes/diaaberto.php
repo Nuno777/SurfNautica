@@ -28,6 +28,7 @@ require('conexao.php')
   </head>
 
 <body>
+
 <header id="header" class="fixed-top header-transparent">
     <?php
     require_once '../sheets/navbar.php';
@@ -116,6 +117,7 @@ else {
 mysqli_close($conn);
 
 ?>
+</div>
 
 <footer id="footer">
   <?php
@@ -123,7 +125,7 @@ mysqli_close($conn);
   ?>
 </footer>
 
-</body>
+
 
 <script src="js/bootstrap.min.js"></script>
 <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -134,4 +136,7 @@ mysqli_close($conn);
 <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="assets/vendor/php-email-form/validate.js"></script>
 <script src="assets/js/main.js"></script>
+</body>
+
+
 </html>
