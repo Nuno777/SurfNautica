@@ -159,9 +159,8 @@ if ($levelperm['permission'] == 0) {
                 <thead class="text-uppercase thead-dark">
                   <tr>
                     <th scope="col">Permission</th>
+                    <th scope="col">Nome</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Planing</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -172,9 +171,8 @@ if ($levelperm['permission'] == 0) {
                   ?>
                     <tr>
                       <td><?php echo $row->permission ?></td>
-                      <td><?php echo $row->email ?></td>
                       <td><?php echo $row->nome ?></td>
-                      <td><?php echo $row->plan ?></td>
+                      <td><?php echo $row->email ?></td>
                     </tr>
                   <?php
                   }
