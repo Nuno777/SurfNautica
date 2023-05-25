@@ -146,3 +146,16 @@ CREATE TABLE IF NOT EXISTS `surfnautica`.`noticia` (
   PRIMARY KEY (`id_not`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
+
+
+INSERT INTO users (email, nome, pass, permission) VALUES ('user1@example.com', 'João Silva', 'senha123', 1);
+INSERT INTO users (email, nome, pass, permission) VALUES ('user2@example.com', 'Maria Santos', 'abc456', 1);
+INSERT INTO users (email, nome, pass, permission) VALUES ('user3@example.com', 'Pedro Costa', 'qwerty', 1);
+
+
+INSERT INTO professor (nome, email, foto, especialidade, id) 
+VALUES ('João Silva', 'joao@example.com', 'foto1.jpg', 'Surfista Profissional', 1);
+INSERT INTO professor (nome, email, foto, especialidade, id) 
+VALUES ('Maria Santos', 'maria@example.com', 'foto2.jpg', 'Surfista Instrutora', 2);
+INSERT INTO professor (nome, email, foto, especialidade, id) 
+VALUES ('Pedro Costa', 'pedro@example.com', 'foto3.jpg', 'Surfista Competitivo', 3);
