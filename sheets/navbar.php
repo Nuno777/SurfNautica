@@ -11,6 +11,7 @@
                 <ul>
                     <li><a href="#">História do Clube</a></li>
                     <li><a href="#">Parcerias</a></li>
+                    <li><a href="Daniel_Silva/professores.php">Professores</a></li>
                 </ul>
             </li>
             <li class="dropdown"><a href="#" class="nav-link scrollto"><span>Escola
