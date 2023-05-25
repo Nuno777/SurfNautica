@@ -2,16 +2,16 @@
 <html>
 <head>
     <?php
-  require_once '../sheets/head.php';
+  require_once 'sheets/head.php';
   ?>
     <title>Tabela de Professores de Surf</title>
-    <link rel="stylesheet" type="text/css" href="styles_professores.css">
+    <link rel="stylesheet" type="text/css" href="styles_prof.css">
  
 </head>
 <body>
 <header id="header" class="fixed-top ">
     <?php
-    require_once '../sheets/navbar.php';
+    require_once 'sheets/navbar.php';
     ?>
   </header>
 
@@ -25,19 +25,17 @@
 
     <table>
         <tr>
-            <th>ID</th>
             <th>Nome</th>
             <th>Email</th>
             <th>Foto</th>
             <th>Especialidade</th>
-            <th>ID do Usuário</th>
         </tr>
     
         <?php
             $serverName="localhost";
             $userName="root";
             $password="";
-            $baseDados="SQL_DB";
+            $baseDados="surfnautica";
 
             //fazer a ligação 
             $conn=mysqli_connect($serverName,$userName,$password,$baseDados);
@@ -48,19 +46,17 @@
             }
 
               // Consulta ao banco de dados para obter os professores
-              $sql = "SELECT id_prof, nome, email, foto, especialidade, id FROM professor";
+              $sql = "SELECT nome, email, foto, especialidade FROM professor";
               $result = mysqli_query($conn, $sql);
   
               // Exibindo os dados na tabela
               if (mysqli_num_rows($result) > 0) {
                   while ($row = mysqli_fetch_assoc($result)) {
                       echo "<tr>";
-                      echo "<td>" . $row["id_prof"] . "</td>";
                       echo "<td>" . $row["nome"] . "</td>";
                       echo "<td>" . $row["email"] . "</td>";
                       echo "<td>" . $row["foto"] . "</td>";
                       echo "<td>" . $row["especialidade"] . "</td>";
-                      echo "<td>" . $row["id"] . "</td>";
                       echo "</tr>";
                   }
               } else {
@@ -72,23 +68,25 @@
         ?>
     </table>
     
+            </main>
     <footer id="footer">
     <?php
-    require_once '../sheets/footer.php';
+    require_once 'sheets/footer.php';
     ?>
+
   </footer>
 
   <a href="#" class="back-to-top d-flex align-items-center
       justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="../assets/vendor/aos/aos.js"></script>
-  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <!-- <script src="assets/vendor/php-email-form/validate.js"></script> -->
-  <script src="../assets/js/main.js"></script>
-  <script src="../assets/js/jquery-3.4.1.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/jquery-3.4.1.min.js"></script>
 </body>
 </html>
