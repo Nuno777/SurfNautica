@@ -24,7 +24,7 @@ if (count($_SESSION['errors']) == 0) {
                     "content" => "The email  <b>" . $email . "</b> has successfully logged in!",
                     "type" => "success",
                 );
-                header('Location: /surfnautica/dashboard/dashboard.php');
+                header('Location: dashboard/dashboard.php');
             } else {
                 $_SESSION["message"] = array(
                     "content" => "There was an error logging in with email <b>" . $email . "</b>!",
@@ -40,6 +40,3 @@ if (count($_SESSION['errors']) != 0) {
     header('Location: login.php');
     exit(0);
 }
-?>
-
-

@@ -16,24 +16,10 @@ if ($levelperm['permission'] == 0) {
 <html lang="en" dir="ltr">
 
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dashboard</title>
-  <link href="https://fonts.googleapis.com/css?family=Karla:400,700|Roboto" rel="stylesheet">
-  <link href="assets/plugins/material/css/materialdesignicons.min.css" rel="stylesheet" />
-  <link href="assets/plugins/simplebar/simplebar.css" rel="stylesheet" />
-  <link href="assets/plugins/nprogress/nprogress.css" rel="stylesheet" />
-  <link href="assets/plugins/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet" />
-  <link href="assets/plugins/jvectormap/jquery-jvectormap-2.0.3.css" rel="stylesheet" />
-  <link href="assets/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" />
-  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-  <link href="assets/plugins/toaster/toastr.min.css" rel="stylesheet" />
-  <link id="main-css-href" rel="stylesheet" href="assets/css/style.css" />
-
-  <link href="assets/images/favicon.png" rel="shortcut icon" />
-
-  <script src="assets/plugins/nprogress/nprogress.js"></script>
+  <?php
+  require_once 'sheets/dashboardHead.php';
+  ?>
 </head>
 
 <body class="navbar-fixed sidebar-fixed" id="body">
@@ -173,9 +159,8 @@ if ($levelperm['permission'] == 0) {
                 <thead class="text-uppercase thead-dark">
                   <tr>
                     <th scope="col">Permission</th>
+                    <th scope="col">Nome</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Planing</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -186,9 +171,8 @@ if ($levelperm['permission'] == 0) {
                   ?>
                     <tr>
                       <td><?php echo $row->permission ?></td>
-                      <td><?php echo $row->email ?></td>
                       <td><?php echo $row->nome ?></td>
-                      <td><?php echo $row->plan ?></td>
+                      <td><?php echo $row->email ?></td>
                     </tr>
                   <?php
                   }
@@ -197,17 +181,18 @@ if ($levelperm['permission'] == 0) {
               </table>
             </div>
           </div>
-          <br>
-          <!-- End Table -->
-
-          <footer class="footer mt-auto">
-            <?php
-            require_once 'sheets/dashboardFooter.php';
-            ?>
-          </footer>
-
-
         </div>
+        <br>
+        <!-- End Table -->
+
+        <footer class="footer mt-auto">
+          <?php
+          require_once 'sheets/dashboardFooter.php';
+          ?>
+        </footer>
+
+
+
       </div>
       <script src="assets/plugins/jquery/jquery.min.js"></script>
       <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

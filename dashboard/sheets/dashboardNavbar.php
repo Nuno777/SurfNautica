@@ -13,13 +13,20 @@ if ($user->num_rows) {
         <span class="d-none d-lg-inline-block"><?php echo $nome ?></span>
       </button>
       <ul class="dropdown-menu dropdown-menu-right">
-        <li class="dropdown-footer">
+        <li>
+        <a class="dropdown-link-item" href="logout.php">
+            <i class="mdi mdi-logout"></i>
+            <span class="nav-text">Log Out</span>
+          </a>
+        </li>
+
+        <!-- <li class="dropdown-footer">
           <a class="dropdown-link-item" href="logout.php">
             <i class="mdi mdi-logout"></i>
             <span class="nav-text">Log Out</span>
           </a>
           
-        </li>
+        </li> -->
       </ul>
     </li>
   </ul>

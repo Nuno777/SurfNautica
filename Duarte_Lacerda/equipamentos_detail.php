@@ -1,5 +1,5 @@
 <?php
-require('database.php');
+require('../conexao.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,12 +8,10 @@ require('database.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Equipamentos - SurfNautica</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/equips.css">
     <!-- Favicons -->
     <link href="img/favicon.png" rel="icon">
-    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -45,27 +43,40 @@ require('database.php');
     <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll" data-image-src="img/hero.jpg"></div>
 
     <div class="container-fluid tm-container-content tm-mt-60">
-        <div class="row mb-4">
-            <h2 class="col-12 tm-text-primary">Titulo</h2>
-        </div>
         <?php
-        $sql = "select name, descr, pic, date_pub from equips;";
-        $result = mysqli_query($connection, $sql);
+        $id = $_GET['id'];
+        if ($id == 1) {
+            header("Location: equipamentos.php");
+        }
+        $sql = "select name, descr, pic from equips where id_equip = " . $id . "and name <> 'Pranchas';";
+        $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
                 foreach ($row as $res => $key) {
-                    print_r($row);
-                    echo ("<br>");
+                    $name = $row['name'];
+                    $descr = $row['descr'];
+                    $pic = $row['pic'];
                 }
+                echo ("<div class='row mb-4'>
+                        <h2 class='col-12 tm-text-primary'>" . $name . "</h2>
+                        </div>
+                        <div class='row tm-mb-90'>
+                        <div class'col-xl-8 col-lg-7 col-md-6 col-sm-12'>
+                            <img src='img/" . $pic . "' alt='Image' class='img-fluid'>
+                        </div>
+                        <div class='col-xl-4 col-lg-5 col-md-6 col-sm-12'>
+                            <div class='tm-bg-gray tm-video-details'>
+                                <p class='mb-12'>" . $descr . "</p>
+                            </div>
+                        </div>");
             }
         } else {
-            echo ("Erro ao executar o select:" . mysqli_connect_error($connection));
+            echo ("Erro ao executar o select:" . mysqli_connect_error($conn));
         }
-
-        mysqli_close($connection);
         ?>
-        <!-- <div class="row tm-mb-90">
+    </div>
+    <!-- <div class="row tm-mb-90">
             <div class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
                 <img src="img/img-01-big.jpg" alt="Image" class="img-fluid">
             </div>
@@ -94,26 +105,44 @@ require('database.php');
                 </div>
             </div>
         </div> -->
-        <div class="row mb-4">
-            <h2 class="col-12 tm-text-primary">
-                Mais Equipamentos
-            </h2>
-        </div>
-        <div class="row mb-3 tm-gallery">
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="img/img-03.jpg " alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Pranchas</h2>
-                        <a href="equipamentos_detail.php">Ver Mais</a>
-                    </figcaption>
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">19 Abril 2023</span>
-                </div>
-            </div>
-        </div> <!-- row -->
-    </div> <!-- container-fluid, tm-container-content -->
+    <div class="row mb-4">
+        <h2 class="col-12 tm-text-primary">
+            Mais Equipamentos
+        </h2>
+    </div>
+    <div class="row mb-3 tm-gallery">
+        <?php
+        $sql = "SELECT name, pic, date_pub FROM surfnautica.equips;";
+        $result = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                foreach ($row as $res => $key) {
+                    $name = $row['name'];
+                    $pic = $row['pic'];
+                    $date_pub = date("d/m/Y", strtotime($row['date_pub']));
+                }
+                echo ('<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                            <figure class="effect-ming tm-video-item">
+                                <img src="img/' . $pic . '" alt="Image" class="img-fluid">
+                                <figcaption class="d-flex align-items-center justify-content-center">
+                                    <h2>' . $name . '</h2>
+                                    <a href="equipamentos_detail.php">Ver Mais</a>
+                                </figcaption>
+                            </figure>
+                            <div class="d-flex justify-content-between tm-text-gray">
+                                <span class="tm-text-gray-light">' . $date_pub . '</span>
+                            </div>
+                        </div>');
+            }
+        } else {
+            echo ("Erro ao executar o select:" . mysqli_connect_error($conn));
+        }
+
+        mysqli_close($conn);
+        ?>
+    </div>
+    </div>
 
     <?php
     include_once("footer.php");

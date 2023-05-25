@@ -59,7 +59,7 @@
         </li>
 
         <li>
-            <a class="sidenav-item-link" href="calendar.html">
+            <a class="sidenav-item-link" href="dashboardContacto.php">
                 <i class="mdi mdi-phone"></i>
                 <span class="nav-text">Contactos</span>
             </a>
