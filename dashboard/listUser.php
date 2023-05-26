@@ -82,7 +82,6 @@ if ($levelperm['permission'] == 0) {
           <div class="card">
             <div class="card-body">
               <h4 class="header-title">Lita de Users</h4>
-              <span class="span-contat">Total</span>
               <br>
               <br>
 

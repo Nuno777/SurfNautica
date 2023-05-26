@@ -17,10 +17,10 @@
   </header>
 
   <section id="hero">
-    <div class="hero-container" data-aos="fade-up">
-      <h1>Welcome to Squad</h1>
-      <h2>We are team of talented designers making websites with Bootstrap</h2>
-      <a href="#about" class="btn-get-started scrollto"><i class="bx bx-chevron-down"></i></a>
+    <div class="hero-container">
+      <h1>Surf Em Peniche</h1>
+      <h2>A vida é melhor quando fazes surf</h2>
+      <a href="Tiago_Gomes/diaaberto.php" class="btn-get-started scrollto"><i class="bx bx-chevron-down"></i></a>
     </div>
   </section>
 
