@@ -98,7 +98,7 @@ if ($levelperm['permission'] == 0) {
                     </thead>
                     <tbody>
                       <?php
-                      $query = "SELECT * FROM users WHERE permission=0 ORDER BY id";
+                      $query = "SELECT * FROM users WHERE permission = 0 ORDER BY id";
                       $result = mysqli_query($conn, $query);
                       $resultdelete = mysqli_query($conn, $query);
                       while ($row = $result->fetch_object()) {

@@ -148,9 +148,10 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 
-INSERT INTO users (email, nome, pass, permission) VALUES ('user1@example.com', 'João Silva', 'senha123', 1);
-INSERT INTO users (email, nome, pass, permission) VALUES ('user2@example.com', 'Maria Santos', 'abc456', 1);
-INSERT INTO users (email, nome, pass, permission) VALUES ('user3@example.com', 'Pedro Costa', 'qwerty', 1);
+INSERT INTO users (email, nome, pass, permission) VALUES ('user1@example.com', 'João Silva', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
+INSERT INTO users (email, nome, pass, permission) VALUES ('user2@example.com', 'Maria Santos', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
+INSERT INTO users (email, nome, pass, permission) VALUES ('user3@example.com', 'Pedro Costa', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
+INSERT INTO users (email, nome, pass, permission) VALUES ('admin@gmail.com', 'Admin', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 1);
 
 
 INSERT INTO professor (nome, email, foto, especialidade, id) 

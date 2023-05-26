@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="form-box">
       <div class="form-value">
         <form method="POST" action="register.php" enctype="multipart/form-data">
-          <h2>Register</h2>
+          <h2>Registo</h2>
           <div class="inputbox">
             <i class="fa-solid fa-signature icon"></i>
             <input type="text" name="nome" id="nome">
@@ -85,13 +85,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <div class="inputbox">
             <i class="fa-solid fa-lock icon"></i>
             <input type="password" name="cpassword" id="cpassword">
-            <label for="">Confirm Password</label>
+            <label for="">Confirmar Password</label>
           </div>
           <div class="button">
-            <button class="submit" id="register" name="register">Register</button>
+            <button class="submit" id="register" name="register">Registar</button>
           </div>
           <div class="login">
-            <p><a href="login.php">Have an account already? <span>Login</span></a></p>
+            <p><a href="login.php">Já tens uma conta?</a></p>
           </div>
         </form>
       </div>

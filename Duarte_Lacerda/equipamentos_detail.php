@@ -30,11 +30,11 @@ require('../conexao.php');
 
 <body>
     <!-- Page Loader -->
-    <!-- <div id="loader-wrapper">
+    <div id="loader-wrapper">
         <div id="loader"></div>
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
-    </div> -->
+    </div>
 
     <?php
     include_once("header.php");
