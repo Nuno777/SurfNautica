@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="info-box mb-4">
               <i class="bx bx-phone-call"></i>
               <h3>Telefone</h3>
-              <p>+351 910 777 161</p>
+              <p>+351 262 777 111</p>
             </div>
           </div>
 

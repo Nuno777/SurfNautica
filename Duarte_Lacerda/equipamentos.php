@@ -28,11 +28,11 @@ require('../conexao.php');
 
 <body>
     <!-- Page Loader -->
-    <div id="loader-wrapper">
+    <!-- <div id="loader-wrapper">
         <div id="loader"></div>
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
-    </div>
+    </div> -->
 
     <?php
     include_once("header.php");
@@ -53,27 +53,26 @@ require('../conexao.php');
         </div>
         <div class="row tm-mb-90 tm-gallery">
             <?php
-            $sql = "SELECT id_equip, name, pic, date_pub FROM surfnautica.equips;";
+            $sql = "select nome, descricao, img, data_pub from equipamentos;";
             $result = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     foreach ($row as $res => $key) {
-                        $id = $row['id_equip'];
-                        $name = $row['name'];
-                        $pic = $row['pic'];
-                        $date_pub = date("d/m/Y", strtotime($row['date_pub']));
+                        $nome = $row['nome'];
+                        $img = $row['img'];
+                        $data_pub = date("d/m/Y", strtotime($row['data_pub']));
                     }
                     echo ('<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                             <figure class="effect-ming tm-video-item">
-                                <img src="img/' . $pic . '" alt="Image" class="img-fluid">
+                                <img src="img/' . $img . '" alt="Image" class="img-fluid">
                                 <figcaption class="d-flex align-items-center justify-content-center">
-                                    <h2>' . $name . '</h2>
-                                    <a href="equipamentos_detail.php?id=' . $id . '">Ver Mais</a>
+                                    <h2>' . $nome . '</h2>
+                                    <a href="equipamentos_detail.php">Ver Mais</a>
                                 </figcaption>
                             </figure>
                             <div class="d-flex justify-content-between tm-text-gray">
-                                <span class="tm-text-gray-light">' . $date_pub . '</span>
+                                <span class="tm-text-gray-light">' . $data_pub . '</span>
                             </div>
                         </div>');
                 }

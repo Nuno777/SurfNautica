@@ -42,16 +42,16 @@ if (isset($_POST['login'])) {
                         <label for="">Password</label>
                     </div>
                     <div class="remember">
-                        <label for=""><input type="checkbox">&nbspRememberme&nbsp</label>
+                        <label for=""><input type="checkbox">&nbspLembrar-me&nbsp</label>
                     </div>
                     <div class="button">
                         <button class="submit" id="login" name="login">Login</button>
                     </div>
                     <div class="register">
-                        <p><a href="register.php">Don't have a account? Register</a></p>
+                        <p><a href="register.php">Não tens uma conta? Regista-te aqui</a></p>
                     </div>
                     <div class="forget">
-                        <a href="#">Forget password</a>
+                        <a href="#">Esqueci a password</a>
                     </div>
                 </form>
             </div>
