@@ -35,7 +35,7 @@
                     <li class="dropdown"><a href="#" class="nav-link scrollto"><span>Info
                                 Surf</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
-                            <li><a href="equipamentos_detail.php">Pranchas</a></li>
+                            <li><a href="../Diogo_Augusto/prancha.php">Pranchas</a></li>
                             <li><a href="equipamentos.php">Equipamentos</a></li>
                         </ul>
                     </li>

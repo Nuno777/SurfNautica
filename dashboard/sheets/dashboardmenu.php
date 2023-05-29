@@ -1,4 +1,3 @@
-
 <div class="sidebar-left" data-simplebar style="height: 100%;">
     <ul class="nav sidebar-inner" id="sidebar-menu">
 
@@ -20,6 +19,13 @@
             <a class="sidenav-item-link" href="chat.html">
                 <i class="mdi mdi-wechat"></i>
                 <span class="nav-text">Parcerias</span>
+            </a>
+        </li>
+
+        <li>
+            <a class="sidenav-item-link" href="../Duarte_Lacerda/dashboard/showequip.php">
+                <i class="mdi mdi-tshirt-crew"></i>
+                <span class="nav-text">Equipamentos</span>
             </a>
         </li>
 
