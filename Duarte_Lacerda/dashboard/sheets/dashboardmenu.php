@@ -23,7 +23,7 @@
         </li>
 
         <li class="active">
-            <a class="sidenav-item-link" href="showewuip.php">
+            <a class="sidenav-item-link" href="showequip.php">
                 <i class="mdi mdi-tshirt-crew"></i>
                 <span class="nav-text">Equipamentos</span>
             </a>
