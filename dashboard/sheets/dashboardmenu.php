@@ -37,7 +37,7 @@
         </li>
 
         <li>
-            <a class="sidenav-item-link" href="team.html">
+            <a class="sidenav-item-link" href="../Daniel_Silva/dashboard/shownews.php">
                 <i class="mdi mdi-newspaper"></i>
                 <span class="nav-text">Noticias</span>
             </a>

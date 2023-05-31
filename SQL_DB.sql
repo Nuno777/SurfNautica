@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `surfnautica`.`noticia` (
   `id_not` INT(11) NOT NULL AUTO_INCREMENT,
   `titulo` VARCHAR(50) NOT NULL,
   `descricao` VARCHAR(250) NOT NULL,
-  `data` DATETIME NOT NULL,
+  `data_not` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `foto` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id_not`))
 ENGINE = InnoDB
