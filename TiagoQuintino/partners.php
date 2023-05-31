@@ -9,7 +9,7 @@ require('database.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/parterns.css">
+    <link rel="stylesheet" href="css/partners.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <link href="assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -27,7 +27,7 @@ require('database.php');
 
     <header id="header" class="fixed-top ">
         <?php
-        require_once 'navbar.php';
+        require_once 'header.php';
         ?>
     </header>
     <div class="container marketing">
@@ -60,19 +60,19 @@ require('database.php');
             <!--  <div class="row mt-md-5">
             <div class="col-lg-4">
                 <img class="bd-placeholder-img rounded-circle" src="img/<?php /* echo ($pic); */ ?>" alt="Image" width="140" height="140"> </img>
-                <h2><? php/*  echo ($name); */ ?></h2>
+                <h2><?php /*  echo ($name); */ ?></h2>
                 <p><?php /* echo ($descri); */ ?></p>
             </div>
 
             <div class="col-lg-4">
                 <img class="bd-placeholder-img rounded-circle" src="img/<?php /* echo ($pic); */ ?>" alt="Image" width="140" height="140"> </img>
-                <h2><? php/*  echo ($name); */ ?></h2>
+                <h2><?php /*  echo ($name); */ ?></h2>
                 <p><?php /* echo ($descri); */ ?></p>
             </div>
 
             <div class="col-lg-4">
                 <img class="bd-placeholder-img rounded-circle" src="img/<?php /* echo ($pic); */ ?>" alt="Image" width="140" height="140"> </img>
-                <h2><? php/*  echo ($name); */ ?></h2>
+                <h2><?php /*  echo ($name); */ ?></h2>
                 <p><?php /* echo ($descri); */ ?></p>
             </div>
          </div> -->
