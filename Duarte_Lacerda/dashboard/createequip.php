@@ -80,7 +80,6 @@ if (isset($_POST)) {
               <?php unset($_SESSION["message"]);
               }
               ?>
-
               <div class="card">
                 <div class="card-body">
                   <h4 class="header-title">Criar Equipamento</h4>
