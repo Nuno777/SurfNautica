@@ -169,12 +169,6 @@
     transition: all 0.3s 1s ease-out;
 }
 
-.preview img {
-    width: 100%;
-    display: none;
-    margin-bottom: 30px;
-}
-
 p {
     line-height: 1.8;
 }

@@ -4,20 +4,50 @@ if (!isset($_SESSION['authenticated'])) {
   header('Location: ../../login.php');
   exit(0);
 }
+$partner = isset($_POST['inputpartner']) == '' ? "" :  $_POST['inputpartner'];
+$nome = isset($_POST['inputname']) == '' ? "" : $_POST['inputname'];
+$img = isset($_POST['inputImg']) == '' ? "" : $_POST['inputImg'];
+$desc = isset($_POST['inputdesc']) == '' ? "" : $_POST['inputdesc'];
+$msg_erro = "";
+print_r($_POST);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  // validar variáveis
+  if ($nome == "" || $partner == "" || $img == "" || $desc == "") {
+    $msg_erro = "Nome, descrição e imagem não inseridos ou parceria não escolhida!";
+  } else {
+    /* estabelecer ligação à BD */
+    require_once '../../conexao.php';
+    if ($conn->connect_errno) {
+      $code = $conn->connect_errno;
+      $message = $conn->connect_error;
+      $msg_erro = "Falha na ligação à Base de Dados ($code $message)!";
+    } else {
+      /* executar query... */
+      $query = "INSERT INTO equipamentos (nome, descricao, img, id_parceria) VALUES (" . $nome . ", " . $desc . ", " . $img . ", " . $partner . ");";
 
-require_once '../../conexao.php';
-
-/* if (!isset($_POST)) {
-  $nome = trim($_POST['nome']);
-  $desc = trim($_POST['desc']);
-  $partner = mysqli_query($conn, "SELECT id_parceria FROM parcerias WHERE nome LIKE " . $_POST['inputpartner'] . ";");;
-  $img = trim($_POST['inputImg']);
+      $sucesso_query = mysqli_query($conn, $query);
+      if ($sucesso_query) {
+        if ($conn->affected_rows > 0) {
+          $_SESSION["message"] = array(
+            "content" => "O equipamento <b>" .  $nome . "</b> foi criado com sucesso!",
+            "type" => "success",
+          );
+        } else {
+          $_SESSION["message"] = array(
+            "content" => "Ocorreu um erro ao criar o equipamento <b>" . $nome . "</b>!",
+            "type" => "danger",
+          );
+        }
+        header("Location: showequip.php");
+        exit(0);
+      } else {
+        $code = $conn->errno; // error code of the most recent operation
+        $message = $conn->error; // error message of the most recent op.
+        $msg_erro = "Falha na query! ($code $message)";
+      }
+    }
+  }
 }
-
-if (isset($_POST)) {
-  $sql = "INSERT INTO equipamentos (nome, descricao, img, id_parceria) VALUES ('$nome', '$desc', '$img', '$partner');";
-  mysqli_query($conn, $sql);
-} */
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -80,44 +110,62 @@ if (isset($_POST)) {
               <?php unset($_SESSION["message"]);
               }
               ?>
+
               <div class="card">
                 <div class="card-body">
                   <h4 class="header-title">Criar Equipamento</h4>
                   <br>
-                  <form action="showequip.php" method="POST">
+                  <form action="createequip.php" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                      <label for="inputEmail4">Nome</label>
-                      <input type="text" class="form-control" name="name" id="name" require>
+                      <label for="inputname">Nome</label>
+                      <input type="text" class="form-control" name="inputname" id="inputname" required>
+                      <small id="name">
+                        Por favor preencha o campo
+                      </small>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="inputdesc">Descrição</label>
-                        <textarea type="text" class="form-control" name="desc" id="inputdesc" rows="12" style="resize: vertical;"></textarea>
+                        <textarea type="text" class="form-control" name="inputdesc" id="inputdesc" rows="12" style="resize: vertical;" required></textarea>
+                        <small id="desc">
+                          Por favor preencha o campo
+                        </small>
                       </div>
+
                       <div class="form-group col-md-6">
                         <label for="inputpartner">Parceria</label>
-                        <select name="partner" id="inputpartner" class="form-control">
+                        <select name="inputpartner" id="inputpartner" class="form-control" required>
+                          <option value=""></option>
                           <?php
                           $sql = "SELECT * FROM parcerias;";
                           $resultParceria = mysqli_query($conn, $sql);
                           while ($row = mysqli_fetch_assoc($resultParceria)) {
                             foreach ($row as $res => $key) {
-                              $parceria = $row['nome'];
+                              $id_parceria = $row['id_parceria'];
+                              $nome = $row['nome'];
                             }
-                            echo "<option>$parceria</option>";
+                            echo "<option value='$id_parceria'>$nome</option>";
                           }
                           ?>
                         </select>
+                        <small id="partner">
+                          Por favor preencha o campo
+                        </small>
                         <br>
                         <label for="">Imagem</label>
                         <div class="custom-file form-group">
-                          <input type="file" name="inputImg" class="custom-file-input" id="inputImg" required>
+                          <input type="file" name="inputImg" class="custom-file-input" id="inputImg" accept="image/*" required>
                           <label class="custom-file-label" for="inputImg">Selecione a imagem...</label>
+                          <small id="img">
+                            Por favor preencha o campo
+                          </small>
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Criar</button>
-                    <a href="showequip.php"><input type="button" value="Voltar" class="btn btn-primary"></a>
+                    <div class="form-row">
+                      <input type="submit" class="btn btn-primary" id="submitbtn" value="Confirmar" style="margin-right: 5px;">
+                      <a href="showequip.php"><input type="button" value="Voltar" class="btn btn-primary"></a>
+                    </div>
                   </form>
                 </div>
               </div>
@@ -158,6 +206,10 @@ if (isset($_POST)) {
           });
           jQuery('input[name="dateRange"]').on('cancel.daterangepicker', function(ev, picker) {
             jQuery(this).val('');
+          });
+          $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
           });
         });
       </script>

@@ -12,6 +12,8 @@
 <link href="assets/plugins/toaster/toastr.min.css" rel="stylesheet" />
 <link id="main-css-href" rel="stylesheet" href="assets/css/style.css" />
 
-<link href="assets/images/favicon.png" rel="shortcut icon" />
+<link href="assets/images/favicon.ico" rel="icon" />
 
 <script src="assets/plugins/nprogress/nprogress.js"></script>
+<script src="assets/js/jquery-3.4.1.min.js"></script>
+<script defer src="assets/js/dash_script.js"></script>

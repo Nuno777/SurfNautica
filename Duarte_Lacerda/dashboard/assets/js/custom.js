@@ -538,8 +538,4 @@ $(document).ready(function () {
       emptyFill: [gray],
     });
   }
-
-  $(".upload-image").click(function () {
-    $(".form-horizontal").ajaxForm({ target: '.preview' }).submit();
-  });
 });
