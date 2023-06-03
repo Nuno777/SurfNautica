@@ -20,18 +20,49 @@ while ($row = mysqli_fetch_assoc($result)) {
     $data_pub = $row['data_pub'];
   }
 }
+$partner = isset($_POST['inputpartner']) == '' ? "" :  $_POST['inputpartner'];
+$nome = isset($_POST['inputname']) == '' ? "" : $_POST['inputname'];
+$img = isset($_POST['inputImg']) == '' ? "" : $_POST['inputImg'];
+$desc = isset($_POST['inputdesc']) == '' ? "" : $_POST['inputdesc'];
+$msg_erro = "";
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  // validar variáveis
+  if ($nome == "" || $partner == "" || $img == "" || $desc == "") {
+    $msg_erro = "Nome, descrição e imagem não inseridos ou parceria não escolhida!";
+  } else {
+    /* estabelecer ligação à BD */
+    if ($conn->connect_errno) {
+      $code = $conn->connect_errno;
+      $message = $conn->connect_error;
+      $msg_erro = "Falha na ligação à Base de Dados ($code $message)!";
+    } else {
+      /* executar query... */
+      $query = "UPDATE equipamentos SET nome = " . $nome . ", descricao = " . $desc . ", img = " . $img . ", id_parceria = " . $partner . " WHERE id_equipa = " . $id_equipa . ");";
 
-/* if (!isset($_POST)) {
-  $nome = trim($_POST['nome']);
-  $desc = trim($_POST['desc']);
-  $partner = mysqli_query($conn, "SELECT id_parceria FROM parcerias WHERE nome LIKE " . $_POST['inputpartner'] . ";");;
-  $img = trim($_POST['inputImg']);
+      $sucesso_query = $conn->query($query);
+      if ($sucesso_query) {
+        if ($conn->affected_rows > 0) {
+          $_SESSION["message"] = array(
+            "content" => "O equipamento <b>" .  $nome . "</b> foi editar com sucesso!",
+            "type" => "success",
+          );
+        } else {
+          $_SESSION["message"] = array(
+            "content" => "Ocorreu um erro ao editar o equipamento <b>" . $nome . "</b>!",
+            "type" => "danger",
+          );
+        }
+        header("Location: showequip.php");
+        exit(0);
+      } else {
+        $code = $conn->errno; // error code of the most recent operation
+        $message = $conn->error; // error message of the most recent op.
+        $msg_erro = "Falha na query! ($code $message)";
+      }
+    }
+  }
 }
 
-if (isset($_POST)) {
-  $sql = "INSERT INTO equipamentos (nome, descricao, img, id_parceria) VALUES ('$nome', '$desc', '$img', '$partner');";
-  mysqli_query($conn, $sql);
-} */
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -99,19 +130,25 @@ if (isset($_POST)) {
                 <div class="card-body">
                   <h4 class="header-title">Editar Equipamento</h4>
                   <br>
-                  <form action="showequip.php" method="POST">
+                  <form action="editequip.php" method="POST">
                     <div class="form-group">
-                      <label for="inputEmail4">Nome</label>
-                      <input type="text" class="form-control" name="name" id="name" value="<?php echo ($nome); ?>" required>
+                      <label for="inputname">Nome</label>
+                      <input type="text" class="form-control" name="inputname" id="inputname" value="<?php echo ($nome); ?>" required>
+                      <small id="name">
+                        Por favor preencha o campo
+                      </small>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="inputdesc">Descrição</label>
-                        <textarea type="text" class="form-control" name="desc" id="inputdesc" rows="12" style="resize: vertical;" require><?php echo ($desc); ?></textarea>
+                        <textarea type="text" class="form-control" name="inputdesc" id="inputdesc" rows="12" style="resize: vertical;" require><?php echo ($desc); ?></textarea>
+                        <small id="desc">
+                          Por favor preencha o campo
+                        </small>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="inputpartner">Parceria</label>
-                        <select name="partner" id="inputpartner" class="form-control">
+                        <select name="inputpartner" id="inputpartner" class="form-control">
                           <?php
                           $sql = "SELECT * FROM parcerias WHERE id_parceria = " . $id_parceria . ";";
                           $resultParceria = mysqli_query($conn, $sql);
@@ -125,25 +162,31 @@ if (isset($_POST)) {
                           $resultP = mysqli_query($conn, $sql);
                           while ($row = mysqli_fetch_assoc($resultP)) {
                             foreach ($row as $res => $key) {
+                              $id = $row['id_parceria'];
                               $parceria = $row['nome'];
                             }
-                            echo "<option>$parceria</option>";
+                            echo "<option value='$id'>$parceria</option>";
                           }
                           ?>
                         </select>
+                        <small id="partner">
+                          Por favor preencha o campo
+                        </small>
                         <br>
                         <label for="">Imagem</label>
                         <div class="custom-file form-group">
-                          <div class="preview">
-                            <img id="file-ip-1-preview">
-                          </div>
-                          <input type="file" name="inputImg" class="custom-file-input" id="inputImg" required>
-                          <label class="custom-file-label" for="inputImg"><?php echo ($img); ?></label>
+                          <input type="file" name="inputImg" class="custom-file-input" accept="image/*" id="inputImg">
+                          <label class="custom-file-label" for="inputImg"><?php echo $img; ?></label>
+                          <small id="img">
+                            Por favor preencha o campo
+                          </small>
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Confirmar</button>
-                    <a href="showequip.php"><input type="button" value="Voltar" class="btn btn-primary"></a>
+                    <div class="form-row">
+                      <input type="submit" class="btn btn-primary" id="submitbtn" value="Confirmar" style="margin-right: 5px;">
+                      <a href="showequip.php"><input type="button" value="Voltar" class="btn btn-primary"></a>
+                    </div>
                   </form>
                 </div>
               </div>
@@ -184,6 +227,10 @@ if (isset($_POST)) {
           });
           jQuery('input[name="dateRange"]').on('cancel.daterangepicker', function(ev, picker) {
             jQuery(this).val('');
+          });
+          $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
           });
         });
       </script>
