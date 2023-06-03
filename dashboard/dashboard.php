@@ -75,13 +75,13 @@ if ($levelperm['permission'] == 0) {
             <div class="col-xl-3 col-sm-6">
               <div class="card card-default card-mini">
                 <div class="card-header">
-                  <h2>Novo Admin</h2>
+                  <h2>Criar Professor</h2>
                   <div class="sub-title">
-                    <a href="newAdmin.php"><span class="mr-1">Criar novo Admin</span></a>
+                    <a href=""><span class="mr-1">Criar novo Professor</span></a>
                   </div>
                 </div>
                 <div class="card-body">
-
+                  <p>Total de Professores:</p>
                   <div class="chart-wrapper">
                   </div>
                 </div>
@@ -91,9 +91,9 @@ if ($levelperm['permission'] == 0) {
             <div class="col-xl-3 col-sm-6">
               <div class="card card-default card-mini">
                 <div class="card-header">
-                  <h2>Atualizar permissão</h2>
+                  <h2>Criar Aulas</h2>
                   <div class="sub-title">
-                    <a href="listPerms.php"><span class="mr-1">Alterar a permissão</span></a>
+                    <a href="listPerms.php"><span class="mr-1">Criar Nova Aula</span></a>
                   </div>
                 </div>
                 <div class="card-body">
@@ -102,7 +102,7 @@ if ($levelperm['permission'] == 0) {
                   $total = mysqli_query($conn, $query);
                   $total = mysqli_num_rows($total);
                   ?>
-                  <p>Total de Contas: <?php echo $total ?></p>
+                  <p>Total de Aulas: </p>
                   <div class="chart-wrapper">
                   </div>
                 </div>
@@ -112,9 +112,9 @@ if ($levelperm['permission'] == 0) {
             <div class="col-xl-3 col-sm-6">
               <div class="card card-default card-mini">
                 <div class="card-header">
-                  <h2>Lista Professores</h2>
+                  <h2>Criar Parcerias</h2>
                   <div class="sub-title">
-                    <a href="listProf.php"><span class="mr-1">Listagem de Professores</span></a>
+                    <a href="listProf.php"><span class="mr-1">Criar Nova Parceria</span></a>
                   </div>
                 </div>
                 <div class="card-body">
@@ -123,7 +123,7 @@ if ($levelperm['permission'] == 0) {
                   $totalprof = mysqli_query($conn, $query);
                   $prof = mysqli_num_rows($totalprof);
                   ?>
-                  <p>Total de Professores: <?php echo $prof ?></p>
+                  <p>Total de Parcerias: </p>
                   <div class="chart-wrapper">
                   </div>
                 </div>
@@ -133,9 +133,9 @@ if ($levelperm['permission'] == 0) {
             <div class="col-xl-3 col-sm-6">
               <div class="card card-default card-mini">
                 <div class="card-header">
-                  <h2>Lista Users</h2>
+                  <h2>Criar Notícias</h2>
                   <div class="sub-title">
-                    <a href="listUser.php"><span class="mr-1">Listagem dos Users</span></a>
+                    <a href="listUser.php"><span class="mr-1">Criar Nova Notícia</span></a>
                   </div>
                 </div>
                 <div class="card-body">
@@ -144,7 +144,7 @@ if ($levelperm['permission'] == 0) {
                   $totaluser = mysqli_query($conn, $query);
                   $user = mysqli_num_rows($totaluser);
                   ?>
-                  <p>Total de Users: <?php echo $user ?></p>
+                  <p>Total de Notícias:</p>
                   <div class="chart-wrapper">
                   </div>
                 </div>
@@ -153,7 +153,45 @@ if ($levelperm['permission'] == 0) {
           </div>
           <!-- End Top -->
           <!-- Table -->
+          <div class="card">
+            <div class="card-body">
+              <h4 class="header-title">Users<p>Total de Users: </p></h4>
 
+              <br>
+              <div class="single-table">
+                <div class="table-responsive">
+                <table class="table text-center">
+                    <thead class="text-uppercase bg-dark">
+                      <tr class="text-white">
+
+                        <th scope="col">Nome</th>
+                        <th scope="col">Email</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      $query = "SELECT * FROM users WHERE permission = 0 ORDER BY id";
+                      $result = mysqli_query($conn, $query);
+                      $resultdelete = mysqli_query($conn, $query);
+                      while ($row = $result->fetch_object()) {
+                      ?>
+                        <tr>
+                          <td><?php echo $row->nome ?></td>
+                          <td><?php echo $row->email ?></td>
+                          <td><a href='editUser.php?id=<?php echo $row->id ?>' class='text-warning' name='edit'> <i class="mdi mdi-pencil"></i></a></td>
+                          <td><a data-toggle='modal' data-target='#deleteUser<?php echo $row->id ?>' class='text-danger' name='delete'> <i class="mdi mdi-delete"></i></a></td>
+                        </tr>
+                      <?php
+                      }
+                      ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
 
         </div>
 

@@ -99,7 +99,7 @@ $resultdelete = mysqli_query($conn, $query);
                             echo "<td>" . $row->email . "</td>";
                             echo "<td><a data-toggle='modal' data-target='#viewmensagem$row->id_cont' class='text-primary' name='Menssage'><i class='mdi mdi-comment-text-outline'></i></a></td>";
                             echo "<td><a href='editcontato.php?id_cont=$row->id_cont' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
-                            echo "<td><a data-toggle='modal' data-target='#deletecontato$row->id_cont' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
+                            echo "<td><a data-toggle='modal' data-target='#deletecontato$row->id_cont' class='text-danger' name='delete'><i class='mdi mdi-delete'></i></a></td>";
                             echo "</tr>";
                           }
 
