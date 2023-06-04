@@ -98,7 +98,7 @@ $resultdelete = mysqli_query($conn, $query);
                             echo "<td>" . $row->nome . "</td>";
                             echo "<td>" . $row->email . "</td>";
                             echo "<td><a data-toggle='modal' data-target='#viewmensagem$row->id_cont' class='text-primary' name='Menssage'><i class='mdi mdi-comment-text-outline'></i></a></td>";
-                            echo "<td><a href='editcontato.php?id_cont=$row->id_cont' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
+                            // echo "<td><a href='editcontato.php?id_cont=$row->id_cont' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
                             echo "<td><a data-toggle='modal' data-target='#deletecontato$row->id_cont' class='text-danger' name='delete'><i class='mdi mdi-delete'></i></a></td>";
                             echo "</tr>";
                           }
@@ -124,7 +124,7 @@ $resultdelete = mysqli_query($conn, $query);
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Mensagem</h5><span class="span-contat"><?php echo $row->email; ?></span>
+                  <h5 class="modal-title" id="exampleModalLabel">Mensagem de <b><?php echo $row->nome;?></b></h5><span class="span-contat"><?php echo $row->email; ?></span>
                 </div>
                 <!-- assunto -->
                 <div class="modal-body">

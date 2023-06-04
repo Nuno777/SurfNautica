@@ -132,6 +132,7 @@ CREATE TABLE IF NOT EXISTS `surfnautica`.`contacto` (
   `nome` VARCHAR(50) NOT NULL,
   `assunto` VARCHAR(50) NOT NULL,
   `mensagem` VARCHAR(250) NOT NULL,
+  `resposta` VARCHAR(250),
   PRIMARY KEY (`id_cont`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;

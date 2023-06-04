@@ -80,8 +80,13 @@ if ($levelperm['permission'] == 0) {
                     <a href=""><span class="mr-1">Criar novo Professor</span></a>
                   </div>
                 </div>
+                <?php
+                  $query = "SELECT id FROM users WHERE permission='1' ORDER BY id";
+                  $totalprof = mysqli_query($conn, $query);
+                  $prof = mysqli_num_rows($totalprof);
+                  ?>
                 <div class="card-body">
-                  <p>Total de Professores:</p>
+                  <p>Total de Professores: <?php echo $prof?> </p>
                   <div class="chart-wrapper">
                   </div>
                 </div>
@@ -98,11 +103,11 @@ if ($levelperm['permission'] == 0) {
                 </div>
                 <div class="card-body">
                   <?php
-                  $query = "SELECT id FROM users ORDER BY id";
-                  $total = mysqli_query($conn, $query);
-                  $total = mysqli_num_rows($total);
+                  $query = "SELECT id_aula FROM aulas ORDER BY id_aula";
+                  $totalaulas = mysqli_query($conn, $query);
+                  $aulas = mysqli_num_rows($totalaulas);
                   ?>
-                  <p>Total de Aulas: </p>
+                  <p>Total de Aulas: <?php echo $aulas?></p>
                   <div class="chart-wrapper">
                   </div>
                 </div>
@@ -118,12 +123,12 @@ if ($levelperm['permission'] == 0) {
                   </div>
                 </div>
                 <div class="card-body">
-                  <?php
-                  $query = "SELECT id FROM users WHERE permission=2 ORDER BY id";
-                  $totalprof = mysqli_query($conn, $query);
-                  $prof = mysqli_num_rows($totalprof);
+                <?php
+                  $query = "SELECT id_parceria FROM parcerias ORDER BY id_parceria";
+                  $totalparc= mysqli_query($conn, $query);
+                  $parcerias = mysqli_num_rows($totalparc);
                   ?>
-                  <p>Total de Parcerias: </p>
+                  <p>Total de Parcerias: <?php echo $parcerias?></p>
                   <div class="chart-wrapper">
                   </div>
                 </div>
@@ -140,11 +145,11 @@ if ($levelperm['permission'] == 0) {
                 </div>
                 <div class="card-body">
                   <?php
-                  $query = "SELECT id FROM users WHERE permission='0' ORDER BY id";
-                  $totaluser = mysqli_query($conn, $query);
-                  $user = mysqli_num_rows($totaluser);
+                  $query = "SELECT id_not FROM noticia ORDER BY id_not";
+                  $totalnot = mysqli_query($conn, $query);
+                  $noticia = mysqli_num_rows($totalnot);
                   ?>
-                  <p>Total de Notícias:</p>
+                  <p>Total de Notícias: <?php echo $noticia?></p>
                   <div class="chart-wrapper">
                   </div>
                 </div>
@@ -155,12 +160,17 @@ if ($levelperm['permission'] == 0) {
           <!-- Table -->
           <div class="card">
             <div class="card-body">
-              <h4 class="header-title">Users<p>Total de Users: </p></h4>
-
+              <?php
+              $query = "SELECT id FROM users WHERE permission='0' ORDER BY id";
+              $totaluser = mysqli_query($conn, $query);
+              $user = mysqli_num_rows($totaluser);
+              ?>
+              <h4 class="header-title">Users<p>Total de Users: <?php echo $user ?></p>
+              </h4>
               <br>
               <div class="single-table">
                 <div class="table-responsive">
-                <table class="table text-center">
+                  <table class="table text-center">
                     <thead class="text-uppercase bg-dark">
                       <tr class="text-white">
 
@@ -192,6 +202,28 @@ if ($levelperm['permission'] == 0) {
               </div>
             </div>
           </div>
+          <!-- Modal para eliminar -->
+          <?php while ($row = $resultdelete->fetch_object()) { ?>
+            <div class="modal fade" id='deleteUser<?php echo $row->id ?>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Eliminar User</h5><span class="span-contat"><?php echo $row->email; ?></span>
+                  </div>
+                  <div class="modal-body">
+                    <p>Deseja eliminar este User?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                    <a href='deleteUser.php?id=<?php echo $row->id . '&email=' . $row->email ?>' type='button' class='btn btn-primary'>Sim</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <?php
+          }
+          ?>
+          <!-- Modal para eliminar fechou -->
 
         </div>
 
@@ -202,8 +234,6 @@ if ($levelperm['permission'] == 0) {
           require_once 'sheets/dashboardFooter.php';
           ?>
         </footer>
-
-
 
       </div>
       <script src="assets/plugins/jquery/jquery.min.js"></script>
