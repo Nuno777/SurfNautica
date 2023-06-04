@@ -1,0 +1,27 @@
+<?php
+require_once '../../conexao.php';
+$query = "SELECT nome FROM users WHERE email = '{$_SESSION['email']}'";
+$user = mysqli_query($conn, $query);
+if ($user->num_rows) {
+  $row = $user->fetch_object();
+  $n = $row->nome;
+?>
+  <ul class="nav navbar-nav">
+    <li class="dropdown user-menu">
+      <button class="dropdown-toggle nav-link" data-toggle="dropdown">
+        <img src="assets/images/user/user-xs.png" class="user-image rounded-circle" alt="User Image" />
+        <span class="d-none d-lg-inline-block"><?php echo $n ?></span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-right">
+        <li>
+          <a class="dropdown-link-item" href="logout.php">
+            <i class="mdi mdi-logout"></i>
+            <span class="nav-text">Log Out</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+<?php
+}
+?>

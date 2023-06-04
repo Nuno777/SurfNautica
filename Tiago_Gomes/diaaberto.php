@@ -26,6 +26,7 @@ require('conexao.php')
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
   <link href="assets/img/favicon.ico" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link rel="stylesheet" href="css/escolasurf.css">
   </head>
 
 <body>
@@ -119,6 +120,58 @@ mysqli_close($conn);
 
 ?>
 </div>
+
+<div style="padding-top: 100px; padding-bottom: 40px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-4">
+        <div class="card border-0 bg-light" style="width: 100%;">
+          <img class="card-img-top" src="img/resize.jpg" alt="" style="height: 200px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title"><strong>Aulas em Grupo</strong></h5>
+            <p class="card-text card-wrap">
+            Aulas de surf para pessoas de todas as idades e níveis de surf. 
+             Cada grupo tem no máximo 5 alunos por treinador, 
+              para maior diversão e segurança de todos.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card border-0 bg-light" style="width: 100%;">
+          <img class="card-img-top" src="img/1.jpg" alt="Card image cap" style="height: 200px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title"><strong>Aulas Privadas</strong></h5>
+            <p class="card-text card-wrap">Aulas individuais com um personal trainer especializado em surf. 
+             Se quiseres trazer a tua cara metade e o teu melhor amigo, 
+              a SurfNautica também dispõe de aulas privadas para pequenos grupos.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card border-0 bg-light" style="width: 100%;">
+          <img class="card-img-top" src="img/2.jpg" alt="Card image cap" style="height: 200px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title"><strong>Clínicas de Surf</strong></h5>
+            <p class="card-text card-wrap">Disponíveis durante as férias escolares, as clínicas de surf proporcionam momentos de diversão, contacto com a natureza e muito surf.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="background-image: url('img/banner.jpg'); background-size: cover; background-position: center center; text-align: center; padding: 20px;">
+  <h3 style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Inscreve-te para os dias abertos</h3>
+  <a href="https://example.com" class="btn btn-light" style="background-color: #263f49; color: white;">Inscrever</a>
+</div>
+
+
+
+
+
 
 <footer id="footer">
   <?php
