@@ -28,3 +28,8 @@ h5{
     padding-top: 50px;
     width: 100%;
 }
+
+.card-wrap {
+  word-wrap: break-word;
+}
+

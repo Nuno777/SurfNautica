@@ -9,7 +9,7 @@
         </li>
 
         <li>
-            <a class="sidenav-item-link" href="analytics.html">
+            <a class="sidenav-item-link" href="../Tiago_Gomes/dashboard/showaula.php">
                 <i class="mdi mdi-chart-line"></i>
                 <span class="nav-text">Aulas</span>
             </a>
