@@ -6,12 +6,54 @@ if (!isset($_SESSION['authenticated'])) {
 }
 
 require_once '../../conexao.php';
-
+$titulo = isset($_POST['inputtitulo']) == '' ? "" :  $_POST['inputtitulo'];
+$data1 = isset($_POST['inputdata1']) == '' ? "" : $_POST['inputdata1'];
+$horas = isset($_POST['inputhoras']) == '' ? "" : $_POST['inputhoras'];
+$id_prof = isset($_POST['inputid_prof']) == '' ? "" : $_POST['inputid_prof'];
+$msg_erro = "";
+print_r($_POST);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  // validar variáveis
+  if ($titulo == "" || $data1 == "" || $horas == "" || $id_prof == "") {
+    $msg_erro = "Nome, descrição e imagem não inseridos ou parceria não escolhida!";
+  } else {
+      /* estabelecer ligação à BD */
+      require_once '../../conexao.php';
+      if ($conn->connect_errno) {
+      $code = $conn->connect_errno;
+      $message = $conn->connect_error;
+      $msg_erro = "Falha na ligação à Base de Dados ($code $message)!";
+      } else {
+      /* executar query... */
+      $query = "INSERT INTO diaaberto (titulo, data1, horas, id_prof) VALUES ('" . $titulo . "', '" . $data1 . "', '" . $horas . "', '" . $id_prof . "');";
+      $sucesso_query = mysqli_query($conn, $query);
+      if ($sucesso_query) {
+        if ($conn->affected_rows > 0) {
+          $_SESSION["message"] = array(
+            "content" => "O Dia aberto <b>" .  $titulo . "</b> foi criado com sucesso!",
+            "type" => "success",
+          );
+        } else {
+          $_SESSION["message"] = array(
+            "content" => "Ocorreu um erro ao criar o dia aberto <b>" . $titulo . "</b>!",
+            "type" => "danger",
+          );
+        }
+        header("Location: showaula.php");
+        exit(0);
+      } else {
+        $code = $conn->errno; // error code of the most recent operation
+        $message = $conn->error; // error message of the most recent op.
+        $msg_erro = "Falha na query! ($code $message)";
+      }
+    }
+  }
+}
 /* if (!isset($_POST)) {
   $nome = trim($_POST['nome']);
   $desc = trim($_POST['desc']);
-  $partner = mysqli_query($conn, "SELECT id_parceria FROM parcerias WHERE nome LIKE " . $_POST['inputpartner'] . ";");;
-  $img = trim($_POST['inputImg']);
+  $partner = mysqli_query($conn, "SELECT id_parceria FROM parcerias WHERE nome LIKE " . $_POST['titulo'] . ";");;
+  $img = trim($_POST['horas']);
 }
 
 if (isset($_POST)) {
@@ -23,7 +65,7 @@ if (isset($_POST)) {
 <html lang="en" dir="ltr">
 
 <head>
-  <title>Dashboard - Aulas</title>
+  <title>Dashboard - Dia aberto</title>
   <?php
   require_once 'sheets/dashboardHead.php';
   ?>
@@ -84,31 +126,32 @@ if (isset($_POST)) {
                 <div class="card-body">
                   <h4 class="header-title">Criar Aula</h4>
                   <br>
-                  <form action="showaula.php" method="POST">
+                  <form action="createaula.php" method="POST">
                     <div class="form-group">
-                      <label for="inputEmail4">Titulo</label>
-                      <input type="text" class="form-control" name="name" id="name" require>
+                      <label for="inputtitulo">Titulo</label>
+                      <input type="text" class="form-control" name="inputtitulo" id="inputtitulo" required>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-6">
-                        <label for="inputdesc">Data</label>
-                        <textarea type="text" class="form-control" name="desc" id="inputdesc" rows="2" style="resize: vertical;"></textarea>
+                        <label for="inputdata1">Data</label>
+                        <textarea type="text" class="form-control" name="inputdata1" id="inputdata1" rows="2" required></textarea>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="inputhoras">Horas</label>
-                        <textarea type="text" class="form-control" name="horas" id="inputhoras" rows="2" style="resize: vertical;"></textarea>
+                        <textarea type="text" class="form-control" name="inputhoras" id="inputhoras" rows="2" required></textarea>
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="inputprofessor">Escolher Professor</label>
-                        <select name="professor" id="inputprofessor" class="form-control">
+                        <label for="inputid_prof">Escolher Professor</label>
+                        <select name="inputid_prof" id="inputid_prof" class="form-control" required>
                           <?php
                           $sql = "SELECT * FROM professor;";
                           $resultProfessor = mysqli_query($conn, $sql);
                           while ($row = mysqli_fetch_assoc($resultProfessor)) {
                             foreach ($row as $res => $key) {
-                              $professor = $row['nome'];
+                              $id_prof = $row['id_prof'];
+                              $nome = $row['nome'];
                             }
-                            echo "<option>$professor</option>";
+                            echo "<option value='$id_prof'>$nome</option>";
                           }
                           ?>
                         </select>

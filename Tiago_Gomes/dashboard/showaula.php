@@ -7,7 +7,7 @@ if (!isset($_SESSION['authenticated'])) {
 
 require_once '../../conexao.php';
 
-$sql = "select id_diaAberto, titulo, data1, horas, diaaberto.id_prof, nome from diaAberto, professor where diaaberto.id_prof=professor.id_prof;";
+$sql = "SELECT id_diaAberto, titulo, data1, horas, diaaberto.id_prof, nome FROM diaAberto, professor WHERE diaaberto.id_prof=professor.id_prof ORDER BY data1 ASC;";
 $result = mysqli_query($conn, $sql);
 $resultAulas = mysqli_query($conn, $sql);
 $resultdelete = mysqli_query($conn, $sql);
