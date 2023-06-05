@@ -9,7 +9,7 @@ $query = "SELECT permission from users where email = '{$_SESSION['email']}'";
 $perms = mysqli_query($conn, $query);
 $levelperm = mysqli_fetch_assoc($perms);
 if ($levelperm['permission'] == 0) {
-  header('Location: ../index.php');
+  header('Location: ../dashboard/user_profile.php');
 }
 ?>
 <!DOCTYPE html>
@@ -165,7 +165,7 @@ if ($levelperm['permission'] == 0) {
               $totaluser = mysqli_query($conn, $query);
               $user = mysqli_num_rows($totaluser);
               ?>
-              <h4 class="header-title">Users<p>Total de Users: <?php echo $user ?></p>
+              <h4 class="header-title">Clientes<p>Total de Clientes: <?php echo $user ?></p>
               </h4>
               <br>
               <div class="single-table">
@@ -208,10 +208,10 @@ if ($levelperm['permission'] == 0) {
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Eliminar User</h5><span class="span-contat"><?php echo $row->email; ?></span>
+                    <h5 class="modal-title" id="exampleModalLabel">Eliminar o Cliente</h5><span class="span-contat"><?php echo $row->email; ?></span>
                   </div>
                   <div class="modal-body">
-                    <p>Deseja eliminar este User?</p>
+                    <p>Deseja eliminar este Cliente?</p>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
