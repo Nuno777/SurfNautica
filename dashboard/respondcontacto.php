@@ -6,10 +6,27 @@ if (!isset($_SESSION['authenticated'])) {
 }
 
 require_once '../conexao.php';
-$query = "SELECT * FROM contacto ORDER BY id_cont";
-$result = mysqli_query($conn, $query);
-$resultMenssage = mysqli_query($conn, $query);
-$resultdelete = mysqli_query($conn, $query);
+if (isset($_POST["editcontato"])) {
+  $id_cont = $_POST["id_cont"];
+  $resposta = $_POST["resposta"];
+  $query = "UPDATE contacto SET resposta='$resposta' WHERE id_cont='$id_cont'";
+  $result = mysqli_query($conn, $query);
+
+  // Definir Alerta - Operações (EDITAR) 
+  if ($conn->affected_rows > 0) {
+    $_SESSION["message"] = array(
+      "content" => "O contacto do email <b>" . $email . "</b> foi atualizado com sucesso!",
+      "type" => "success",
+    );
+  } else {
+    $_SESSION["message"] = array(
+      "content" => "Ocorreu um erro ao atualizar o contacto do email <b>" . $email . "</b>!",
+      "type" => "danger",
+    );
+  }
+
+  header('Location: dashboardContacto.php');
+}
 
 ?>
 <!DOCTYPE html>
@@ -57,140 +74,100 @@ $resultdelete = mysqli_query($conn, $query);
 
 
       <div class="content-wrapper">
-        <!-- Top -->
-        <div class="content">
-          <div class="row">
-            <div class="col-lg-12 mt-5">
-              <!-- Alerta - Operações (EDITAR) -->
-              <?php
-              if (isset($_SESSION["message"])) { ?>
-                <div class='alert alert-<?php echo $_SESSION["message"]["type"] ?> alert-dismissible fade show' role='alert'>
-                  <?php echo $_SESSION["message"]["content"]; ?>
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="mdi mdi-times"></span>
-                  </button>
-                </div>
 
-              <?php unset($_SESSION["message"]);
-              }
-              ?>
-
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="header-title">Responder</h4>
-                  <br>
-                  <div class="single-table">
-                    <form>
-                      <div class="row">
-                        <div class="col-sm-6">
-                          <div class="form-group">
-                            <label for="fname">First name</label>
-                            <input type="text" class="form-control" placeholder="John">
-                          </div>
-                        </div>
-                        <div class="col-sm-6">
-                          <div class="form-group">
-                            <label for="lname">Last name</label>
-                            <input type="text" class="form-control" placeholder="Smith">
-                          </div>
-                        </div>
-                        <div class="col-sm-6">
-                          <div class="form-group">
-                            <label for="city">City</label>
-                            <input type="text" class="form-control" placeholder="City Name">
-                          </div>
-                        </div>
-                        <div class="col-sm-6">
-                          <div class="row">
-                            <div class="col-6">
-                              <div class="form-group">
-                                <label for="State">State</label>
-                                <input type="text" class="form-control" placeholder="State">
-                              </div>
-                            </div>
-                            <div class="col-6">
-                              <div class="form-group">
-                                <label for="Zip">Zip</label>
-                                <input type="text" class="form-control" placeholder="Zip">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <button type="submit" class="btn btn-primary ">Submit</button>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End Top -->
-
-        <!-- Modal de ver mensagem -->
-        <?php while ($row = $resultMenssage->fetch_object()) {
-          $mensagem = $row->mensagem;
+        <?php
+        $id_cont = $_GET["id_cont"];
+        $query = "SELECT * FROM contacto WHERE id_cont='$id_cont'";
+        $result = mysqli_query($conn, $query);
+        if ($result && $result->num_rows) {
+          $row = $result->fetch_object();
+          $id_cont = $row->id_cont;
+          $email = $row->email;
+          $nome = $row->nome;
           $assunto = $row->assunto;
+          $mensagem = $row->mensagem;
         ?>
-          <div class="modal fade" id='viewmensagem<?php echo $row->id_cont ?>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Mensagem de <b><?php echo $row->nome; ?></b></h5><span class="span-contat"><?php echo $row->email; ?></span>
-                </div>
-                <!-- assunto -->
-                <div class="modal-body">
-                  <span>Assunto</span>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <textarea type="text" class="form-control" rows="3" style="resize: none" disabled><?= $assunto ?></textarea>
-                    </div>
-                  </div>
-                </div>
+          <div class="content">
+            <div class="row">
+              <div class="col-lg-12 mt-5">
 
-                <!-- mensagem -->
-                <div class="modal-body">
-                  <span>Mensagem</span>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <textarea type="text" class="form-control" rows="10" style="resize: none" disabled><?= $mensagem ?></textarea>
+                <!-- Alerta - Operações (EDITAR) -->
+                <?php
+                if (isset($_SESSION["message"])) { ?>
+                  <div class='alert alert-<?php echo $_SESSION["message"]["type"] ?> alert-dismissible fade show' role='alert'>
+                    <?php echo $_SESSION["message"]["content"]; ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="mdi mdi-times"></span>
+                    </button>
+                  </div>
+
+                <?php unset($_SESSION["message"]);
+                }
+                ?>
+
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="header-title">Responder</h4>
+                    <br>
+                    <div class="single-table">
+
+                      <form id="editcontato" action="dashboardContacto.php" method="POST" class="form" enctype="multipart/form-data">
+                        <div class="row">
+
+                          <input type="text" class="form-control" id="id_cont" name="id_cont" value="<?= $id_cont ?>" required hidden>
+
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="fname">Nome</label>
+                              <input type="text" class="form-control" placeholder="Nome" id="nome" name="nome" value="<?= $nome ?>" disabled>
+                            </div>
+                          </div>
+
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="lname">Email</label>
+                              <input type="text" class="form-control" placeholder="Email" id="email" name="email" value="<?= $email ?>" pattern="^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3})|(aero|coop|info|museum|name))$" required disabled>
+                            </div>
+                          </div>
+
+                          <div class="col-sm-12">
+                            <div class="form-group">
+                              <label for="city">Assunto</label>
+                              <input type="text" class="form-control" placeholder="Assunto" id="assunto" name="assunto" value="<?= $assunto ?>" disabled>
+                            </div>
+                          </div>
+
+                          <div class="col-sm-12">
+                            <div class="form-group">
+                              <label for="city">Mensagem</label>
+                              <textarea class="form-control" rows="10" id="mensagem" name="mensagem" minlength="4" maxlength="250" style="resize: none" disabled required><?= $mensagem ?></textarea>
+                            </div>
+                          </div>
+
+                          <div class="col-sm-12">
+                            <div class="form-group">
+                              <label for="city">Resposta</label>
+                              <textarea class="form-control" rows="10" id="resposta" name="resposta" minlength="4" maxlength="250" style="resize: none" required></textarea>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" name="editcontato" id="respondcontcct" disabled>Submeter</button>
+
+                        <a href="dashboardContacto.php" class="btn btn-secondary" name="voltarcontato" type="submit">Voltar</a>
+
                     </div>
                   </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
-                  <?php echo "<a href='editcontato.php?id_cont=$row->id_cont' type='button' class='btn btn-primary'>Responder</a>"; ?>
                 </div>
               </div>
             </div>
           </div>
         <?php
+        } else {
+          echo "<script>alert('Seleciona uma mensagem valida para responder');window.location='dashboardContacto.php'</script>";
         }
         ?>
-        <!-- Modal de ver mensagem fechou -->
 
-        <!-- Modal para eliminar -->
-        <?php while ($row = $resultdelete->fetch_object()) { ?>
-          <div class="modal fade" id='deletecontato<?php echo $row->id_cont ?>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Eliminar Contacto</h5><span class="span-contat"><?php echo $row->email; ?></span>
-                </div>
-                <div class="modal-body">
-                  <p>Deseja eliminar este contacto?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
-                  <a href='deletecontato.php?id_cont=<?php echo $row->id_cont . '&email=' . $row->email ?>' type='button' class='btn btn-primary'>Sim</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        <?php
-        }
-        ?>
-        <!-- Modal para eliminar fechou -->
         <br>
         <footer class="footer mt-auto">
           <?php
@@ -201,6 +178,15 @@ $resultdelete = mysqli_query($conn, $query);
 
 
       </div>
+      <!-- JQuery ativar botão editar -->
+      <script>
+        $(document).ready(function() {
+          $('#editcontato').on('input change', function() {
+            $('#respondcontcct').attr('disabled', false);
+          });
+        })
+      </script>
+
       <script src="assets/plugins/jquery/jquery.min.js"></script>
       <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
       <script src="assets/plugins/simplebar/simplebar.min.js"></script>

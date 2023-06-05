@@ -105,7 +105,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <div class="col-lg-6 ">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3014.977444350692!2d-9.368743958631846!3d39.35025750943084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1f48a9de96c075%3A0x59825346bd0e936a!2sPraia%20do%20Molhe%20Leste!5e1!3m2!1spt-PT!2spt!4v1679914429168!5m2!1spt-PT!2spt" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
-
           <div class="col-lg-6">
             <form id="contacto" action="contacto.php" method="POST" role="form" class="php-email-form" enctype="multipart/form-data">
               <div class="row">
@@ -120,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="text" class="form-control" name="assunto" id="assunto" placeholder="Assunto" maxlength="60" required>
               </div>
               <div class="form-group mt-3">
-                <textarea class="form-control" name="mensagem" id="mensagem" rows="8" placeholder="Mensagem" required></textarea>
+                <textarea class="form-control" name="mensagem" id="mensagem" rows="10" placeholder="Mensagem" style="resize: none" required></textarea>
               </div>
               <br>
               <div class="text-center"><button type="submit">Enviar</button></div>
