@@ -4,32 +4,53 @@ if (!isset($_SESSION['authenticated'])) {
   header('Location: ../../login.php');
   exit(0);
 }
-$partner = isset($_POST['inputpartner']) == '' ? "" :  $_POST['inputpartner'];
-$nome = isset($_POST['inputname']) == '' ? "" : $_POST['inputname'];
-$img = isset($_POST['inputImg']) == '' ? "" : $_POST['inputImg'];
-$desc = isset($_POST['inputdesc']) == '' ? "" : $_POST['inputdesc'];
+
+require_once '../../conexao.php';
+
+$partner = array_key_exists('inputpartner', $_POST) ? $_POST['inputpartner'] : "";
+$nome = array_key_exists('inputname', $_POST) ? $_POST['inputname'] : "";
+$img = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['name'] : "";
+$desc = array_key_exists('inputdesc', $_POST) ? $_POST['inputdesc'] : "";
 $msg_erro = "";
-print_r($_POST);
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  // validar variáveis
-  if ($nome == "" || $partner == "" || $img == "" || $desc == "") {
-    $msg_erro = "Nome, descrição e imagem não inseridos ou parceria não escolhida!";
-  } else {
-    /* estabelecer ligação à BD */
+  if ($nome == "" || $desc == "" || $partner == "")
+    $_SESSION["message"] = array(
+      "content" => "Ocorreu um erro ao criar o equipamento <b>" . $nome . "</b>!",
+      "type" => "danger",
+    );
+  else {
     require_once '../../conexao.php';
     if ($conn->connect_errno) {
       $code = $conn->connect_errno;
       $message = $conn->connect_error;
       $msg_erro = "Falha na ligação à Base de Dados ($code $message)!";
     } else {
-      /* executar query... */
-      $query = "INSERT INTO equipamentos (nome, descricao, img, id_parceria) VALUES (" . $nome . ", " . $desc . ", " . $img . ", " . $partner . ");";
+      $nome = $conn->real_escape_string($nome);
+      $desc = $conn->real_escape_string($desc);
 
-      $sucesso_query = mysqli_query($conn, $query);
-      if ($sucesso_query) {
+      $query = "INSERT INTO `equipamentos` (`nome`, `descricao`, `id_parceria`) VALUES ('$nome', '$desc', '$partner')";
+
+      if (!empty($img) && is_uploaded_file($_FILES['inputImg']['tmp_name'])) {
+        // tratar upload da foto
+        $diretoria_upload = "upload/";
+        $extensao = pathinfo($img, PATHINFO_EXTENSION);
+        $imageDatabasePath = $diretoria_upload . sha1(microtime()) . "." . $extensao;
+        $newhotel_ficheiro = "../" . $imageDatabasePath;
+
+
+        if (move_uploaded_file($_FILES['inputImg']['tmp_name'], $newhotel_ficheiro)) {
+          $query = "INSERT INTO `equipamentos` (`nome`, `descricao`, `img`, `id_parceria`) VALUES ('$nome', '$desc', '$imageDatabasePath', '$partner')";
+        }
+      }
+
+      $querynewhotle = $conn->query($query);
+      if ($querynewhotle) {
+
+        // Definir Alerta - Operações (NEW) 
         if ($conn->affected_rows > 0) {
           $_SESSION["message"] = array(
-            "content" => "O equipamento <b>" .  $nome . "</b> foi criado com sucesso!",
+            "content" => "O equipamento <b>" . $nome . "</b> foi criado com sucesso!",
             "type" => "success",
           );
         } else {
@@ -41,8 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header("Location: showequip.php");
         exit(0);
       } else {
-        $code = $conn->errno; // error code of the most recent operation
-        $message = $conn->error; // error message of the most recent op.
+        $code = $conn->errno;
+        $message = $conn->error;
         $msg_erro = "Falha na query! ($code $message)";
       }
     }
@@ -142,9 +163,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                           while ($row = mysqli_fetch_assoc($resultParceria)) {
                             foreach ($row as $res => $key) {
                               $id_parceria = $row['id_parceria'];
-                              $nome = $row['nome'];
+                              $parceria = $row['nome'];
                             }
-                            echo "<option value='$id_parceria'>$nome</option>";
+                            echo "<option value='$id_parceria'>$parceria</option>";
                           }
                           ?>
                         </select>
@@ -154,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <br>
                         <label for="">Imagem</label>
                         <div class="custom-file form-group">
-                          <input type="file" name="inputImg" class="custom-file-input" id="inputImg" accept="image/*" required>
+                          <input type="file" name="inputImg" class="custom-file-input" id="inputImg" accept=".png, .jpg, .jpeg" required>
                           <label class="custom-file-label" for="inputImg">Selecione a imagem...</label>
                           <small id="img">
                             Por favor preencha o campo
@@ -163,7 +184,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       </div>
                     </div>
                     <div class="form-row">
-                      <input type="submit" class="btn btn-primary" id="submitbtn" value="Confirmar" style="margin-right: 5px;">
+
+                      <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Confirmar</button>
                       <a href="showequip.php"><input type="button" value="Voltar" class="btn btn-primary"></a>
                     </div>
                   </form>
