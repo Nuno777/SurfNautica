@@ -142,6 +142,9 @@ require_once '../../conexao.php';
       <script src="assets/js/chart.js"></script>
       <script src="assets/js/map.js"></script>
       <script src="assets/js/custom.js"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="assets/js/validation.js"></script>
+
 
 </body>
 
