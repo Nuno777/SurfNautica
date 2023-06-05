@@ -152,7 +152,7 @@ if (isset($_POST["editcontato"])) {
 
                         </div>
 
-                        <button type="submit" class="btn btn-primary" name="editcontato" id="respondcontct" disabled>Submeter</button>
+                        <button type="submit" class="btn btn-primary" name="editcontato" id="respondcontcct" disabled>Submeter</button>
 
                         <a href="dashboardContacto.php" class="btn btn-secondary" name="voltarcontato" type="submit">Voltar</a>
 
@@ -182,7 +182,7 @@ if (isset($_POST["editcontato"])) {
       <script>
         $(document).ready(function() {
           $('#editcontato').on('input change', function() {
-            $('#respondcontct').attr('disabled', false);
+            $('#respondcontcct').attr('disabled', false);
           });
         })
       </script>
