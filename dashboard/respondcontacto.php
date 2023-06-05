@@ -76,37 +76,49 @@ $resultdelete = mysqli_query($conn, $query);
 
               <div class="card">
                 <div class="card-body">
-                  <h4 class="header-title">Contactos</h4>
+                  <h4 class="header-title">Responder</h4>
                   <br>
                   <div class="single-table">
-                    <div class="table-responsive">
-                      <table class="table text-center">
-                        <thead class="text-uppercase bg-dark">
-                          <tr class="text-white">
+                    <form>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="fname">First name</label>
+                            <input type="text" class="form-control" placeholder="John">
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="lname">Last name</label>
+                            <input type="text" class="form-control" placeholder="Smith">
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" class="form-control" placeholder="City Name">
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="row">
+                            <div class="col-6">
+                              <div class="form-group">
+                                <label for="State">State</label>
+                                <input type="text" class="form-control" placeholder="State">
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <div class="form-group">
+                                <label for="Zip">Zip</label>
+                                <input type="text" class="form-control" placeholder="Zip">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
-                            <th scope="col">Nome</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Mensagem</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <?php
-                          while ($row = $result->fetch_object()) {
-                            echo "<tr>";
-                            echo "<td>" . $row->nome . "</td>";
-                            echo "<td>" . $row->email . "</td>";
-                            echo "<td><a data-toggle='modal' data-target='#viewmensagem$row->id_cont' class='text-primary' name='Menssage'><i class='mdi mdi-comment-text-outline'></i></a></td>";
-                            // echo "<td><a href='respondcontacto.php?id_cont=$row->id_cont' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
-                            echo "<td><a data-toggle='modal' data-target='#deletecontato$row->id_cont' class='text-danger' name='delete'><i class='mdi mdi-delete'></i></a></td>";
-                            echo "</tr>";
-                          }
+                      <button type="submit" class="btn btn-primary ">Submit</button>
 
-                          ?>
-                        </tbody>
-                      </table>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -124,7 +136,7 @@ $resultdelete = mysqli_query($conn, $query);
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Mensagem de <b><?php echo $row->nome;?></b></h5><span class="span-contat"><?php echo $row->email; ?></span>
+                  <h5 class="modal-title" id="exampleModalLabel">Mensagem de <b><?php echo $row->nome; ?></b></h5><span class="span-contat"><?php echo $row->email; ?></span>
                 </div>
                 <!-- assunto -->
                 <div class="modal-body">
@@ -147,7 +159,7 @@ $resultdelete = mysqli_query($conn, $query);
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
-                  <?php echo "<a href='respondcontacto.php?id_cont=$row->id_cont' type='button' class='btn btn-primary'>Responder</a>"; ?>
+                  <?php echo "<a href='editcontato.php?id_cont=$row->id_cont' type='button' class='btn btn-primary'>Responder</a>"; ?>
                 </div>
               </div>
             </div>

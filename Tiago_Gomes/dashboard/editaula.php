@@ -103,10 +103,10 @@ if (isset($_POST)) {
                 <div class="card-body">
                   <h4 class="header-title">Editar Aulas</h4>
                   <br>
-                  <form action="showequip.php" method="POST">
+                  <form action="showaula.php" method="POST">
                     <div class="form-group">
-                      <label for="inputEmail4">Titulo</label>
-                      <input type="text" class="form-control" name="name" id="name" value="<?php echo ($titulo); ?>" required>
+                      <label for="titulo">Titulo</label>
+                      <input type="text" class="form-control" name="titulo" id="titulo" value="<?php echo ($titulo); ?>" required>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-6">
