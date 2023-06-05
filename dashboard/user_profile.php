@@ -10,7 +10,7 @@ if (!isset($_SESSION['authenticated'])) {
 <html lang="en" dir="ltr">
 
 <head>
-  <title>Dashboard</title>
+  <title>Painel Do Cliente</title>
   <?php
   require_once 'sheets/dashboardHead.php';
   ?>
@@ -29,6 +29,13 @@ if (!isset($_SESSION['authenticated'])) {
         </div>
         <div class="sidebar-left" data-simplebar style="height: 100%;">
           <ul class="nav sidebar-inner" id="sidebar-menu">
+
+            <li class="active">
+              <a class="sidenav-item-link" href="dashboard.php">
+                <i class="mdi mdi-monitor-dashboard"></i>
+                <span class="nav-text">Painel</span>
+              </a>
+            </li>
 
             <li class="">
               <a class="sidenav-item-link" href="">

@@ -8,12 +8,12 @@ $result = mysqli_query($conn, $query);
  // Definir Alerta - Operações (DELETE) 
  if ($conn->affected_rows > 0) {
     $_SESSION["message"] = array(
-        "content" => "The User with the email <b>" .  $email . "</b> was successfully deleted!",
+        "content" => "O cliente do email <b>" .  $email . "</b> foi eliminado com sucesso!",
         "type" => "success",
     );
 } else {
     $_SESSION["message"] = array(
-        "content" => "There was an error deleting the email <b>" . $email . "</b>!",
+        "content" => "Ocorreu um erro ao eliminar o cliente do email  <b>" . $email . "</b>!",
         "type" => "danger",
     );
 }
