@@ -6,25 +6,65 @@ if (!isset($_SESSION['authenticated'])) {
 }
 
 require_once '../../conexao.php';
+if (isset($_POST[" editaula"])) {
+  $id_prof = $_POST["id_prof"];
+  $query = "UPDATE diaaberto SET titulo = " . $titulo . ", data1 = " . $data1 . ", horas = " . $horas . ", id_prof = " . $id_prof . " WHERE id_diaAberto = " . $id_diaAberto . ");";
+  $result = mysqli_query($conn, $query);
 
-$id_diaAberto = $_GET['id_diaAberto'];
-$id_prof = $_GET['id_prof'];
-
-$sql = "select id_diaAberto, titulo, titulo, data1, horas, id_prof from diaAberto";
-$result = mysqli_query($conn, $sql);
-$resultAulas = mysqli_query($conn, $sql);
-$resultdelete = mysqli_query($conn, $sql);
-
-while ($row = mysqli_fetch_assoc($result)) {
-  foreach ($row as $res => $key) {
-    $id_diaAberto = $row['id_diaAberto'];
-    $titulo = $row['titulo'];
-    $data1 = $row['data1'];
-    $horas = $row['horas'];
-    $id_prof = $row['id_prof'];
+  // Definir Alerta - Operações (EDITAR) 
+  if ($conn->affected_rows > 0) {
+    $_SESSION["message"] = array(
+      "content" => "O contacto do email <b>" . $titulo . "</b> foi atualizado com sucesso!",
+      "type" => "success",
+    );
+  } else {
+    $_SESSION["message"] = array(
+      "content" => "Ocorreu um erro ao atualizar o contacto do email <b>" . $titulo . "</b>!",
+      "type" => "danger",
+    );
   }
+
+  header('Location: showaula.php');
 }
 
+/* $msg_erro = "";
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+  if ($titulo == "" || $data1 == "" || $horas == "") {
+    $msg_erro = "Nome, descrição e imagem não inseridos ou parceria não escolhida!";
+  } else {
+
+    if ($conn->connect_errno) {
+      $code = $conn->connect_errno;
+      $message = $conn->connect_error;
+      $msg_erro = "Falha na ligação à Base de Dados ($code $message)!";
+    } else {
+
+      $query = "UPDATE diaaberto SET titulo = " . $titulo . ", data1 = " . $data1 . ", horas = " . $horas . ", id_prof = " . $id_prof . " WHERE id_diaAberto = " . $id_diaAberto . ");";
+
+      $sucesso_query = $conn->query($query);
+      if ($sucesso_query) {
+        if ($conn->affected_rows > 0) {
+          $_SESSION["message"] = array(
+            "content" => "O dia aberto <b>" .  $titulo . "</b> foi editar com sucesso!",
+            "type" => "success",
+          );
+        } else {
+          $_SESSION["message"] = array(
+            "content" => "Ocorreu um erro ao editar o dia aberto <b>" . $titulo . "</b>!",
+            "type" => "danger",
+          );
+        }
+        header("Location: showaula.php");
+        exit(0);
+      } else {
+        $code = $conn->errno; 
+        $message = $conn->error; 
+        $msg_erro = "Falha na query! ($code $message)";
+      }
+    }
+  }
+} */
 /* if (!isset($_POST)) {
   $titulo = trim($_POST['titulo']);
   $data1 = trim($_POST['data1']);
@@ -83,6 +123,25 @@ if (isset($_POST)) {
 
       <div class="content-wrapper">
         <!-- Top -->
+<?php
+
+$id_diaAberto = $_GET["id_diaAberto"];
+$id_prof = $_GET["id_prof"];
+
+
+$sql = "SELECT * FROM diaaberto WHERE id_diaAberto = " . $id_diaAberto . ";";
+$result = mysqli_query($conn, $sql);
+
+while ($row = mysqli_fetch_assoc($result)) {
+  foreach ($row as $res => $key) {
+    $id_diaAberto = $row['id_diaAberto'];
+    $titulo = $row['titulo'];
+    $data1 = $row['data1'];
+    $horas = $row['horas'];
+    $id_prof = $row['id_prof'];
+  }
+}
+?>
         <div class="content">
           <div class="row">
             <div class="col-lg-12 mt-5">
@@ -101,44 +160,79 @@ if (isset($_POST)) {
 
               <div class="card">
                 <div class="card-body">
-                  <h4 class="header-title">Editar Aulas</h4>
+                  <h4 class="header-title">Editar Dia Aberto</h4>
                   <br>
-                  <form action="showaula.php" method="POST">
+                  <form action="editaula.php" method="POST">
                     <div class="form-group">
+
+                    <input type="text" class="form-control" id="id_diaAberto" name="id_diaAberto" value="<?= $id_diaAberto ?>" required hidden>
+
+
                       <label for="titulo">Titulo</label>
-                      <input type="text" class="form-control" name="titulo" id="titulo" value="<?php echo ($titulo); ?>" required>
+                      <input type="text" class="form-control" name="titulo" id="titulo" value="<?= $titulo; ?>" required>
+                      <small id="titulo_preencher">
+                        Por favor preencha o campo
+                      </small>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="data1">Data</label>
-                        <textarea type="text" class="form-control" name="data1" id="data1" rows="12" style="resize: vertical;" require><?php echo ($data1); ?></textarea>
+                        <textarea type="text" class="form-control" name="data1" id="data1" rows="2" style="resize: vertical;" require><?=  $data1; ?></textarea>
+                        <small id="data1_preencher">
+                          Por favor preencha o campo
+                        </small>
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="inputpartner">Parceria</label>
-                        <select name="partner" id="inputpartner" class="form-control">
+                        <label for="horas">Horas</label>
+                        <select name="horas" id="horas" class="form-control">
                           <?php
-                          $sql = "SELECT * FROM diaaberto WHERE id_diaAberto = " . $id_diaAberto . ";";
-                          $resultAulas = mysqli_query($conn, $sql);
-                          while ($row = mysqli_fetch_assoc($resultAulas)) {
+                          $sql = "SELECT horas FROM diaaberto;";
+                          $resulthoras = mysqli_query($conn, $sql);
+                          while ($row = mysqli_fetch_assoc($resulthoras)) {
                             foreach ($row as $res => $key) {
                               $p = $row['horas'];
                             }
                             echo "<option selected>$p</option>";
                           }
-                          $sql = "SELECT * FROM diaaberto where horas <> '$p';";
-                          $resultAulas = mysqli_query($conn, $sql);
-                          while ($row = mysqli_fetch_assoc($resultAulas)) {
-                            foreach ($row as $res => $key) {
-                              $horas = $row['horas'];
-                            }
-                            echo "<option>$horas</option>";
-                          }
                           ?>
                         </select>
+                        <small id="horas_preencher">
+                          Por favor preencha o campo
+                        </small>
+                        </div>
+                        <div class="form-group col-md-6">
+                        <label for="id_prof">Escolher Professor</label>
+                        <select name="id_prof" id="id_prof" class="form-control" required>
+                          <?php
+                          $sql = "SELECT * FROM professor WHERE id_prof = " . $id_prof . ";";
+                          $resultProfesso = mysqli_query($conn, $sql);
+                          while ($row = mysqli_fetch_assoc($resultProfesso)) {
+                            foreach ($row as $res => $key) {
+                              $q = $row['nome'];
+                            }
+                            echo "<option selected>$q</option>";
+                          }
+
+                          $sql = "SELECT * FROM professor;";
+                          $resultProfessor = mysqli_query($conn, $sql);
+                          while ($row = mysqli_fetch_assoc($resultProfessor)) {
+                            foreach ($row as $res => $key) {
+                              $id_prof = $row['id_prof'];
+                              $nome = $row['nome'];
+                            }
+                            echo "<option value='$id_prof'>$nome</option>";
+                          }
+                          
+                          ?>
+                        </select>
+                        <small id="professor_preencher">
+                          Escolher o Professor que dá a aula.
+                        </small>
                       </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Editar</button>
+                    <a href="showaula.php"><input type="button" value="Voltar" class="btn btn-primary"></a>
                     </div>
-                    <button type="submit" class="btn btn-primary">Confirmar</button>
-                    <a href="showeaula.php"><input type="button" value="Voltar" class="btn btn-primary"></a>
                   </form>
                 </div>
               </div>

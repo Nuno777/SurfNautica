@@ -65,7 +65,7 @@ require('../conexao.php');
                     }
                     echo ('<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                             <figure class="effect-ming tm-video-item">
-                                <img src="img/' . $img . '" alt="Image" class="img-fluid">
+                                <img src="dashboard/upload/' . $img . '" alt="Image" class="img-fluid">
                                 <figcaption class="d-flex align-items-center justify-content-center">
                                     <h2>' . $nome . '</h2>
                                     <a href="equipamentos_detail.php">Ver Mais</a>

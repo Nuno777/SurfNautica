@@ -87,7 +87,6 @@ $resultdelete = mysqli_query($conn, $query);
 
                             <th scope="col">Nome</th>
                             <th scope="col">Descrição</th>
-                            <th scope="col">Imagem</th>
                             <th scope="col">Data de Publicação</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
@@ -100,14 +99,12 @@ $resultdelete = mysqli_query($conn, $query);
                               $id_equipa = $row['id_equipa'];
                               $nome = $row['nome'];
                               $desc = $row['descricao'];
-                              $img = $row['img'];
                               $data_pub = $row['data_pub'];
                               $id_parceria = $row['id_parceria'];
                             }
                             echo "<tr>";
                             echo "<td>" . $nome . "</td>";
                             echo "<td>" . substr("$desc", 0, 75) . " <a style='cursor: pointer;' data-toggle='modal' data-target='#viewequip$id_equipa' class='text-primary' name='Menssage'>(...)</a> </td>";
-                            echo "<td>" . $img . "</td>";
                             echo "<td>" . $data_pub . "</td>";
                             echo "<td><a href='editequip.php?id_equipa=$id_equipa&id_parceria=$id_parceria' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
                             echo "<td><a data-toggle='modal' data-target='#deleteequip$id_equipa' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
@@ -148,15 +145,6 @@ $resultdelete = mysqli_query($conn, $query);
                   <div class="row">
                     <div class="col-md-12">
                       <span class="span-name"><?php echo $nome; ?></span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="modal-body">
-                  <span>Imagem</span>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <span class="span-img"><?php echo $img; ?></span>
                     </div>
                   </div>
                 </div>
