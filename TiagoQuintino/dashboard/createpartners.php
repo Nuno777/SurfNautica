@@ -183,6 +183,9 @@ if ($sucesso_query) {
       <script src="assets/js/chart.js"></script>
       <script src="assets/js/map.js"></script>
       <script src="assets/js/custom.js"></script>
+      <script src="assets/js/validation.js"></script>
+
+
     </div>
   </div>
 </body>

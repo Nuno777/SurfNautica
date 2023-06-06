@@ -26,8 +26,7 @@ if (isset($_POST[" editaula"])) {
 
   header('Location: showaula.php');
 }
-
-/* $msg_erro = "";
+ $msg_erro = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   if ($titulo == "" || $data1 == "" || $horas == "") {
@@ -64,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       }
     }
   }
-} */
+} 
 /* if (!isset($_POST)) {
   $titulo = trim($_POST['titulo']);
   $data1 = trim($_POST['data1']);
@@ -177,7 +176,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="data1">Data</label>
-                        <textarea type="text" class="form-control" name="data1" id="data1" rows="2" style="resize: vertical;" require><?=  $data1; ?></textarea>
+                        <textarea type="date" class="form-control" name="data1" id="data1" rows="2" style="resize: vertical;" require><?=  $data1; ?></textarea>
                         <small id="data1_preencher">
                           Por favor preencha o campo
                         </small>
@@ -201,8 +200,8 @@ while ($row = mysqli_fetch_assoc($result)) {
                         </small>
                         </div>
                         <div class="form-group col-md-6">
-                        <label for="id_prof">Escolher Professor</label>
-                        <select name="id_prof" id="id_prof" class="form-control" required>
+                        <label for="inputid_prof">Escolher Professor</label>
+                        <select name="inputid_prof" id="inputid_prof" class="form-control" required>
                           <?php
                           $sql = "SELECT * FROM professor WHERE id_prof = " . $id_prof . ";";
                           $resultProfesso = mysqli_query($conn, $sql);
@@ -282,6 +281,7 @@ while ($row = mysqli_fetch_assoc($result)) {
       <script src="assets/js/chart.js"></script>
       <script src="assets/js/map.js"></script>
       <script src="assets/js/custom.js"></script>
+      <script src="assets/js/validation.js"></script>
 
 </body>
 
