@@ -6,7 +6,7 @@ if (!isset($_SESSION['authenticated'])) {
 }
 
 require_once '../../conexao.php';
-$query = "SELECT * FROM surfnautica.noticia ORDER BY id_not";
+$query = "SELECT * FROM noticia ORDER BY id_not";
 $result = mysqli_query($conn, $query);
 $resultEquip = mysqli_query($conn, $query);
 $resultdelete = mysqli_query($conn, $query);
