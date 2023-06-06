@@ -17,13 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($titulo == "" || $data1 == "" || $horas == "" || $id_prof == "") {
     $msg_erro = "Nome, descrição e imagem não inseridos ou parceria não escolhida!";
   } else {
-      /* estabelecer ligação à BD */
-      require_once '../../conexao.php';
-      if ($conn->connect_errno) {
+    /* estabelecer ligação à BD */
+    require_once '../../conexao.php';
+    if ($conn->connect_errno) {
       $code = $conn->connect_errno;
       $message = $conn->connect_error;
       $msg_erro = "Falha na ligação à Base de Dados ($code $message)!";
-      } else {
+    } else {
       /* executar query... */
       $query = "INSERT INTO diaaberto (titulo, data1, horas, id_prof) VALUES ('" . $titulo . "', '" . $data1 . "', '" . $horas . "', '" . $id_prof . "');";
       $sucesso_query = mysqli_query($conn, $query);
@@ -134,7 +134,7 @@ if (isset($_POST)) {
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="inputdata1">Data</label>
-                        <textarea type="text" class="form-control" name="inputdata1" id="inputdata1" rows="2" required></textarea>
+                        <input type="date" class="form-control" name="inputdata1" id="inputdata1" rows="2" required></input>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="inputhoras">Horas</label>
@@ -185,6 +185,7 @@ if (isset($_POST)) {
       <script src="assets/plugins/jvectormap/jquery-jvectormap-us-aea.js"></script>
       <script src="assets/plugins/daterangepicker/moment.min.js"></script>
       <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
+      <script src="assets/js/validation.js"></script>
       <script>
         jQuery(document).ready(function() {
           jQuery('input[name="dateRange"]').daterangepicker({
