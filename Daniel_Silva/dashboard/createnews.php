@@ -110,26 +110,30 @@ if ($sucesso_query) {
                 <div class="card-body">
                   <h4 class="header-title">Criar Noticias</h4>
                   <br>
-                  <form enctype="multipart/form-data" action="createnews.php" method="POST">
-                    <div class="form-group">
-                      <label for="inputname">Titulo</label>
-                      <input type="text" class="form-control" name="inputname" id="inputname" required>
-                    </div>
-                    <div class="form-row">
-                      <div class="form-group col-md-6">
-                        <label for="inputdesc">Descrição</label>
-                        <textarea type="text" class="form-control" name="inputdesc" id="inputdesc" rows="12" style="resize: vertical;" required></textarea>
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label for="inputImg">Foto</label>
-                        <div class="custom-file form-group">
-                          <input type="file" name="inputImg" class="custom-file-input" id="inputImg" required>
-                          <label class="custom-file-label" for="inputImg"><?php echo "Selecione a imagem..."; ?></label>
-                        </div>
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Criar</button>
-                    <a href="showpartners.php"><input type="button" value="Voltar" class="btn btn-primary"></a>
+                  <form enctype="multipart/form-data" action="createnews.php" method="POST" id="myForm">
+    <div class="form-group">
+      <label for="inputname">Titulo</label>
+      <input type="text" class="form-control" name="inputname" id="inputname" required>
+      <small id="nameError" style="color: red;"></small>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputdesc">Descrição</label>
+        <textarea type="text" class="form-control" name="inputdesc" id="inputdesc" rows="12" style="resize: vertical;" required></textarea>
+        <small id="descError" style="color: red;"></small>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputImg">Foto</label>
+        <div class="custom-file form-group">
+          <input type="file" name="inputImg" class="custom-file-input" id="inputImg" required>
+          <label class="custom-file-label" for="inputImg"><?php echo "Selecione a imagem..."; ?></label>
+          <small id="imgError" style="color: red;"></small>
+        </div>
+      </div>
+    </div>
+      <button type="submit" class="btn btn-primary">Criar</button>
+      </form>
+
                   </form>
                 </div>
               </div>
@@ -183,6 +187,7 @@ if ($sucesso_query) {
       <script src="assets/js/chart.js"></script>
       <script src="assets/js/map.js"></script>
       <script src="assets/js/custom.js"></script>
+      <script src="assets/js/validar.js"></script>
     </div>
   </div>
 </body>
