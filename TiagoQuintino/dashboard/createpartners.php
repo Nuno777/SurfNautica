@@ -123,7 +123,7 @@ if ($sucesso_query) {
                       <div class="form-group col-md-6">
                         <label for="inputImg">Imagem</label>
                         <div class="custom-file form-group">
-                          <input type="file" name="inputImg" class="custom-file-input" id="inputImg" required>
+                          <input type="file" name="inputImg" class="custom-file-input" id="inputImg" accept="image/png, image/jpeg" required>
                           <label class="custom-file-label" for="inputImg"><?php echo "Selecione a imagem..."; ?></label>
                         </div>
                       </div>
