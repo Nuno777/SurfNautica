@@ -103,9 +103,9 @@ $resultdelete = mysqli_query($conn, $query);
                             }
                             echo "<tr>";
                             echo "<td>" . $nome . "</td>";
-                            echo "<td>" . substr("$desc", 0, 75) . " (...)</td>";
+                            echo "<td>" . substr("$desc", 0, 75) . " <a style='cursor: pointer;' data-toggle='modal' data-target='#viewpartner$id_parceria' class='text-primary' name='Menssage'>(...)</a> </td>";
                             echo "<td>" . $img . "</td>";
-                            echo "<td><a href='editepartners.php?id_parceria=$id_parceria' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
+                            echo "<td><a href='editpartners.php?id_parceria=$id_parceria' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
                             echo "<td><a href='deletepartners.php?id_parceria=$id_parceria&nome=$nome' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
                             echo "</tr>";
                           }
@@ -128,8 +128,7 @@ $resultdelete = mysqli_query($conn, $query);
         <!-- Modal de ver parcerias -->
         <?php while ($row = $row = mysqli_fetch_assoc($resultPart)) {
           foreach ($row as $res => $key) {
-
-            $nome = $row['nome'];
+            $id_parceria = $row['id_parceria'];
             $nome = $row['nome'];
             $desc = $row['descricao'];
             $img = $row['img'];
@@ -139,8 +138,16 @@ $resultdelete = mysqli_query($conn, $query);
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Nome</h5>
-                  <span class="span-nome"><?php echo $nome; ?></span>
+                  <h5 class="modal-title" id="exampleModalLabel">Parceiro</h5>
+                </div>
+
+                <div class="modal-body">
+                  <span>Nome</span>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <span class="span-name"><?php echo $nome; ?></span>
+                    </div>
+                  </div>
                 </div>
 
                 <div class="modal-body">
@@ -156,7 +163,7 @@ $resultdelete = mysqli_query($conn, $query);
                   <span>Descrição</span>
                   <div class="row">
                     <div class="col-md-12">
-                      <textarea type="text" class="form-control" rows="10" style="resize: none" disabled><?= $descricao ?></textarea>
+                      <textarea type="text" class="form-control" rows="10" style="resize: none" disabled><?php echo $desc; ?></textarea>
                     </div>
                   </div>
                 </div>

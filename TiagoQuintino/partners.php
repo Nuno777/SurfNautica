@@ -18,6 +18,7 @@ require('database.php');
     <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
     <link href="assets/css/navbar.css" rel="stylesheet">
+    <link href="assets/img/favicon.ico" rel="icon">
     <title>Parcerias</title>
 </head>
 <title>Parcerias</title>
