@@ -195,7 +195,7 @@ $resultdelete = mysqli_query($conn, $query);
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
-                  <a href='deleteequip.php?id_cont=<?php echo $id_equipa . '&nome=' . $nome ?>' type='button' class='btn btn-primary'>Sim</a>
+                  <a href='deleteequip.php?id_equipa=<?php echo $id_equipa . '&nome=' . $nome ?>' type='button' class='btn btn-primary'>Sim</a>
                 </div>
               </div>
             </div>
