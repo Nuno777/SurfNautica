@@ -1,13 +1,49 @@
 <?php
 session_start();
+$uploaded_image = isset($_SESSION['uploaded_image']) ? $_SESSION['uploaded_image'] : "";
+
 if (!isset($_SESSION['authenticated'])) {
   header('Location: ../../login.php');
   exit(0);
 }
-
 require_once '../../conexao.php';
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+  $name = $_POST['inputname'];
+  $desc = $_POST['inputdesc'];
+
+  //upload IMAGE
+  $img_name = $_FILES['inputImg']['name'];
+  $tmp_name = $_FILES['inputImg']['tmp_name'];
+  $folder = "../assets/img/" . $img_name;
+  move_uploaded_file($tmp_name, $folder);
+
+  $query = "INSERT INTO parcerias (nome, descricao, img) VALUES ('" . $name . "', '" . $desc . "', '" . $img_name . "');";
+  echo $query;
+  $sucesso_query = mysqli_query($conn, $query);
+}
+if ($sucesso_query) {
+  if ($conn->affected_rows > 0) {
+    $_SESSION["message"] = array(
+      "content" => "O parceiro <b>" .  $nome . "</b> foi criado com sucesso!",
+      "type" => "success",
+    );
+  } else {
+    $_SESSION["message"] = array(
+      "content" => "Ocorreu um erro ao criar o parceiro <b>" . $nome . "</b>!",
+      "type" => "danger",
+    );
+  }
+  header("Location: showpartners.php");
+  exit(0);
+} else {
+  $code = $conn->error; // error code of the most recent operation
+  $message = $conn->error; // error message of the most recent op.
+  $msg_erro = "Falha na query! ($code $message)";
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -74,21 +110,21 @@ require_once '../../conexao.php';
                 <div class="card-body">
                   <h4 class="header-title">Criar Parcerias</h4>
                   <br>
-                  <form action="showpartners.php" method="POST">
+                  <form enctype="multipart/form-data" action="createpartners.php" method="POST">
                     <div class="form-group">
-                      <label for="inputEmail4">Nome</label>
-                      <input type="text" class="form-control" name="name" id="name" require>
+                      <label for="inputname">Nome</label>
+                      <input type="text" class="form-control" name="inputname" id="inputname" required>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="inputdesc">Descrição</label>
-                        <textarea type="text" class="form-control" name="desc" id="inputdesc" rows="12" style="resize: vertical;"></textarea>
+                        <textarea type="text" class="form-control" name="inputdesc" id="inputdesc" rows="12" style="resize: vertical;" required></textarea>
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="">Imagem</label>
+                        <label for="inputImg">Imagem</label>
                         <div class="custom-file form-group">
                           <input type="file" name="inputImg" class="custom-file-input" id="inputImg" required>
-                          <label class="custom-file-label" for="inputImg">Selecione a imagem...</label>
+                          <label class="custom-file-label" for="inputImg"><?php echo "Selecione a imagem..."; ?></label>
                         </div>
                       </div>
                     </div>
@@ -135,6 +171,10 @@ require_once '../../conexao.php';
           jQuery('input[name="dateRange"]').on('cancel.daterangepicker', function(ev, picker) {
             jQuery(this).val('');
           });
+          $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+          });
         });
       </script>
       <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
@@ -143,7 +183,8 @@ require_once '../../conexao.php';
       <script src="assets/js/chart.js"></script>
       <script src="assets/js/map.js"></script>
       <script src="assets/js/custom.js"></script>
-
+    </div>
+  </div>
 </body>
 
 </html>

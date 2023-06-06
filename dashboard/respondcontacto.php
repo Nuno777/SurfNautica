@@ -15,12 +15,12 @@ if (isset($_POST["editcontato"])) {
   // Definir Alerta - Operações (EDITAR) 
   if ($conn->affected_rows > 0) {
     $_SESSION["message"] = array(
-      "content" => "O contacto do email <b>" . $email . "</b> foi atualizado com sucesso!",
+      "content" => "Respondeu a mensagem do email <b>" . $email . "</b> com sucesso!",
       "type" => "success",
     );
   } else {
     $_SESSION["message"] = array(
-      "content" => "Ocorreu um erro ao atualizar o contacto do email <b>" . $email . "</b>!",
+      "content" => "Ocorreu um erro ao responder a mensagem do email <b>" . $email . "</b>!",
       "type" => "danger",
     );
   }
@@ -33,7 +33,7 @@ if (isset($_POST["editcontato"])) {
 <html lang="en" dir="ltr">
 
 <head>
-  <title>Dashboard - Contactos</title>
+  <title>Dashboard | Responder</title>
   <?php
   require_once 'sheets/dashboardHead.php';
   ?>
@@ -86,6 +86,7 @@ if (isset($_POST["editcontato"])) {
           $nome = $row->nome;
           $assunto = $row->assunto;
           $mensagem = $row->mensagem;
+          $resposta = $row->resposta;
         ?>
           <div class="content">
             <div class="row">
@@ -110,7 +111,7 @@ if (isset($_POST["editcontato"])) {
                     <br>
                     <div class="single-table">
 
-                      <form id="editcontato" action="dashboardContacto.php" method="POST" class="form" enctype="multipart/form-data">
+                      <form id="editcontato" action="respondcontacto.php" method="POST" class="form" enctype="multipart/form-data">
                         <div class="row">
 
                           <input type="text" class="form-control" id="id_cont" name="id_cont" value="<?= $id_cont ?>" required hidden>
@@ -146,13 +147,13 @@ if (isset($_POST["editcontato"])) {
                           <div class="col-sm-12">
                             <div class="form-group">
                               <label for="city">Resposta</label>
-                              <textarea class="form-control" rows="10" id="resposta" name="resposta" minlength="4" maxlength="250" style="resize: none" required></textarea>
+                              <textarea class="form-control" rows="10" id="resposta" name="resposta" minlength="4" maxlength="250" style="resize: none" required><?= $resposta ?></textarea>
                             </div>
                           </div>
 
                         </div>
 
-                        <button type="submit" class="btn btn-primary" name="editcontato" id="respondcontcct" disabled>Submeter</button>
+                        <button type="submit" class="btn btn-primary" name="editcontato" id="respondbutton" disabled>Submeter</button>
 
                         <a href="dashboardContacto.php" class="btn btn-secondary" name="voltarcontato" type="submit">Voltar</a>
 
@@ -178,14 +179,7 @@ if (isset($_POST["editcontato"])) {
 
 
       </div>
-      <!-- JQuery ativar botão editar -->
-      <script>
-        $(document).ready(function() {
-          $('#editcontato').on('input change', function() {
-            $('#respondcontcct').attr('disabled', false);
-          });
-        })
-      </script>
+
 
       <script src="assets/plugins/jquery/jquery.min.js"></script>
       <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -221,6 +215,15 @@ if (isset($_POST["editcontato"])) {
       <script src="assets/js/chart.js"></script>
       <script src="assets/js/map.js"></script>
       <script src="assets/js/custom.js"></script>
+
+      <!-- JQuery ativar botão editar -->
+      <script>
+        $(document).ready(function() {
+          $('#editcontato').on('input change', function() {
+            $('#respondbutton').attr('disabled', false);
+          });
+        })
+      </script>
 
 </body>
 

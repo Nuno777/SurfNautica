@@ -7,19 +7,79 @@ if (!isset($_SESSION['authenticated'])) {
 
 require_once '../../conexao.php';
 
-$id_parceria = $_GET['id_parceria'];
+$id_parceriabuscar = $_GET['id_parceria'];
 
-$sql = "SELECT * FROM parcerias WHERE id_parceria = " . $id_parceria . ";";
+$sql = "SELECT * FROM parcerias WHERE id_parceria = " . $id_parceriabuscar . ";";
 $result = mysqli_query($conn, $sql);
 while ($row = mysqli_fetch_assoc($result)) {
   foreach ($row as $res => $key) {
-    $nome = $row['nome'];
+    $id_parceria = $row['id_parceria'];
+    $nomeParceria = $row['nome'];
     $desc = $row['descricao'];
     $img = $row['img'];
   }
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  // validar variáveis
+  $id = isset($_POST['idParceiroHidden']) ? $_POST['idParceiroHidden'] : "";
+  $name = isset($_POST['name']) ? $_POST['name'] : "";
+  $img = $_FILES['inputImg']['name'];
+  $tmp_name = $_FILES['inputImg']['tmp_name'];
+  $target_file = basename($_FILES["inputImg"]["name"]);
+  $folder = "../assets/img/" . $img_name;
+  move_uploaded_file($tmp_name, $folder);
+
+  $desc = isset($_POST['inputdesc']) ? $_POST['inputdesc'] : "";
+  if ($nome == "" || $img == "" || $desc == "") {
+    echo $nome . " " . $target_file . " " . $desc;
+
+    $msg_erro = "Nome, descrição e imagem não inseridos ou não escolhida!";
+  } else {
+    echo "sdasdasdasda";
+    /* estabelecer ligação à BD */
+    require_once '../../conexao.php';
+    if ($conn->connect_errno) {
+      $code = $conn->connect_errno;
+      $message = $conn->connect_error;
+      $msg_erro = "Falha na ligação à Base de Dados ($code $message)!";
+    } else {
+      /* executar query... */
+      $query = "UPDATE parcerias SET nome = '" . $name . "', descricao = '" . $desc . "', img = '" . $img . "' WHERE id_parceria = " . $id . ";";
+      echo $query;
+      print_r($_POST);
+      $sucesso_query = mysqli_query($conn, $query);
+      if ($sucesso_query) {
+        if ($conn->affected_rows > 0) {
+          $_SESSION["message"] = array(
+            "content" => "O parceiro <b>" .  $name . "</b> foi criado com sucesso!",
+            "type" => "success",
+          );
+        } else {
+          $_SESSION["message"] = array(
+            "content" => "Ocorreu um erro ao criar o parceiro <b>" . $name . "</b>!",
+            "type" => "danger",
+          );
+        }
+        header("Location: showpartners.php");
+        exit(0);
+      } else {
+        $code = $conn->errno; // error code of the most recent operation
+        $message = $conn->error; // error message of the most recent op.
+        $msg_erro = "Falha na query! ($code $message)";
+      }
+    }
+  }
+}
+
+/*  */
+
+print_r($_POST);
+
+
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -86,24 +146,25 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <div class="card-body">
                   <h4 class="header-title">Editar Parceria</h4>
                   <br>
-                  <form action="showeparterns.php" method="POST">
+                  <form enctype="multipart/form-data" action="showpartners.php" method="POST">
+                    <input type="hidden" id="idParceiroHidden" name="idParceiroHidden" value="<?php echo $id_parceriabuscar; ?>">
                     <div class="form-group">
-                      <label for="inputEmail4">Nome</label>
-                      <input type="text" class="form-control" name="name" id="name" value="<?php echo ($nome); ?>" required>
+                      <label for="name">Nome</label>
+                      <input type="text" class="form-control" name="name" id="name" value="<?php echo $nomeParceria; ?>" required>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="inputdesc">Descrição</label>
-                        <textarea type="text" class="form-control" name="desc" id="inputdesc" rows="12" style="resize: vertical;" require><?php echo ($desc); ?></textarea>
+                        <textarea type="text" class="form-control" name="inputdesc" id="inputdesc" rows="12" style="resize: vertical;" required><?php echo ($desc); ?></textarea>
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="">Imagem</label>
+                        <label for="inputImg">Imagem</label>
                         <div class="custom-file form-group">
                           <div class="preview">
                             <img id="file-ip-1-preview">
                           </div>
-                          <input type="file" name="inputImg" class="custom-file-input" id="inputImg" required>
-                          <label class="custom-file-label" for="inputImg"><?php echo ($img); ?></label>
+                          <input type="file" name="inputImg" class="custom-file-input" id="inputImg">
+                          <label class="custom-file-label" for="inputImg" value="<?php echo ($img); ?>"><?php echo ($img); ?></label>
                         </div>
                       </div>
                     </div>

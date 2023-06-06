@@ -9,6 +9,7 @@ require_once '../conexao.php';
 $query = "SELECT * FROM contacto ORDER BY id_cont";
 $result = mysqli_query($conn, $query);
 $resultMenssage = mysqli_query($conn, $query);
+$resultRespond = mysqli_query($conn, $query);
 $resultdelete = mysqli_query($conn, $query);
 
 ?>
@@ -16,7 +17,7 @@ $resultdelete = mysqli_query($conn, $query);
 <html lang="en" dir="ltr">
 
 <head>
-  <title>Dashboard - Contactos</title>
+  <title>Dashboard | Contactos</title>
   <?php
   require_once 'sheets/dashboardHead.php';
   ?>
@@ -87,7 +88,7 @@ $resultdelete = mysqli_query($conn, $query);
                             <th scope="col">Nome</th>
                             <th scope="col">Email</th>
                             <th scope="col">Mensagem</th>
-                            <th scope="col"></th>
+                            <th scope="col">Resposta</th>
                             <th scope="col"></th>
                           </tr>
                         </thead>
@@ -98,6 +99,7 @@ $resultdelete = mysqli_query($conn, $query);
                             echo "<td>" . $row->nome . "</td>";
                             echo "<td>" . $row->email . "</td>";
                             echo "<td><a data-toggle='modal' data-target='#viewmensagem$row->id_cont' class='text-primary' name='Menssage'><i class='mdi mdi-comment-text-outline'></i></a></td>";
+                            echo "<td><a data-toggle='modal' data-target='#viewrespond$row->id_cont' class='text-primary' name='Menssage'><i class='mdi mdi-comment-text-outline'></i></a></td>";
                             // echo "<td><a href='respondcontacto.php?id_cont=$row->id_cont' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
                             echo "<td><a data-toggle='modal' data-target='#deletecontato$row->id_cont' class='text-danger' name='delete'><i class='mdi mdi-delete'></i></a></td>";
                             echo "</tr>";
@@ -156,6 +158,37 @@ $resultdelete = mysqli_query($conn, $query);
         }
         ?>
         <!-- Modal de ver mensagem fechou -->
+
+        <!-- Modal de ver resposta -->
+        <?php while ($row = $resultRespond->fetch_object()) {
+          $resposta = $row->resposta;
+        ?>
+          <div class="modal fade" id='viewrespond<?php echo $row->id_cont ?>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Resposta ao <b><?php echo $row->nome;?></b></h5><span class="span-contat"><?php echo $row->email; ?></span>
+                </div>
+
+                <!-- mensagem -->
+                <div class="modal-body">
+                  <span>Resposta</span>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <textarea type="text" class="form-control" rows="10" style="resize: none" disabled><?= $resposta ?></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <?php
+        }
+        ?>
+        <!-- Modal de ver resposta fechou -->
 
         <!-- Modal para eliminar -->
         <?php while ($row = $resultdelete->fetch_object()) { ?>
