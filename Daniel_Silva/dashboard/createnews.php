@@ -6,6 +6,49 @@ if (!isset($_SESSION['authenticated'])) {
 }
 
 require_once '../../conexao.php';
+$nome = isset($_POST['inputname']) == '' ? "" : $_POST['inputname'];
+$img = isset($_POST['inputImg']) == '' ? "" : $_POST['inputImg'];
+$desc = isset($_POST['inputdesc']) == '' ? "" : $_POST['inputdesc'];
+$msg_erro = "";
+print_r($_POST);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  // validar variáveis
+  if ($nome == "" || $img == "" || $desc == "") {
+    $msg_erro = "Nome, descrição e imagem não inseridos";
+  } else {
+    /* estabelecer ligação à BD */
+    require_once '../../conexao.php';
+    if ($conn->connect_errno) {
+      $code = $conn->connect_errno;
+      $message = $conn->connect_error;
+      $msg_erro = "Falha na ligação à Base de Dados ($code $message)!";
+    } else {
+      /* executar query... */
+      $query = "INSERT INTO noticia (nome, descricao, img,) VALUES (" . $nome . ", " . $desc . ", " . $img . ");";
+
+      $sucesso_query = mysqli_query($conn, $query);
+      if ($sucesso_query) {
+        if ($conn->affected_rows > 0) {
+          $_SESSION["message"] = array(
+            "content" => "A noticia <b>" .  $nome . "</b> foi criada com sucesso!",
+            "type" => "success",
+          );
+        } else {
+          $_SESSION["message"] = array(
+            "content" => "Ocorreu um erro ao criar a noticia <b>" . $nome . "</b>!",
+            "type" => "danger",
+          );
+        }
+        header("Location: shownews.php");
+        exit(0);
+      } else {
+        $code = $conn->errno; // error code of the most recent operation
+        $message = $conn->error; // error message of the most recent op.
+        $msg_erro = "Falha na query! ($code $message)";
+      }
+    }
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -86,7 +129,7 @@ require_once '../../conexao.php';
                       <div class="form-group col-md-6">
                         <label for="">Foto</label>
                         <div class="custom-file form-group">
-                          <input type="file" name="inputImg" class="custom-file-input" id="inputImg" required>
+                          <input type="file" name="inputImg" class="custom-file-input" accept=".png, .jpg, .jpeg" id="inputImg" required>
                           <label class="custom-file-label" for="inputImg">Selecione a foto...</label>
                         </div>
                       </div>

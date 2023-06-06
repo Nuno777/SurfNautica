@@ -100,7 +100,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                       <div class="form-group col-md-6">
                         <label for="">Foto</label>
                         <div class="custom-file form-group">
-                          <input type="file" name="inputImg" class="custom-file-input" id="inputImg" required>
+                          <input type="file" name="inputImg" class="custom-file-input" accept=".png, .jpg, .jpeg" id="inputImg" required>
                           <label class="custom-file-label" for="inputImg"><?php echo ($img); ?></label>
                         </div>
                       </div>
