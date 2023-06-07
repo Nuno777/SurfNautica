@@ -1,5 +1,6 @@
 <?php
 session_start();
+$uploaded_image = isset($_SESSION['uploaded_image']) ? $_SESSION['uploaded_image'] : "";
 if (!isset($_SESSION['authenticated'])) {
   header('Location: ../../login.php');
   exit(0);
@@ -10,68 +11,61 @@ require_once '../../conexao.php';
 $id_parceria = $_GET['id_parceria'];
 $id_equipa = $_GET['id_equipa'];
 
-$partner = array_key_exists('inputpartner', $_POST) ? $_POST['inputpartner'] : "";
-$nome = array_key_exists('inputname', $_POST) ? $_POST['inputname'] : "";
-$img = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['name'] : "";
-$desc = array_key_exists('inputdesc', $_POST) ? $_POST['inputdesc'] : "";
-$msg_erro = "";
+$sql = "SELECT * FROM equipamentos WHERE id_equipa = " . $id_equipa . ";";
+$result = mysqli_query($conn, $sql);
+while ($row = mysqli_fetch_assoc($result)) {
+  foreach ($row as $res => $key) {
+    $d = $row['img'];
+  }
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  if ($nome == "" || $desc == "" || $partner == "")
-    $_SESSION["message"] = array(
-      "content" => "Ocorreu um erro ao criar o equipamento <b>" . $nome . "</b>!",
-      "type" => "danger",
-    );
-  else {
-    require_once '../../conexao.php';
-    if ($conn->connect_errno) {
-      $code = $conn->connect_errno;
-      $message = $conn->connect_error;
-      $msg_erro = "Falha na ligação à Base de Dados ($code $message)!";
-    } else {
-      $nome = $conn->real_escape_string($nome);
-      $desc = $conn->real_escape_string($desc);
 
-      $query = "UPDATE `equipamentos` SET nome='$nome', descricao = '$desc', id_parceria = '$partner' WHERE id_parceiria = '$id_parceria')";
+  $partner = array_key_exists('inputpartner', $_POST) ? $_POST['inputpartner'] : "";
+  $nome = array_key_exists('inputname', $_POST) ? $_POST['inputname'] : "";
+  $img = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['name'] : "";
+  $desc = array_key_exists('inputdesc', $_POST) ? $_POST['inputdesc'] : "";
+  $tmp_name = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['tmp_name'] : "";
+  $msg_erro = "";
 
-      if (!empty($img) && is_uploaded_file($_FILES['inputImg']['tmp_name'])) {
-        // tratar upload da foto
-        $diretoria_upload = "upload/";
-        $extensao = pathinfo($img, PATHINFO_EXTENSION);
-        $imageDatabasePath = $diretoria_upload . sha1(microtime()) . "." . $extensao;
-        $newhotel_ficheiro = "../" . $imageDatabasePath;
+  $query = "UPDATE `equipamentos` SET nome='$nome', descricao = '$desc',  id_parceria = '$partner' WHERE id_parceiria = '$id_parceria');";
 
+  // Validar se o nome da imagem da base de dados é igual ao nome fornecido no input
+  if ($d != $img) {
+    if ($img != "" && getimagesize($tmp_name)) {
+      // tratar upload da foto
+      $diretoria_upload = "upload/";
+      $extensao = pathinfo($img, PATHINFO_EXTENSION);
+      $imageDatabasePath = $diretoria_upload . sha1(microtime()) . "." . $extensao;
 
-        if (move_uploaded_file($_FILES['inputImg']['tmp_name'], $newhotel_ficheiro)) {
-          $query = "UPDATE `equipamentos` SET nome='$nome', descricao = '$desc', img = '$imageDatabasePath',id_parceria = '$partner' WHERE id_parceiria = '$id_parceria')";
-        }
-      }
-
-      $querynewhotle = $conn->query($query);
-      if ($querynewhotle) {
-
-        // Definir Alerta - Operações (NEW) 
-        if ($conn->affected_rows > 0) {
-          $_SESSION["message"] = array(
-            "content" => "O equipamento <b>" . $nome . "</b> foi criado com sucesso!",
-            "type" => "success",
-          );
-        } else {
-          $_SESSION["message"] = array(
-            "content" => "Ocorreu um erro ao criar o equipamento <b>" . $nome . "</b>!",
-            "type" => "danger",
-          );
-        }
-        header("Location: showequip.php");
-        exit(0);
-      } else {
-        $code = $conn->errno;
-        $message = $conn->error;
-        $msg_erro = "Falha na query! ($code $message)";
+      if (move_uploaded_file($tmp_name, $imageDatabasePath)) {
+        $query = "UPDATE `equipamentos` SET nome='$nome', descricao = '$desc', img = '$imageDatabasePath', id_parceria = '$partner' WHERE id_parceiria = '$id_parceria');";
       }
     }
   }
+
+  $sucesso_query = mysqli_query($conn, $query);
+  if ($sucesso_query) {
+    if ($conn->affected_rows > 0) {
+      $_SESSION["message"] = array(
+        "content" => "O equipamento <b>" .  $nome . "</b> foi criado com sucesso!",
+        "type" => "success",
+      );
+    } else {
+      $_SESSION["message"] = array(
+        "content" => "Ocorreu um erro ao criar o equipamento <b>" . $nome . "</b>!",
+        "type" => "danger",
+      );
+    }
+    header("Location: showequip.php");
+    exit(0);
+  } else {
+    $code = $conn->error; // error code of the most recent operation
+    $message = $conn->error; // error message of the most recent op.
+    $msg_erro = "Falha na query! ($code $message)";
+  }
 }
+
 
 $sql = "SELECT * FROM equipamentos WHERE id_equipa = " . $id_equipa . ";";
 $result = mysqli_query($conn, $sql);

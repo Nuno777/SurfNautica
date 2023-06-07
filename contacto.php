@@ -55,20 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   </header>
 
   <main id="main">
-    <section class="breadcrumbs">
-      <div class="container">
-
-        <div class="d-flex justify-content-between align-items-center">
-          <h2>Contactos</h2>
-          <ol>
-            <li><a href="index.php">Home</a></li>
-            <li>Contactos</li>
-          </ol>
-        </div>
-
-      </div>
-    </section>
-
 
     <section id="contact" class="contact section-bg">
       <div class="container">

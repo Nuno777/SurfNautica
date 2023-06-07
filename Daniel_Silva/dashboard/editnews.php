@@ -90,17 +90,17 @@ while ($row = mysqli_fetch_assoc($result)) {
                   <form action="shownews.php" method="POST">
                     <div class="form-group">
                       <label for="inputEmail4">Título</label>
-                      <input type="text" class="form-control" name="name" id="name" value="<?php echo ($titulo); ?>" required>
+                      <input type="text" class="form-control" name="titulo" id="name" value="<?php echo ($titulo); ?>" required>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="inputdesc">Descrição</label>
-                        <textarea type="text" class="form-control" name="desc" id="inputdesc" rows="12" style="resize: vertical;" require><?php echo ($desc); ?></textarea>
+                        <textarea type="text" class="form-control" name="descricao" id="inputdesc" rows="12" style="resize: vertical;" required><?php echo ($desc); ?></textarea>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="">Foto</label>
                         <div class="custom-file form-group">
-                          <input type="file" name="inputImg" class="custom-file-input" id="inputImg" required>
+                          <input type="file" name="inputImg" class="custom-file-input" accept=".png, .jpg, .jpeg" id="inputImg" required>
                           <label class="custom-file-label" for="inputImg"><?php echo ($img); ?></label>
                         </div>
                       </div>

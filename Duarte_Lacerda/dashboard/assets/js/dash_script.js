@@ -83,10 +83,6 @@ function validateImg() {
         $("#img").show();
         imgError = true;
         return true;
-    } else if (imgValue == "") {
-        $("#img").show();
-        imgError = true;
-        return true;
     } else {
         $("#img").hide();
         imgError = false;

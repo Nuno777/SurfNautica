@@ -33,6 +33,7 @@ if (count($_SESSION['errors']) == 0) {
             }
         } else {
             $_SESSION['errors']['auth'] = 'Email/password incorretas';
+            echo "<script>alert('Password errada!');window.location='login.php'</script>";
 
         }
     }

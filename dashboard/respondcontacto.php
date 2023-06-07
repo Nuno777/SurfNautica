@@ -156,7 +156,7 @@ if (isset($_POST["editcontato"])) {
                         <button type="submit" class="btn btn-primary" name="editcontato" id="respondbutton" disabled>Submeter</button>
 
                         <a href="dashboardContacto.php" class="btn btn-secondary" name="voltarcontato" type="submit">Voltar</a>
-
+                      </form>
                     </div>
                   </div>
                 </div>

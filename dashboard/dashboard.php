@@ -161,7 +161,7 @@ if ($levelperm['permission'] == 0) {
           <div class="card">
             <div class="card-body">
               <?php
-              $query = "SELECT id FROM users WHERE permission='0' ORDER BY id";
+              $query = "SELECT nome,email,permission, CASE WHEN permission = 2 THEN 'Administrador' WHEN permission = 1 THEN 'Professor'  WHEN permission = 0 THEN 'Usuário' ELSE permission END AS permission FROM users WHERE permission='0' OR permission='1'";
               $totaluser = mysqli_query($conn, $query);
               $user = mysqli_num_rows($totaluser);
               ?>
@@ -176,13 +176,14 @@ if ($levelperm['permission'] == 0) {
 
                         <th scope="col">Nome</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Estatuto</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php
-                      $query = "SELECT * FROM users WHERE permission = 0 ORDER BY id";
+                      $query = "SELECT id,nome,email,permission, CASE WHEN permission = 2 THEN 'Administrador' WHEN permission = 1 THEN 'Professor'  WHEN permission = 0 THEN 'Cliente' ELSE permission END AS permission FROM users WHERE permission='0' OR permission='1' ORDER BY permission <1";
                       $result = mysqli_query($conn, $query);
                       $resultdelete = mysqli_query($conn, $query);
                       while ($row = $result->fetch_object()) {
@@ -190,6 +191,7 @@ if ($levelperm['permission'] == 0) {
                         <tr>
                           <td><?php echo $row->nome ?></td>
                           <td><?php echo $row->email ?></td>
+                          <td><?php echo $row->permission ?></td>
                           <td><a href='editUser.php?id=<?php echo $row->id ?>' class='text-warning' name='edit'> <i class="mdi mdi-pencil"></i></a></td>
                           <td><a data-toggle='modal' data-target='#deleteUser<?php echo $row->id ?>' class='text-danger' name='delete'> <i class="mdi mdi-delete"></i></a></td>
                         </tr>

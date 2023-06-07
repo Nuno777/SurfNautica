@@ -1,17 +1,54 @@
 <?php
 session_start();
+$uploaded_image = isset($_SESSION['uploaded_image']) ? $_SESSION['uploaded_image'] : "";
+
 if (!isset($_SESSION['authenticated'])) {
   header('Location: ../../login.php');
   exit(0);
 }
-
 require_once '../../conexao.php';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+  $name = $_POST['inputname'];
+  $desc = $_POST['inputdesc'];
+
+  //upload IMAGE
+  $img_name = $_FILES['inputImg']['name'];
+  $tmp_name = $_FILES['inputImg']['tmp_name'];
+  $folder = "../assets/img/" . $img_name;
+  move_uploaded_file($tmp_name, $folder);
+
+  $query = "INSERT INTO noticia (titulo, descricao, foto) VALUES ('" . $name . "', '" . $desc . "', '" . $img_name . "');";
+  echo $query;
+  $sucesso_query = mysqli_query($conn, $query);
+}
+if ($sucesso_query) {
+  if ($conn->affected_rows > 0) {
+    $_SESSION["message"] = array(
+      "content" => "A noticia <b>" .  $nome . "</b> foi criada com sucesso!",
+      "type" => "success",
+    );
+  } else {
+    $_SESSION["message"] = array(
+      "content" => "Ocorreu um erro ao criar a noticia <b>" . $nome . "</b>!",
+      "type" => "danger",
+    );
+  }
+  header("Location: shownews.php");
+  exit(0);
+} else {
+  $code = $conn->error; // error code of the most recent operation
+  $message = $conn->error; // error message of the most recent op.
+  $msg_erro = "Falha na query! ($code $message)";
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
-  <title>Dashboard - Notícia</title>
+  <title>Dashboard - Noticias</title>
   <?php
   require_once 'sheets/dashboardHead.php';
   ?>
@@ -71,28 +108,32 @@ require_once '../../conexao.php';
 
               <div class="card">
                 <div class="card-body">
-                  <h4 class="header-title">Criar Notícia</h4>
+                  <h4 class="header-title">Criar Noticias</h4>
                   <br>
-                  <form action="shownews.php" method="POST">
-                    <div class="form-group">
-                      <label for="inputEmail4">Título</label>
-                      <input type="text" class="form-control" name="name" id="name" require>
-                    </div>
-                    <div class="form-row">
-                      <div class="form-group col-md-6">
-                        <label for="inputdesc">Descrição</label>
-                        <textarea type="text" class="form-control" name="desc" id="inputdesc" rows="12" style="resize: vertical;"></textarea>
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label for="">Foto</label>
-                        <div class="custom-file form-group">
-                          <input type="file" name="inputImg" class="custom-file-input" id="inputImg" required>
-                          <label class="custom-file-label" for="inputImg">Selecione a foto...</label>
-                        </div>
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Criar</button>
-                    <a href="showequip.php"><input type="button" value="Voltar" class="btn btn-primary"></a>
+                  <form enctype="multipart/form-data" action="createnews.php" method="POST" id="myForm">
+    <div class="form-group">
+      <label for="inputname">Titulo</label>
+      <input type="text" class="form-control" name="inputname" id="inputname" required>
+      <small id="nameError" style="color: red;"></small>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputdesc">Descrição</label>
+        <textarea type="text" class="form-control" name="inputdesc" id="inputdesc" rows="12" style="resize: vertical;" required></textarea>
+        <small id="descError" style="color: red;"></small>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputImg">Foto</label>
+        <div class="custom-file form-group">
+          <input type="file" name="inputImg" class="custom-file-input" id="inputImg" required>
+          <label class="custom-file-label" for="inputImg"><?php echo "Selecione a imagem..."; ?></label>
+          <small id="imgError" style="color: red;"></small>
+        </div>
+      </div>
+    </div>
+      <button type="submit" class="btn btn-primary">Criar</button>
+      </form>
+
                   </form>
                 </div>
               </div>
@@ -134,6 +175,10 @@ require_once '../../conexao.php';
           jQuery('input[name="dateRange"]').on('cancel.daterangepicker', function(ev, picker) {
             jQuery(this).val('');
           });
+          $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+          });
         });
       </script>
       <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
@@ -142,10 +187,9 @@ require_once '../../conexao.php';
       <script src="assets/js/chart.js"></script>
       <script src="assets/js/map.js"></script>
       <script src="assets/js/custom.js"></script>
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script src="assets/js/validation.js"></script>
-
-
+      <script src="assets/js/validar.js"></script>
+    </div>
+  </div>
 </body>
 
 </html>
