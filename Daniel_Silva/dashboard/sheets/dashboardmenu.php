@@ -44,7 +44,7 @@
         </li>
 
         <li>
-            <a class="sidenav-item-link" href="dashboardContacto.php">
+            <a class="sidenav-item-link" href="../../dashboard/dashboardContacto.php">
                 <i class="mdi mdi-phone"></i>
                 <span class="nav-text">Contactos</span>
             </a>

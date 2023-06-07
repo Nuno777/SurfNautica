@@ -46,7 +46,7 @@ $resultdelete = mysqli_query($conn, $query);
           <button id="sidebar-toggler" class="sidebar-toggle">
             <span class="sr-only">Toggle navigation</span>
           </button>
-          <span class="page-title">Dashboard</span>
+          <span class="page-title">Contactos</span>
 
           <div class="navbar-right ">
             <?php
@@ -126,7 +126,7 @@ $resultdelete = mysqli_query($conn, $query);
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Mensagem de <b><?php echo $row->nome;?></b></h5><span class="span-contat"><?php echo $row->email; ?></span>
+                  <h5 class="modal-title" id="exampleModalLabel">Mensagem de <b><?php echo $row->nome; ?></b></h5><span class="span-contat"><?php echo $row->email; ?></span>
                 </div>
                 <!-- assunto -->
                 <div class="modal-body">
@@ -167,7 +167,7 @@ $resultdelete = mysqli_query($conn, $query);
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Resposta ao <b><?php echo $row->nome;?></b></h5><span class="span-contat"><?php echo $row->email; ?></span>
+                  <h5 class="modal-title" id="exampleModalLabel">Resposta ao <b><?php echo $row->nome; ?></b></h5><span class="span-contat"><?php echo $row->email; ?></span>
                 </div>
 
                 <!-- mensagem -->

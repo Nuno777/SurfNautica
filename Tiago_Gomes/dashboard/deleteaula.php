@@ -8,12 +8,12 @@ $result = mysqli_query($conn, $query);
 // Definir Alerta - Operações (EDITAR) 
 if ($conn->affected_rows > 0) {
     $_SESSION["message"] = array(
-        "content" => "O equipamento <b>" .  $titulo . "</b> foi eliminado com sucesso!",
+        "content" => "O dia aberto <b>" .  $titulo . "</b> foi eliminado com sucesso!",
         "type" => "success",
     );
 } else {
     $_SESSION["message"] = array(
-        "content" => "Ocorreu um erro ao eliminar o equipamento <b>" . $titulo . "</b>!",
+        "content" => "Ocorreu um erro ao eliminar o dia aberto <b>" . $titulo . "</b>!",
         "type" => "danger",
     );
 }

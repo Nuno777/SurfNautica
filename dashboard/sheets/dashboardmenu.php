@@ -8,7 +8,7 @@
             </a>
         </li>
 
-        <li class="">
+        <li>
             <a class="sidenav-item-link" href="../Tiago_Gomes/dashboard/showaula.php">
                 <i class="mdi mdi-chart-line"></i>
                 <span class="nav-text">Aulas</span>
@@ -16,7 +16,7 @@
         </li>
 
         <li>
-            <a class="sidenav-item-link" href="chat.html">
+            <a class="sidenav-item-link" href="../TiagoQuintino/dashboard/showpartners.php">
                 <i class="mdi mdi-wechat"></i>
                 <span class="nav-text">Parcerias</span>
             </a>
@@ -43,7 +43,7 @@
             </a>
         </li>
 
-        <li class="">
+        <li>
             <a class="sidenav-item-link" href="dashboardContacto.php">
                 <i class="mdi mdi-phone"></i>
                 <span class="nav-text">Contactos</span>
