@@ -1,0 +1,57 @@
+-Daniel Silva
+professores.php
+noticias.php   (A página era originalmente do Diogo, mas como ele não está no projeto, esta página ficou a ser utilizada pelo Daniel.)
+/dashboard:
+
+createnews.php
+editnews.php
+deletenews.php
+shownews.php
+
+-Duarte Lacerda
+equipamentos_detail.php
+equipamentos.php
+/dashboard:
+
+createequip.php
+deleteequip.php
+editequip.php
+showequip.php
+
+-Nuno Albano
+contacto.php
+index.php
+/dashboard:
+
+dashboard.php
+dashboardcontacto.php
+deletecontato.php
+respondcontacto.php
+
+-Tiago Quintino
+partners.php
+
+/dashboard:
+showpartner.php
+createpartner.php
+deletepartner.php
+editpartner.php
+
+
+
+
+
+-Tiago Gomes
+diaaberto.php
+
+/dashboard:
+showaula.php
+createaula.php
+editaula.php
+deleteaula.php
+
+
+-Todos
+
+login.php
+register.php
