@@ -3,7 +3,6 @@ $(document).ready(function () {
     $('form').submit(function (e) {
         e.preventDefault(); // Impede o envio do formulário
         var titulo = $('#inputtitulo').val();
-        /* $("#data1").val($.format.date(new Date(), 'YYYY-MM-DD'));    */     
         var data = $('input[name="dateRange"]').val();
         var horas = $('#inputhoras').val();
         var prof = $('#inputid_prof').val();
@@ -13,7 +12,7 @@ $(document).ready(function () {
             return;
         }
 
-      /*   if (data1 === '') {
+        /* if (data1 === '') {
             alert('Por favor, preencha o campo da Data.');
             return;
         } */
@@ -22,11 +21,18 @@ $(document).ready(function () {
             return;
         }
 
-        // Verifica se o campo Título não excede 50 caracteres
-        if (titulo.length > 50) {
-            alert('O campo Título deve ter no máximo 50 caracteres.');
+        // Verifica se o campo Título tem entre 3 e 25 caracteres
+        if (titulo.length < 3 || titulo.length > 25) {
+            alert('O campo Título deve ter entre 3 e 25 caracteres.');
             return;
         }
+
+        // Verifica se o campo horas tem entre 3 e 25 caracteres
+        if (horas.length < 3 || horas.length > 25) {
+            alert('O campo Horas deve ter entre 3 e 25 caracteres.');
+            return;
+        }
+
         if (prof === '') {
             alert('Por favor, selecione uma prof.');
             return;
@@ -36,4 +42,5 @@ $(document).ready(function () {
         $(this).unbind('submit').submit();
     });
 });
+
 

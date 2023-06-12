@@ -106,7 +106,7 @@ $resultdelete = mysqli_query($conn, $sql);
                             }
                             echo "<tr>";
                             echo "<td>" . $titulo . "</td>";
-                            echo "<td>" . substr("$data1", 0, 75) . " (...)</td>";
+                            echo "<td>" . substr("$data1", 0, 75) . "</td>";
                             echo "<td>" . $horas . "</td>";
                             echo "<td>" . $prof_nome . "</td>";
                             echo "<td><a href='editaula.php?id_diaAberto=$id_diaAberto&id_prof=$id_prof' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
@@ -126,82 +126,6 @@ $resultdelete = mysqli_query($conn, $sql);
         </div>
         <!-- End Top -->
 
-        <!-- Modal de ver equipamento -->
-        <?php while ($row = $row = mysqli_fetch_assoc($resultAulas)) {
-          foreach ($row as $res => $key) {
-            $titulo = $row['titulo'];
-            $data1 = $row['data1'];
-            $horas = $row['horas'];
-            $id_prof = $row['id_prof'];
-          }
-        ?>
-          <div class="modal fade" id='viewequip<?php echo $id_diaAberto ?>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Titulo</h5>
-                  <span class="span-titulo"><?php echo $titulo; ?></span>
-                </div>
-
-                <div class="modal-body">
-                  <span>Data</span>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <span class="span-data1"><?php echo $horas; ?></span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="modal-body">
-                  <span>data1</span>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <textarea type="text" class="form-control" rows="10" style="resize: none" disabled><?= $data1 ?></textarea>
-                    </div>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        <?php
-        }
-        ?>
-        <!-- Modal de ver mensagem fechou -->
-
-        <!-- Modal para eliminar -->
-        <?php while ($row = mysqli_fetch_assoc($resultdelete)) {
-          foreach ($row as $res => $key) {
-            $id_diaAberto = $row['id_diaAberto'];
-            $titulo = $row['titulo'];
-            $data1 = $row['data1'];
-            $horas = $row['horas'];
-            $id_prof = $row['id_prof'];
-          }
-        ?>
-          <div class="modal fade" id='deleteaula<?php echo $id_diaAberto ?>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Eliminar equipamento</h5><span class="span-equip"><?php echo $titulo; ?></span>
-                </div>
-                <div class="modal-body">
-                  <p>Deseja eliminar este equipamento?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
-                  <a href='deleteaula.php?id_cont=<?php echo $id_diaAberto . '&titulo=' . $titulo ?>' type='button' class='btn btn-primary'>Sim</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        <?php
-        }
-        ?>
-        <!-- Modal para eliminar fechou -->
-        <br>
         <footer class="footer mt-auto">
           <?php
           require_once 'sheets/dashboardFooter.php';

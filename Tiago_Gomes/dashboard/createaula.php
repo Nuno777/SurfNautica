@@ -49,17 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   }
 }
-/* if (!isset($_POST)) {
-  $nome = trim($_POST['nome']);
-  $desc = trim($_POST['desc']);
-  $partner = mysqli_query($conn, "SELECT id_parceria FROM parcerias WHERE nome LIKE " . $_POST['titulo'] . ";");;
-  $img = trim($_POST['horas']);
-}
 
-if (isset($_POST)) {
-  $sql = "INSERT INTO equipamentos (nome, descricao, img, id_parceria) VALUES ('$nome', '$desc', '$img', '$partner');";
-  mysqli_query($conn, $sql);
-} */
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -128,17 +118,17 @@ if (isset($_POST)) {
                   <br>
                   <form action="createaula.php" method="POST">
                     <div class="form-group">
-                      <label for="inputtitulo">Titulo</label>
-                      <input type="text" class="form-control" name="inputtitulo" id="inputtitulo" required>
+                      <label for="inputdata1">Data</label>
+                      <input type="date" class="form-control" name="inputdata1" id="inputdata1" rows="2" required>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-6">
-                        <label for="inputdata1">Data</label>
-                        <input type="date" class="form-control" name="inputdata1" id="inputdata1" rows="2" required></input>
+                        <label for="inputtitulo">Titulo</label>
+                        <input type="text" class="form-control" name="inputtitulo" id="inputtitulo" required>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="inputhoras">Horas</label>
-                        <textarea type="text" class="form-control" name="inputhoras" id="inputhoras" rows="2" required></textarea>
+                        <textarea type="text" class="form-control" name="inputhoras" id="inputhoras" required></textarea>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="inputid_prof">Escolher Professor</label>
@@ -209,7 +199,14 @@ if (isset($_POST)) {
       <script src="assets/js/chart.js"></script>
       <script src="assets/js/map.js"></script>
       <script src="assets/js/custom.js"></script>
+      <script>
+        document.getElementById('inputdata1').addEventListener('change', function() {
+          var date = new Date(this.value);
+          var days = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+          var dayOfWeek = days[date.getDay()];
+          document.getElementById('inputtitulo').value = dayOfWeek;
+        });
+      </script>
+    </body>
 
-</body>
-
-</html>
+    </html>

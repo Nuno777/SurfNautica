@@ -38,7 +38,7 @@ require('conexao.php')
 </header>
 
 <?php
-$sql = "select nome, titulo, data1, horas from diaaberto, professor where diaaberto.id_prof = professor.id_prof;";
+$sql = "SELECT nome, titulo, data1, horas FROM diaaberto, professor WHERE diaaberto.id_prof = professor.id_prof ORDER BY data1 ASC;";
 $result = mysqli_query($conn, $sql);
 
 ?>
@@ -164,8 +164,8 @@ mysqli_close($conn);
 </div>
 
 <div style="background-image: url('img/banner.jpg'); background-size: cover; background-position: center center; text-align: center; padding: 20px;">
-  <h3 style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Inscreve-te para os dias abertos</h3>
-  <a href="https://example.com" class="btn btn-light" style="background-color: #263f49; color: white;">Inscrever</a>
+  <h3 style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Faz Login para poderes inscrever-te!</h3>
+  <a href="../login.php" class="btn btn-light" style="background-color: #263f49; color: white;">Ir para o Login</a>
 </div>
 
 
