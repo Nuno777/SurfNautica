@@ -21,13 +21,13 @@ if (count($_SESSION['errors']) == 0) {
             $_SESSION['email'] = $email;
             if ($conn->affected_rows > 0) {
                 $_SESSION["message"] = array(
-                    "content" => "The email  <b>" . $email . "</b> has successfully logged in!",
+                    "content" => "O email  <b>" . $email . "</b> fez login com sucesso!",
                     "type" => "success",
                 );
                 header('Location: dashboard/dashboard.php');
             } else {
                 $_SESSION["message"] = array(
-                    "content" => "There was an error logging in with email <b>" . $email . "</b>!",
+                    "content" => "Houve um erro ao entrar com o email <b>" . $email . "</b>!",
                     "type" => "danger",
                 );
             }

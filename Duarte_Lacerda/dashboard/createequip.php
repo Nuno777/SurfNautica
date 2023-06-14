@@ -26,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $imageDatabasePath = $diretoria_upload . sha1(microtime()) . "." . $extensao;
     $newEquip = $imageDatabasePath;
 
-
     if (move_uploaded_file($tmp_name, $newEquip)) {
       $query = "INSERT INTO `equipamentos` (`nome`, `descricao`, `img`, `id_parceria`) VALUES ('$nome', '$desc', '$newEquip', '$partner')";
     }
@@ -168,7 +167,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       </div>
                     </div>
                     <div class="form-row">
-
                       <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Confirmar</button>
                       <a href="showequip.php"><input type="button" value="Voltar" class="btn btn-primary"></a>
                     </div>

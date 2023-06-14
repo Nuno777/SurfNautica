@@ -66,7 +66,7 @@ $resultdelete = mysqli_query($conn, $query);
               if (isset($_SESSION["message"])) { ?>
                 <div class='alert alert-<?php echo $_SESSION["message"]["type"] ?> alert-dismissible fade show' role='alert'>
                   <?php echo $_SESSION["message"]["content"]; ?>
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="mdi mdi-times"></span>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="mdi mdi-window-close"></span>
                   </button>
                 </div>
 
