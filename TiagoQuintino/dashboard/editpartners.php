@@ -1,5 +1,6 @@
 <?php
 session_start();
+$uploaded_image = isset($_SESSION['uploaded_image']) ? $_SESSION['uploaded_image'] : "";
 if (!isset($_SESSION['authenticated'])) {
   header('Location: ../../login.php');
   exit(0);
@@ -7,84 +8,77 @@ if (!isset($_SESSION['authenticated'])) {
 
 require_once '../../conexao.php';
 
-$id_parceriabuscar = $_GET['id_parceria'];
+$id_parceria = $_GET['id_parceria'];
+$id_parceria = $_GET['id_parceria'];
 
-$sql = "SELECT * FROM parcerias WHERE id_parceria = " . $id_parceriabuscar . ";";
+$sql = "SELECT * FROM parcerias WHERE id_parceria = " . $id_parceria . ";";
+$resultParceria = mysqli_query($conn, $sql);
+while ($row = mysqli_fetch_assoc($resultParceria)) {
+  foreach ($row as $res => $key) {
+    $p = $row['nome'];
+  }
+}
+
+$sql = "SELECT * FROM parcerias WHERE id_parceria = " . $id_parceria . ";";
 $result = mysqli_query($conn, $sql);
 while ($row = mysqli_fetch_assoc($result)) {
   foreach ($row as $res => $key) {
-    $id_parceria = $row['id_parceria'];
-    $nomeParceria = $row['nome'];
+    $nome2 = $row['nome'];
     $desc = $row['descricao'];
     $img = $row['img'];
   }
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  // validar variáveis
-  $id = isset($_POST['idParceiroHidden']) ? $_POST['idParceiroHidden'] : "";
-  $name = isset($_POST['name']) ? $_POST['name'] : "";
-  $img = $_FILES['inputImg']['name'];
-  $tmp_name = $_FILES['inputImg']['tmp_name'];
-  $target_file = basename($_FILES["inputImg"]["name"]);
-  $folder = "../assets/img/" . $img_name;
-  move_uploaded_file($tmp_name, $folder);
 
-  $desc = isset($_POST['inputdesc']) ? $_POST['inputdesc'] : "";
-  if ($nome == "" || $img == "" || $desc == "") {
-    echo $nome . " " . $target_file . " " . $desc;
+  $partner = array_key_exists('inputpartner', $_POST) ? $_POST['inputpartner'] : "";
+  $nome1 = array_key_exists('inputname', $_POST) ? $_POST['inputname'] : "";
+  $img1 = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['name'] : "";
+  $desc1 = array_key_exists('inputdesc', $_POST) ? $_POST['inputdesc'] : "";
+  $tmp_name = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['tmp_name'] : "";
+  $msg_erro = "";
 
-    $msg_erro = "Nome, descrição e imagem não inseridos ou não escolhida!";
-  } else {
-    echo "sdasdasdasda";
-    /* estabelecer ligação à BD */
-    require_once '../../conexao.php';
-    if ($conn->connect_errno) {
-      $code = $conn->connect_errno;
-      $message = $conn->connect_error;
-      $msg_erro = "Falha na ligação à Base de Dados ($code $message)!";
-    } else {
-      /* executar query... */
-      $query = "UPDATE parcerias SET nome = '" . $name . "', descricao = '" . $desc . "', img = '" . $img . "' WHERE id_parceria = " . $id . ";";
-      echo $query;
-      print_r($_POST);
-      $sucesso_query = mysqli_query($conn, $query);
-      if ($sucesso_query) {
-        if ($conn->affected_rows > 0) {
-          $_SESSION["message"] = array(
-            "content" => "O parceiro <b>" .  $name . "</b> foi criado com sucesso!",
-            "type" => "success",
-          );
-        } else {
-          $_SESSION["message"] = array(
-            "content" => "Ocorreu um erro ao criar o parceiro <b>" . $name . "</b>!",
-            "type" => "danger",
-          );
-        }
-        header("Location: showpartners.php");
-        exit(0);
-      } else {
-        $code = $conn->errno; // error code of the most recent operation
-        $message = $conn->error; // error message of the most recent op.
-        $msg_erro = "Falha na query! ($code $message)";
-      }
+  $query = "UPDATE `parcerias` SET `nome` = '$nome1', `descricao` = '$desc1' WHERE `id_parceria` = $id_parceria;";
+
+  if ($img1 != "" && getimagesize($tmp_name)) {
+    // tratar upload da foto
+    $diretoria_upload = "upload/";
+    $extensao = pathinfo($img1, PATHINFO_EXTENSION);
+    $imageDatabasePath = $diretoria_upload . sha1(microtime()) . "." . $extensao;
+    $newPar = $imageDatabasePath;
+
+    if (move_uploaded_file($tmp_name, $newPar)) {
+      $query = "UPDATE `parcerias` SET `nome` ='$nome1', `descricao` = '$desc1', `img` = '$newPar' WHERE id_parceria = '$id_parceria';";
     }
   }
+
+  $sucesso_query = mysqli_query($conn, $query);
+  if ($sucesso_query) {
+    if ($conn->affected_rows > 0) {
+      $_SESSION["message"] = array(
+        "content" => "O parceiro <b>" .  $nome . "</b> foi editado com sucesso!",
+        "type" => "success",
+      );
+    } else {
+      $_SESSION["message"] = array(
+        "content" => "Ocorreu um erro ao editar o parceiro <b>" . $nome . "</b>!",
+        "type" => "danger",
+      );
+    }
+    header("Location: showpartners.php");
+    exit(0);
+  } else {
+    $code = $conn->error; // error code of the most recent operation
+    $message = $conn->error; // error message of the most recent op.
+    $msg_erro = "Falha na query! ($code $message)";
+  }
 }
-
-/*  */
-
-print_r($_POST);
-
-
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
-  <title>Dashboard - Parceria</title>
+  <title>Dashboard - Equipamento</title>
   <?php
   require_once 'sheets/dashboardHead.php';
   ?>
@@ -144,32 +138,39 @@ print_r($_POST);
 
               <div class="card">
                 <div class="card-body">
-                  <h4 class="header-title">Editar Parceria</h4>
+                  <h4 class="header-title">Editar Equipamento</h4>
                   <br>
-                  <form enctype="multipart/form-data" action="showpartners.php" method="POST">
-                    <input type="hidden" id="idParceiroHidden" name="idParceiroHidden" value="<?php echo $id_parceriabuscar; ?>">
+                  <form action="editpartners.php?id_parceria=<?php echo $id_parceria; ?>&id_parceria=<?php echo $id_parceria; ?>" method="POST">
                     <div class="form-group">
-                      <label for="name">Nome</label>
-                      <input type="text" class="form-control" name="name" id="name" value="<?php echo $nomeParceria; ?>" required>
+                      <label for="inputname">Nome</label>
+                      <input type="text" class="form-control" name="inputname" id="inputname" value="<?php echo ($nome2); ?>" required>
+                      <small id="name">
+                        Por favor preencha o campo
+                      </small>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="inputdesc">Descrição</label>
-                        <textarea type="text" class="form-control" name="inputdesc" id="inputdesc" rows="12" style="resize: vertical;" required><?php echo ($desc); ?></textarea>
+                        <textarea type="text" class="form-control" name="inputdesc" id="inputdesc" rows="12" style="resize: vertical;" require><?php echo ($desc); ?></textarea>
+                        <small id="desc">
+                          Por favor preencha o campo
+                        </small>
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="inputImg">Imagem</label>
+                        <label for="">Imagem</label>
                         <div class="custom-file form-group">
-                          <div class="preview">
-                            <img id="file-ip-1-preview">
-                          </div>
-                          <input type="file" name="inputImg" class="custom-file-input" id="inputImg">
-                          <label class="custom-file-label" for="inputImg" value="<?php echo ($img); ?>"><?php echo ($img); ?></label>
+                          <input type="file" name="inputImg" class="custom-file-input" accept=".png, .jpg, .jpeg" id="inputImg">
+                          <label class="custom-file-label" for="inputImg"><?php echo $img; ?></label>
+                          <small id="img">
+                            Por favor preencha o campo
+                          </small>
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Confirmar</button>
-                    <a href="showpartners.php"><input type="button" value="Voltar" class="btn btn-primary"></a>
+                    <div class="form-row">
+                      <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Confirmar</button>
+                      <a href="showpartners.php"><input type="button" value="Voltar" class="btn btn-primary"></a>
+                    </div>
                   </form>
                 </div>
               </div>
@@ -211,6 +212,10 @@ print_r($_POST);
           jQuery('input[name="dateRange"]').on('cancel.daterangepicker', function(ev, picker) {
             jQuery(this).val('');
           });
+          $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+          });
         });
       </script>
       <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
@@ -219,7 +224,6 @@ print_r($_POST);
       <script src="assets/js/chart.js"></script>
       <script src="assets/js/map.js"></script>
       <script src="assets/js/custom.js"></script>
-      <script src="assets/js/validation.js"></script>
 
 </body>
 
