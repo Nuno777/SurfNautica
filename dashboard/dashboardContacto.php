@@ -6,12 +6,11 @@ if (!isset($_SESSION['authenticated'])) {
 }
 
 require_once '../conexao.php';
-$query = "SELECT * FROM contacto ORDER BY id_cont";
+$query = "SELECT * FROM contacto ORDER BY id_cont DESC";
 $result = mysqli_query($conn, $query);
 $resultMenssage = mysqli_query($conn, $query);
 $resultRespond = mysqli_query($conn, $query);
 $resultdelete = mysqli_query($conn, $query);
-
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -46,7 +45,7 @@ $resultdelete = mysqli_query($conn, $query);
           <button id="sidebar-toggler" class="sidebar-toggle">
             <span class="sr-only">Toggle navigation</span>
           </button>
-          <span class="page-title">Contactos</span>
+          <span class="page-title">Dashboard</span>
 
           <div class="navbar-right ">
             <?php
@@ -80,8 +79,9 @@ $resultdelete = mysqli_query($conn, $query);
                   <h4 class="header-title">Contactos</h4>
                   <br>
                   <div class="single-table">
-                    <div class="table-responsive">
-                      <table class="table text-center">
+                    <div class="table-responsive table-hover">
+                    
+                      <table class="table text-center ">
                         <thead class="text-uppercase bg-dark">
                           <tr class="text-white">
 
@@ -98,7 +98,7 @@ $resultdelete = mysqli_query($conn, $query);
                             echo "<tr>";
                             echo "<td>" . $row->nome . "</td>";
                             echo "<td>" . $row->email . "</td>";
-                            echo "<td><a data-toggle='modal' data-target='#viewmensagem$row->id_cont' class='text-primary' name='Menssage'><i class='mdi mdi-comment-text-outline'></i></a></td>";
+                            echo "<td><a data-toggle='modal' data-target='#viewmensagem$row->id_cont' class='text-primary' name='Menssage'><span class='txtcontact'>" .substr("$row->mensagem", 0, 75). "...</span></a></td>";
                             echo "<td><a data-toggle='modal' data-target='#viewrespond$row->id_cont' class='text-primary' name='Menssage'><i class='mdi mdi-comment-text-outline'></i></a></td>";
                             // echo "<td><a href='respondcontacto.php?id_cont=$row->id_cont' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
                             echo "<td><a data-toggle='modal' data-target='#deletecontato$row->id_cont' class='text-danger' name='delete'><i class='mdi mdi-delete'></i></a></td>";

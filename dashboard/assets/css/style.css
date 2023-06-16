@@ -49,6 +49,14 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
 }
 
+.txtcontact{
+  color:#8a909d;
+}
+
+.txtcontact:hover{
+  color: rgba(55, 142, 181, 0.9);
+}
+
 body {
   margin: 0;
   font-family: "Karla", sans-serif;
