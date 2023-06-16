@@ -1,86 +1,42 @@
 <?php
 session_start();
 if (!isset($_SESSION['authenticated'])) {
-  header('Location: ../../login.php');
+  header('Location: ../login.php');
   exit(0);
 }
 
-require_once '../../conexao.php';
-if (isset($_POST[" editaula"])) {
-  $id_prof = $_POST["id_prof"];
-  $query = "UPDATE diaaberto SET titulo = " . $titulo . ", data1 = " . $data1 . ", horas = " . $horas . ", id_prof = " . $id_prof . " WHERE id_diaAberto = " . $id_diaAberto . ");";
-  $result = mysqli_query($conn, $query);
+require_once '../conexao.php';
 
-  // Definir Alerta - Operações (EDITAR) 
-  if ($conn->affected_rows > 0) {
-    $_SESSION["message"] = array(
-      "content" => "O contacto do email <b>" . $titulo . "</b> foi atualizado com sucesso!",
-      "type" => "success",
-    );
-  } else {
-    $_SESSION["message"] = array(
-      "content" => "Ocorreu um erro ao atualizar o contacto do email <b>" . $titulo . "</b>!",
-      "type" => "danger",
-    );
-  }
 
-  header('Location: showaula.php');
+if (isset($_POST["editaula"])) {
+    $id_aula = $_POST["id_diaAberto"];
+    $id_prof = $_POST["id_prof"];
+    $titulo = $_POST["titulo"];
+    $data1 = $_POST["data1"];
+    $horas = $_POST["horas"];
+$query = "UPDATE diaaberto SET titulo='$titulo',data1='$data1',horas='$horas',id_prof='$id_prof' WHERE id_diaAberto ='$id_aula'";
+  $result = mysqli_query($conn, $query);  
+if ($conn->affected_rows > 0) {
+  $_SESSION["message"] = array(
+    "content" => "Editou o dia aberto <b>" . $titulo . "</b> com sucesso!",
+    "type" => "success",
+  );
+  echo "sucesso";
+} else {
+  $_SESSION["message"] = array(
+    "content" => "Ocorreu um erro ao responder a editar o dia aberto <b>" . $titulo . "</b>!",
+    "type" => "danger",
+  );
 }
- $msg_erro = "";
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-  if ($titulo == "" || $data1 == "" || $horas == "") {
-    $msg_erro = "Nome, descrição e imagem não inseridos ou parceria não escolhida!";
-  } else {
-
-    if ($conn->connect_errno) {
-      $code = $conn->connect_errno;
-      $message = $conn->connect_error;
-      $msg_erro = "Falha na ligação à Base de Dados ($code $message)!";
-    } else {
-
-      $query = "UPDATE diaaberto SET titulo = " . $titulo . ", data1 = " . $data1 . ", horas = " . $horas . ", id_prof = " . $id_prof . " WHERE id_diaAberto = " . $id_diaAberto . ");";
-
-      $sucesso_query = $conn->query($query);
-      if ($sucesso_query) {
-        if ($conn->affected_rows > 0) {
-          $_SESSION["message"] = array(
-            "content" => "O dia aberto <b>" .  $titulo . "</b> foi editar com sucesso!",
-            "type" => "success",
-          );
-        } else {
-          $_SESSION["message"] = array(
-            "content" => "Ocorreu um erro ao editar o dia aberto <b>" . $titulo . "</b>!",
-            "type" => "danger",
-          );
-        }
-        header("Location: showaula.php");
-        exit(0);
-      } else {
-        $code = $conn->errno; 
-        $message = $conn->error; 
-        $msg_erro = "Falha na query! ($code $message)";
-      }
-    }
-  }
-} 
-/* if (!isset($_POST)) {
-  $titulo = trim($_POST['titulo']);
-  $data1 = trim($_POST['data1']);
-  $partner = mysqli_query($conn, "SELECT id_diaAberto FROM diaaberto WHERE titulo LIKE " . $_POST['inputpartner'] . ";");;
-  $img = trim($_POST['inputImg']);
 }
 
-if (isset($_POST)) {
-  $sql = "INSERT INTO equipamentos (titulo, data1, img, id_diaAberto) VALUES ('$titulo', '$data1', '$img', '$partner');";
-  mysqli_query($conn, $sql);
-} */
 ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
-  <title>Dashboard - Aula</title>
+  <title>Dashboard | Editar Aulas</title>
   <?php
   require_once 'sheets/dashboardHead.php';
   ?>
@@ -92,7 +48,7 @@ if (isset($_POST)) {
       <div id="sidebar" class="sidebar sidebar-with-footer">
         <!-- Aplication Brand -->
         <div class="app-brand">
-          <a href="../../index.php">
+          <a href="../index.php">
             <img src="assets/images/favicon.png" style="height: 65px;" alt="Mono">
             <span class="brand-name text-light">SURFNAUTICA</span>
           </a>
@@ -121,64 +77,61 @@ if (isset($_POST)) {
 
 
       <div class="content-wrapper">
-        <!-- Top -->
-<?php
 
-$id_diaAberto = $_GET["id_diaAberto"];
-$id_prof = $_GET["id_prof"];
+        <?php
+        $id_aula = isset($_GET["id_diaAberto"]) ? $_GET["id_diaAberto"] : '';
+        $query = "SELECT * FROM diaaberto WHERE id_diaAberto='$id_aula'";
+        $result = mysqli_query($conn, $query);
+        if ($result && $result->num_rows) {
+          $row = $result->fetch_object();
+          $id_aula = $row->id_diaAberto;
+          $titulo = $row->titulo;
+          $data1 = $row->data1;
+          $horas = $row->horas;
+          $id_prof = $row->id_prof;
+        }
+         ?>
+          <div class="content">
+            <div class="row">
+              <div class="col-lg-12 mt-5">
 
+                <!-- Alerta - Operações (EDITAR) -->
+                <?php
+                if (isset($_SESSION["message"])) { ?>
+                  <div class='alert alert-<?php echo $_SESSION["message"]["type"] ?> alert-dismissible fade show' role='alert'>
+                    <?php echo $_SESSION["message"]["content"]; ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="mdi mdi-times"></span>
+                    </button>
+                  </div>
 
-$sql = "SELECT * FROM diaaberto WHERE id_diaAberto = " . $id_diaAberto . ";";
-$result = mysqli_query($conn, $sql);
+                <?php unset($_SESSION["message"]);
+                }
+                ?>
 
-while ($row = mysqli_fetch_assoc($result)) {
-  foreach ($row as $res => $key) {
-    $id_diaAberto = $row['id_diaAberto'];
-    $titulo = $row['titulo'];
-    $data1 = $row['data1'];
-    $horas = $row['horas'];
-    $id_prof = $row['id_prof'];
-  }
-}
-?>
-        <div class="content">
-          <div class="row">
-            <div class="col-lg-12 mt-5">
-              <!-- Alerta - Operações (EDITAR) -->
-              <?php
-              if (isset($_SESSION["message"])) { ?>
-                <div class='alert alert-<?php echo $_SESSION["message"]["type"] ?> alert-dismissible fade show' role='alert'>
-                  <?php echo $_SESSION["message"]["content"]; ?>
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="mdi mdi-times"></span>
-                  </button>
-                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="header-title">Editar Aula</h4>
+                    <br>
+                    <div class="single-table">
 
-              <?php unset($_SESSION["message"]);
-              }
-              ?>
-
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="header-title">Editar Dia Aberto</h4>
-                  <br>
-                  <form action="editaula.php" method="POST">
+                    <form id="editaula" action="editaula.php" method="POST">   
                     <div class="form-group">
 
-                    <input type="text" class="form-control" id="id_diaAberto" name="id_diaAberto" value="<?= $id_diaAberto ?>" required hidden>
+                    <input type="text" class="form-control" id="id_diaAberto" name="id_diaAberto" value="<?= $id_aula ?>" required hidden>
 
 
-                      <label for="titulo">Titulo</label>
+                      <label for="inputtitulo">Titulo</label>
                       <input type="text" class="form-control" name="titulo" id="titulo" value="<?= $titulo; ?>" required>
                       <small id="titulo_preencher">
-                        Por favor preencha o campo
+                        Por favor preencha o campo.
                       </small>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-6">
-                        <label for="data1">Data</label>
-                        <textarea type="date" class="form-control" name="data1" id="data1" rows="2" style="resize: vertical;" require><?=  $data1; ?></textarea>
+                      <label for="inputdata1">Data</label>
+                      <input type="date" class="form-control" name="data1" id="data1" rows="2" value="<?= $data1; ?>" required>
                         <small id="data1_preencher">
-                          Por favor preencha o campo
+                          Por favor preencha o campo.
                         </small>
                       </div>
                       <div class="form-group col-md-6">
@@ -196,12 +149,12 @@ while ($row = mysqli_fetch_assoc($result)) {
                           ?>
                         </select>
                         <small id="horas_preencher">
-                          Por favor preencha o campo
+                          Por favor preencha o campo.
                         </small>
                         </div>
                         <div class="form-group col-md-6">
-                        <label for="inputid_prof">Escolher Professor</label>
-                        <select name="inputid_prof" id="inputid_prof" class="form-control" required>
+                        <label for="id_prof">Escolher Professor</label>
+                        <select name="id_prof" id="id_prof" class="form-control" required>
                           <?php
                           $sql = "SELECT * FROM professor WHERE id_prof = " . $id_prof . ";";
                           $resultProfesso = mysqli_query($conn, $sql);
@@ -229,16 +182,18 @@ while ($row = mysqli_fetch_assoc($result)) {
                         </small>
                       </div>
                       </div>
-                      <button type="submit" class="btn btn-primary">Editar</button>
+                      <button type="submit" class="btn btn-primary" name="editaula">Editar</button>
                     <a href="showaula.php"><input type="button" value="Voltar" class="btn btn-primary"></a>
                     </div>
                   </form>
+
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- End Top -->
+
         <br>
         <footer class="footer mt-auto">
           <?php
@@ -246,7 +201,11 @@ while ($row = mysqli_fetch_assoc($result)) {
           ?>
         </footer>
 
+
+
       </div>
+
+
       <script src="assets/plugins/jquery/jquery.min.js"></script>
       <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
       <script src="assets/plugins/simplebar/simplebar.min.js"></script>
@@ -281,8 +240,21 @@ while ($row = mysqli_fetch_assoc($result)) {
       <script src="assets/js/chart.js"></script>
       <script src="assets/js/map.js"></script>
       <script src="assets/js/custom.js"></script>
-      <script src="assets/js/validation.js"></script>
-
+      <script>
+        $(document).ready(function() {
+          $('#editaula').on('input change', function() {
+            $('#respondbutton').attr('disabled', false);
+          });
+        })
+      </script>
+<script>
+        document.getElementById('data1').addEventListener('change', function() {
+          var date = new Date(this.value);
+          var days = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+          var dayOfWeek = days[date.getDay()];
+          document.getElementById('titulo').value = dayOfWeek;
+        });
+      </script>
 </body>
 
 </html>
