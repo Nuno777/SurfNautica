@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `surfnautica`.`equipamentos` (
   `id_equipa` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
   `descricao` VARCHAR(250) NOT NULL,
-  `img` VARCHAR(250) NOT NULL,
+  `img` VARCHAR(250),
   `data_pub` timestamp default current_timestamp,
   `id_parceria` INT(11) NOT NULL,
   PRIMARY KEY (`id_equipa`),

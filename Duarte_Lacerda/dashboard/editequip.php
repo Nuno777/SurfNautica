@@ -11,61 +11,13 @@ require_once '../../conexao.php';
 $id_parceria = $_GET['id_parceria'];
 $id_equipa = $_GET['id_equipa'];
 
-$sql = "SELECT * FROM equipamentos WHERE id_equipa = " . $id_equipa . ";";
-$result = mysqli_query($conn, $sql);
-while ($row = mysqli_fetch_assoc($result)) {
+$sql = "SELECT * FROM parcerias WHERE id_parceria = " . $id_parceria . ";";
+$resultParceria = mysqli_query($conn, $sql);
+while ($row = mysqli_fetch_assoc($resultParceria)) {
   foreach ($row as $res => $key) {
-    $d = $row['img'];
+    $p = $row['nome'];
   }
 }
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-  $partner = array_key_exists('inputpartner', $_POST) ? $_POST['inputpartner'] : "";
-  $nome = array_key_exists('inputname', $_POST) ? $_POST['inputname'] : "";
-  $img = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['name'] : "";
-  $desc = array_key_exists('inputdesc', $_POST) ? $_POST['inputdesc'] : "";
-  $tmp_name = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['tmp_name'] : "";
-  $msg_erro = "";
-
-  $query = "UPDATE `equipamentos` SET nome='$nome', descricao = '$desc',  id_parceria = '$partner' WHERE id_parceiria = '$id_parceria');";
-
-  // Validar se o nome da imagem da base de dados é igual ao nome fornecido no input
-  if ($d != $img) {
-    if ($img != "" && getimagesize($tmp_name)) {
-      // tratar upload da foto
-      $diretoria_upload = "upload/";
-      $extensao = pathinfo($img, PATHINFO_EXTENSION);
-      $imageDatabasePath = $diretoria_upload . sha1(microtime()) . "." . $extensao;
-
-      if (move_uploaded_file($tmp_name, $imageDatabasePath)) {
-        $query = "UPDATE `equipamentos` SET nome='$nome', descricao = '$desc', img = '$imageDatabasePath', id_parceria = '$partner' WHERE id_parceiria = '$id_parceria');";
-      }
-    }
-  }
-
-  $sucesso_query = mysqli_query($conn, $query);
-  if ($sucesso_query) {
-    if ($conn->affected_rows > 0) {
-      $_SESSION["message"] = array(
-        "content" => "O equipamento <b>" .  $nome . "</b> foi criado com sucesso!",
-        "type" => "success",
-      );
-    } else {
-      $_SESSION["message"] = array(
-        "content" => "Ocorreu um erro ao criar o equipamento <b>" . $nome . "</b>!",
-        "type" => "danger",
-      );
-    }
-    header("Location: showequip.php");
-    exit(0);
-  } else {
-    $code = $conn->error; // error code of the most recent operation
-    $message = $conn->error; // error message of the most recent op.
-    $msg_erro = "Falha na query! ($code $message)";
-  }
-}
-
 
 $sql = "SELECT * FROM equipamentos WHERE id_equipa = " . $id_equipa . ";";
 $result = mysqli_query($conn, $sql);
@@ -78,6 +30,50 @@ while ($row = mysqli_fetch_assoc($result)) {
   }
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+  $partner = array_key_exists('inputpartner', $_POST) ? $_POST['inputpartner'] : "";
+  $nome1 = array_key_exists('inputname', $_POST) ? $_POST['inputname'] : "";
+  $img1 = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['name'] : "";
+  $desc1 = array_key_exists('inputdesc', $_POST) ? $_POST['inputdesc'] : "";
+  $tmp_name = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['tmp_name'] : "";
+  $msg_erro = "";
+
+  $query = "UPDATE `equipamentos` SET `nome` = '$nome1', `descricao` = '$desc1',  `id_parceria` = $partner WHERE `id_equipa` = $id_equipa;";
+
+  if ($img1 != "" && getimagesize($tmp_name)) {
+    // tratar upload da foto
+    $diretoria_upload = "upload/";
+    $extensao = pathinfo($img1, PATHINFO_EXTENSION);
+    $imageDatabasePath = $diretoria_upload . sha1(microtime()) . "." . $extensao;
+    $newEquip = $imageDatabasePath;
+
+    if (move_uploaded_file($tmp_name, $newEquip)) {
+      $query = "UPDATE `equipamentos` SET `nome` ='$nome1', `descricao` = '$desc1', `img` = '$newEquip', id_parceria` = '$partner' WHERE id_equipa = '$id_equipa';";
+    }
+  }
+
+  $sucesso_query = mysqli_query($conn, $query);
+  if ($sucesso_query) {
+    if ($conn->affected_rows > 0) {
+      $_SESSION["message"] = array(
+        "content" => "O equipamento <b>" .  $nome . "</b> foi editado com sucesso!",
+        "type" => "success",
+      );
+    } else {
+      $_SESSION["message"] = array(
+        "content" => "Ocorreu um erro ao editar o equipamento <b>" . $nome . "</b>!",
+        "type" => "danger",
+      );
+    }
+    header("Location: showequip.php");
+    exit(0);
+  } else {
+    $code = $conn->error; // error code of the most recent operation
+    $message = $conn->error; // error message of the most recent op.
+    $msg_erro = "Falha na query! ($code $message)";
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -145,7 +141,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <div class="card-body">
                   <h4 class="header-title">Editar Equipamento</h4>
                   <br>
-                  <form action="editequip.php" method="POST">
+                  <form action="editequip.php?id_equipa=<?php echo $id_equipa; ?>&id_parceria=<?php echo $id_parceria; ?>" method="POST">
                     <div class="form-group">
                       <label for="inputname">Nome</label>
                       <input type="text" class="form-control" name="inputname" id="inputname" value="<?php echo ($nome); ?>" required>
@@ -199,7 +195,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                       </div>
                     </div>
                     <div class="form-row">
-                      <button type="submit" class="btn btn-primary" id="submitbtn" style="margin-right: 5px;">Confirmar</button>
+                      <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Confirmar</button>
                       <a href="showequip.php"><input type="button" value="Voltar" class="btn btn-primary"></a>
                     </div>
                   </form>

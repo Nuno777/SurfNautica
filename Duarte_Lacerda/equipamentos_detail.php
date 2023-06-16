@@ -44,14 +44,16 @@ require('../conexao.php');
 
     <div class="container-fluid tm-container-content tm-mt-60">
         <?php
-        $sql = "select nome, descricao, img from equipamentos where nome <> 'Pranchas';";
+        $id_equipa = $_GET['id_equipa'];
+
+        $sql = "select nome, descricao, img from equipamentos where id_equipa = '$id_equipa';";
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
                 foreach ($row as $res => $key) {
                     $nome = $row['nome'];
-                    $descricao = $row['descricao'];
+                    $desc = $row['descricao'];
                     $img = $row['img'];
                 }
                 echo ("<div class='row mb-4'>
@@ -59,11 +61,11 @@ require('../conexao.php');
                         </div>
                         <div class='row tm-mb-90'>
                         <div class'col-xl-8 col-lg-7 col-md-6 col-sm-12'>
-                            <img src='img/" . $img . "' alt='Image' class='img-fluid'>
+                            <img src='dashboard/" . $img . "' alt='Image' class='img-fluid'>
                         </div>
                         <div class='col-xl-4 col-lg-5 col-md-6 col-sm-12'>
                             <div class='tm-bg-gray tm-video-details'>
-                                <p class='mb-12'>" . $descricao . "</p>
+                                <p class='mb-12'>" . $desc . "</p>
                             </div>
                         </div>");
             }
@@ -108,22 +110,23 @@ require('../conexao.php');
     </div>
     <div class="row mb-3 tm-gallery">
         <?php
-        $sql = "select nome, descricao, img, data_pub from equipamentos;";
+        $sql = "select * from equipamentos order by id_equipa;";
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
                 foreach ($row as $res => $key) {
+                    $id_equipa = $row['id_equipa'];
                     $nome = $row['nome'];
                     $img = $row['img'];
                     $data_pub = date("d/m/Y", strtotime($row['data_pub']));
                 }
                 echo ('<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                             <figure class="effect-ming tm-video-item">
-                                <img src="img/' . $img . '" alt="Image" class="img-fluid">
+                                <img src="dashboard/' . $img . '" alt="Image" class="img-fluid">
                                 <figcaption class="d-flex align-items-center justify-content-center">
                                     <h2>' . $nome . '</h2>
-                                    <a href="equipamentos_detail.php">Ver Mais</a>
+                                    <a href="equipamentos_detail.php?id_equipa=' . $id_equipa . '">Ver Mais</a>
                                 </figcaption>
                             </figure>
                             <div class="d-flex justify-content-between tm-text-gray">
