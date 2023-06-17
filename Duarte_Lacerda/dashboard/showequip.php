@@ -88,8 +88,9 @@ $resultdelete = mysqli_query($conn, $query);
                             <th scope="col">Nome</th>
                             <th scope="col">Descrição</th>
                             <th scope="col">Data de Publicação</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
+                            <th scope="col">Parceria</th>
+                            <th scope="col">Editar</th>
+                            <th scope="col">Eliminar</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -106,6 +107,14 @@ $resultdelete = mysqli_query($conn, $query);
                             echo "<td>" . $nome . "</td>";
                             echo "<td>" . substr("$desc", 0, 75) . " <a style='cursor: pointer;' data-toggle='modal' data-target='#viewequip$id_equipa' class='text-primary' name='Menssage'>(...)</a> </td>";
                             echo "<td>" . $data_pub . "</td>";
+                            $sql = "SELECT * FROM parcerias where id_parceria = '$id_parceria';";
+                            $resultP = mysqli_query($conn, $sql);
+                            while ($row = mysqli_fetch_assoc($resultP)) {
+                              foreach ($row as $res => $key) {
+                                $p = $row['nome'];
+                              }
+                            }
+                            echo "<td>" . $p . "</td>";
                             echo "<td><a href='editequip.php?id_equipa=$id_equipa&id_parceria=$id_parceria' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
                             echo "<td><a data-toggle='modal' data-target='#deleteequip$id_equipa' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
                             echo "</tr>";

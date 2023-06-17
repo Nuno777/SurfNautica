@@ -21,9 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   if ($img != "" && getimagesize($tmp_name)) {
     // tratar upload da foto
-    $diretoria_upload = "upload/";
     $extensao = pathinfo($img, PATHINFO_EXTENSION);
-    $imageDatabasePath = $diretoria_upload . sha1(microtime()) . "." . $extensao;
+    $imageDatabasePath = sha1(microtime()) . "." . $extensao;
     $newEquip = $imageDatabasePath;
 
     if (move_uploaded_file($tmp_name, $newEquip)) {
@@ -167,7 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       </div>
                     </div>
                     <div class="form-row">
-                      <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Confirmar</button>
+                      <button type="submit" class="btn btn-primary" id="submitbtn" style="margin-right: 5px;">Confirmar</button>
                       <a href="showequip.php"><input type="button" value="Voltar" class="btn btn-primary"></a>
                     </div>
                   </form>
