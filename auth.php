@@ -42,3 +42,4 @@ if (count($_SESSION['errors']) != 0) {
     header('Location: login.php');
     exit(0);
 }
+?>
