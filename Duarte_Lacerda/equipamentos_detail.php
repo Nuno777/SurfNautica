@@ -61,7 +61,7 @@ require('../conexao.php');
                         </div>
                         <div class='row tm-mb-90'>
                         <div class'col-xl-8 col-lg-7 col-md-6 col-sm-12'>
-                            <img src='dashboard/" . $img . "' alt='Image' class='img-fluid'>
+                            <img src='dashboard/upload/" . $img . "' alt='Image' class='img-fluid'>
                         </div>
                         <div class='col-xl-4 col-lg-5 col-md-6 col-sm-12'>
                             <div class='tm-bg-gray tm-video-details'>
@@ -74,35 +74,6 @@ require('../conexao.php');
         }
         ?>
     </div>
-    <!-- <div class="row tm-mb-90">
-            <div class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
-                <img src="img/img-01-big.jpg" alt="Image" class="img-fluid">
-            </div>
-            <div class="col-xl-4 col-lg-5 col-md-6 col-sm-12">
-                <div class="tm-bg-gray tm-video-details">
-                    <h3 class="tm-text-gray-dark mb-3">Titulo</h3>
-                    <p class="mb-4">
-                        Free for both personal and commercial use. No need to pay anything. No need to make any
-                        attribution. Free for both personal and commercial use. No need to pay anything. No need to make any
-                        attribution.
-                    </p>
-                    <div class="mb-4">
-                        <h3 class="tm-text-gray-dark mb-3">Titulo</h3>
-                        <p>Free for both personal and commercial use. No need to pay anything. No need to make any
-                            attribution. Free for both personal and commercial use. No need to pay anything. No need to make any
-                            attribution.
-                        </p>
-                    </div>
-                    <div class="mb-4">
-                        <h3 class="tm-text-gray-dark mb-3">Titulo</h3>
-                        <p>Free for both personal and commercial use. No need to pay anything. No need to make any
-                            attribution. Free for both personal and commercial use. No need to pay anything. No need to make any
-                            attribution.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     <div class="row mb-4">
         <h2 class="col-12 tm-text-primary">
             Mais Equipamentos
@@ -123,7 +94,7 @@ require('../conexao.php');
                 }
                 echo ('<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                             <figure class="effect-ming tm-video-item">
-                                <img src="dashboard/' . $img . '" alt="Image" class="img-fluid">
+                                <img src="dashboard/upload/' . $img . '" alt="Image" class="img-fluid">
                                 <figcaption class="d-flex align-items-center justify-content-center">
                                     <h2>' . $nome . '</h2>
                                     <a href="equipamentos_detail.php?id_equipa=' . $id_equipa . '">Ver Mais</a>

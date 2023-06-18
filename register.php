@@ -34,6 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $sucesso_query = $conn->query($query);
         if ($sucesso_query) {
+          $_SESSION['nome'] = $nome;
+          $_SESSION['id'] = $id;
           header("Location: login.php");
           exit(0);
         } else {
@@ -69,22 +71,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <h2>Registo</h2>
           <div class="inputbox">
             <i class="fa-solid fa-signature icon"></i>
-            <input type="text" name="nome" id="nome">
+            <input type="text" name="nome" id="nome" required>
             <label for="">Name</label>
           </div>
           <div class="inputbox">
             <i class="fa-solid fa-envelope icon"></i>
-            <input type="email" name="email" id="email" pattern="^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3})|(aero|coop|info|museum|name))$">
+            <input type="email" name="email" id="email" pattern="^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3})|(aero|coop|info|museum|name))$" required>
             <label for="">Email</label>
           </div>
           <div class="inputbox">
             <i class="fa-solid fa-lock icon"></i>
-            <input type="password" name="password" id="password">
+            <input type="password" name="password" id="password" required>
             <label for="">Password</label>
           </div>
           <div class="inputbox">
             <i class="fa-solid fa-lock icon"></i>
-            <input type="password" name="cpassword" id="cpassword">
+            <input type="password" name="cpassword" id="cpassword" required>
             <label for="">Confirmar Password</label>
           </div>
           <div class="button">

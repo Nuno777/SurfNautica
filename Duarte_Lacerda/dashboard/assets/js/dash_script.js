@@ -5,23 +5,25 @@ $("#inputname").keyup(function () {
     validateName();
 });
 function validateName() {
-    let nameValue = $("#inputname").val();
-    do
-        if (nameValue.length == "") {
-            $("#name").show();
-            nameError = true;
-            return false;
-        } else if (nameValue.length < 3 || nameValue.length > 25) {
-            $("#name").show();
-            $("#name").html("Tamanho do nome deverá ter entre 3 e 25 caracteres!");
-            nameError = true;
-            return false;
-        } else {
-            $("#name").hide();
-            nameError = false;
-        }
-    while (nameError == true) {
+    let nameValue = $("#inputname").val().trim();
+    let nameV = $("#inputname").val();
+    var regex = /^[^\s].*$/;
+    nameError = false;
 
+    if (nameValue === '' || !regex.test(nameV)) {
+        $("#name").show();
+        $("#name").html("Nome inválido! Não pode estar vazio ou começar com espaço.");
+        nameError = true;
+        return false;
+    } else if (nameValue.length < 3 || nameValue.length > 25) {
+        $("#name").show();
+        $("#name").html("Tamanho do nome deve ter entre 3 e 25 caracteres!");
+        nameError = true;
+        return false;
+    } else {
+        $("#name").hide();
+        nameError = false;
+        return true;
     }
 }
 
@@ -32,42 +34,44 @@ $("#inputdesc").keyup(function () {
     validateDesc();
 });
 function validateDesc() {
-    let descValue = $("#inputdesc").val();
-    do
-        if (descValue.length == "") {
-            $("#desc").show();
-            descError = true;
-            return false;
-        } else if (descValue.length < 3 || descValue.length > 250) {
-            $("#desc").show();
-            $("#desc").html("Tamanho da descrição deverá ter entre 3 e 250 caracteres!");
-            descError = true;
-            return false;
-        } else {
-            $("#desc").hide();
-            descError = false;
-        }
-    while (descError == true) {
+    let descValue = $("#inputdesc").val().trim();
+    let descV = $("#inputdesc").val();
+    var regex = /^[^\s].*$/;
+    descError = false;
 
+    if (descValue === '' || !regex.test(descV)) {
+        $("#desc").show();
+        $("#desc").html("Descrição inválida! Não pode estar vazia ou começar com espaço.");
+        descError = true;
+        return false;
+    } else if (descValue.length < 3 || descValue.length > 250) {
+        $("#desc").show();
+        $("#desc").html("Tamanho da descrição deverá ter entre 3 e 250 caracteres!");
+        descError = true;
+        return false;
+    } else {
+        $("#desc").hide();
+        descError = false;
+        return true;
     }
 }
 
-//Validate Parceria
+// Validate Parceria
 $("#partner").hide();
-let partnererror = true;
+let partnerError = true;
 $("#inputpartner").keyup(function () {
     validatePartner();
 });
 function validatePartner() {
     let partnerValue = $("#inputpartner").val();
-    if (partnerValue == "") {
+    if (partnerValue === '') {
         $("#partner").show();
-        partnererror = true;
-        return true;
-    }
-    else {
+        partnerError = true;
+        return false;
+    } else {
         $("#partner").hide();
-        partnererror = false;
+        partnerError = false;
+        return true;
     }
 }
 
@@ -79,28 +83,25 @@ $("#imputImg").keyup(function () {
 });
 function validateImg() {
     let imgValue = $("#imputImg").val();
-    if (imgValue == "") {
+    if (imgValue === '') {
         $("#img").show();
         imgError = true;
-        return true;
+        return false;
     } else {
         $("#img").hide();
         imgError = false;
+        return true;
     }
-};
+}
 
 // Submit button
 $("#submitbtn").click(function () {
-    validateName();
-    validatePartner();
-    validateDesc();
-    validateImg();
-    if (
-        nameError == true &&
-        partnerError == true &&
-        descError == true &&
-        imgError == true
-    ) {
+    let nameValid = validateName();
+    let partnerValid = validatePartner();
+    let descValid = validateDesc();
+    let imgValid = validateImg();
+
+    if (nameValid && partnerValid && descValid && imgValid) {
         return true;
     } else {
         return false;

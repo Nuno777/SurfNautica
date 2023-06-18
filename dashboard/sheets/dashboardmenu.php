@@ -8,6 +8,13 @@
             </a>
         </li>
 
+        <li class="">
+            <a class="sidenav-item-link" href="user_profile.php">
+                <i class="mdi mdi-monitor-dashboard"></i>
+                <span class="nav-text">Painel do Cliente</span>
+            </a>
+        </li>
+
         <li>
             <a class="sidenav-item-link" href="../Tiago_Gomes/dashboard/showaula.php">
                 <i class="mdi mdi-chart-line"></i>
