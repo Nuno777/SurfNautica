@@ -76,7 +76,7 @@ $resultdelete = mysqli_query($conn, $query);
 
               <div class="card">
                 <div class="card-body">
-                  <h4 class="header-title">Contactos</h4>
+                  <h4 class="header-title">Mensagens</h4>
                   <br>
                   <div class="single-table">
                     <div class="table-responsive table-hover">
@@ -101,7 +101,7 @@ $resultdelete = mysqli_query($conn, $query);
                             echo "<td><a data-toggle='modal' data-target='#viewmensagem$row->id_cont' class='text-primary' name='Menssage'><span class='txtcontact'>" .substr("$row->assunto", 0, 75). "...</span></a></td>";
                             echo "<td><a data-toggle='modal' data-target='#viewrespond$row->id_cont' class='text-primary' name='Menssage'><i class='mdi mdi-comment-text-outline'></i></a></td>";
                             // echo "<td><a href='respondcontacto.php?id_cont=$row->id_cont' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
-                            echo "<td><a data-toggle='modal' data-target='#deletecontato$row->id_cont' class='text-danger' name='delete'><i class='mdi mdi-delete'></i></a></td>";
+                            echo "<td><a data-toggle='modal' data-target='#deletecontato$row->id_cont' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
                             echo "</tr>";
                           }
 
@@ -196,10 +196,10 @@ $resultdelete = mysqli_query($conn, $query);
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Eliminar Contacto</h5><span class="span-contat"><?php echo $row->email; ?></span>
+                  <h5 class="modal-title" id="exampleModalLabel">Eliminar Mensagem</h5><span class="span-contat"><?php echo $row->email; ?></span>
                 </div>
                 <div class="modal-body">
-                  <p>Deseja eliminar este contacto?</p>
+                  <p>Deseja eliminar esta mensagem?</p>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
