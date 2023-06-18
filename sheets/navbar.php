@@ -58,11 +58,8 @@ if (isset($_SESSION['authenticated'])) {
             <li><a class="nav-link scrollto" href="noticias.php">Noticias</a></li>
             <li><a class="nav-link scrollto" href="contacto.php">Contactos</a></li>
             <?php
-
             if (isset($_SESSION['authenticated'])) {
                 ?>
-                <!-- echo '<li><a class="nav-link scrollto" href="profile.php">' . $nome . '</a></li>'; -->
-
                 <li class="dropdown">
                 <a href="dashboard/dashboard.php" class="nav-link scrollto">
                     <span><?php echo $nome?></span>

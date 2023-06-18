@@ -87,7 +87,7 @@ $resultdelete = mysqli_query($conn, $query);
 
                             <th scope="col">Nome</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Mensagem</th>
+                            <th scope="col">Assunto</th>
                             <th scope="col">Resposta</th>
                             <th scope="col"></th>
                           </tr>
@@ -98,7 +98,7 @@ $resultdelete = mysqli_query($conn, $query);
                             echo "<tr>";
                             echo "<td>" . $row->nome . "</td>";
                             echo "<td>" . $row->email . "</td>";
-                            echo "<td><a data-toggle='modal' data-target='#viewmensagem$row->id_cont' class='text-primary' name='Menssage'><span class='txtcontact'>" .substr("$row->mensagem", 0, 75). "...</span></a></td>";
+                            echo "<td><a data-toggle='modal' data-target='#viewmensagem$row->id_cont' class='text-primary' name='Menssage'><span class='txtcontact'>" .substr("$row->assunto", 0, 75). "...</span></a></td>";
                             echo "<td><a data-toggle='modal' data-target='#viewrespond$row->id_cont' class='text-primary' name='Menssage'><i class='mdi mdi-comment-text-outline'></i></a></td>";
                             // echo "<td><a href='respondcontacto.php?id_cont=$row->id_cont' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
                             echo "<td><a data-toggle='modal' data-target='#deletecontato$row->id_cont' class='text-danger' name='delete'><i class='mdi mdi-delete'></i></a></td>";

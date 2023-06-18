@@ -34,7 +34,6 @@ if (count($_SESSION['errors']) == 0) {
         } else {
             $_SESSION['errors']['auth'] = 'Email/password incorretas';
             echo "<script>alert('Password errada!');window.location='login.php'</script>";
-
         }
     }
 }
@@ -43,3 +42,43 @@ if (count($_SESSION['errors']) != 0) {
     exit(0);
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Erro</title>
+      <link href="https://fonts.googleapis.com/css?family=Karla:400,700|Roboto"
+        rel="stylesheet">
+      <link href="/surfnautica/dashboard/assets/plugins/material/css/materialdesignicons.min.css"
+        rel="stylesheet" />
+      <link href="/surfnautica/dashboard/assets/plugins/simplebar/simplebar.css" rel="stylesheet" />
+      <link href="/surfnautica/dashboard/assets/plugins/nprogress/nprogress.css" rel="stylesheet" />
+
+      <link id="main-css-href" rel="stylesheet" href="/surfnautica/dashboard/assets/css/style.css" />
+
+      <link href="/surfnautica/dashboard/assets/images/favicon.png" rel="shortcut icon" />
+
+      <script src="/surfnautica/dashboard/assets/plugins/nprogress/nprogress.js"></script>
+    </head>
+
+  </head>
+  <body class="bg-light-gray" id="body">
+    <div class="container d-flex align-items-center justify-content-center"
+      style="min-height: 100vh">
+      <div class="d-flex flex-column justify-content-between">
+        <div class="row justify-content-center mt-5">
+          <div class="text-center page-404">
+            <h1 class="error-title">Erro</h1>
+            <p class="pt-4 pb-5 error-subtitle">Cliente não registado.</p>
+            <a href="index.php" class="btn btn-primary btn-pill">Página Inicial</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </body>
+</html>
