@@ -5,7 +5,6 @@ require('conexao.php')
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<head>
 
   <?php
   require_once 'sheets/head.php';
@@ -27,11 +26,11 @@ require('conexao.php')
   <link href="assets/img/favicon.ico" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link rel="stylesheet" href="css/escolasurf.css">
-  </head>
+</head>
 
 <body>
 
-<header id="header" class="fixed-top header-transparent">
+<header id="header" class="fixed-top">
     <?php
     require_once 'sheets/navbar.php';
     ?>

@@ -11,7 +11,7 @@
                 <ul>
                     <li><a href="#">História do Clube</a></li>
                     <li><a href="../TiagoQuintino/partners.php">Parcerias</a></li>
-                    <li><a href="professores.php">Professores</a></li>
+                    <li><a href="../Daniel_Silva/professores.php">Professores</a></li>
                 </ul>
             </li>
             <li class="dropdown"><a href="../Tiago_Gomes/escolasurf.html" class="nav-link scrollto"><span>Escola
