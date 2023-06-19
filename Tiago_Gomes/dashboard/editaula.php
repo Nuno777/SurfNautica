@@ -182,8 +182,11 @@ if ($conn->affected_rows > 0) {
                         </small>
                       </div>
                       </div>
+                      <div class="form-row justify-content-end">
                       <button type="submit" class="btn btn-primary" name="editaula">Editar</button>
-                    <a href="showaula.php"><input type="button" value="Voltar" class="btn btn-primary"></a>
+                    <a href="showaula.php"><input type="button" value="Voltar" class="btn btn-primary" style="margin-left: 10px;"></a>
+                      </div>
+                     
                     </div>
                   </form>
 

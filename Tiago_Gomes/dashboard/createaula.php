@@ -147,8 +147,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </select>
                       </div>
                     </div>
+                    <div class="form-row justify-content-end">
                     <button type="submit" class="btn btn-primary">Criar</button>
-                    <a href="showaula.php"><input type="button" value="Voltar" class="btn btn-primary"></a>
+                    <a href="showaula.php"><input type="button" value="Voltar" class="btn btn-primary" style="margin-left: 10px;"></a>
+                    </div>
+                    
                   </form>
                 </div>
               </div>
@@ -207,6 +210,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           document.getElementById('inputtitulo').value = dayOfWeek;
         });
       </script>
-    </body>
+</body>
 
-    </html>
+</html>

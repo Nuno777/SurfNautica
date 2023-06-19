@@ -128,8 +128,11 @@ if ($sucesso_query) {
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Criar</button>
-                    <a href="showpartners.php"><input type="button" value="Voltar" class="btn btn-primary"></a>
+                    <div class="form-row  justify-content-end">
+                      <button type="submit" class="btn btn-primary">Criar</button>
+                    <a href="showpartners.php"><input type="button" value="Voltar" class="btn btn-primary " style="margin-left: 10px;"></a>
+                    </div>
+                    
                   </form>
                 </div>
               </div>
