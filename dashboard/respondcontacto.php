@@ -152,10 +152,10 @@ if (isset($_POST["editcontato"])) {
                           </div>
 
                         </div>
-
-                        <button type="submit" class="btn btn-primary" name="editcontato" id="respondbutton" disabled>Submeter</button>
-
                         <a href="dashboardContacto.php" class="btn btn-secondary" name="voltarcontato" type="submit">Voltar</a>
+                        <button type="submit"  class="btn btn-primary" name="editcontato" id="respondbutton" disabled>Submeter</button>
+
+                        
                       </form>
                     </div>
                   </div>

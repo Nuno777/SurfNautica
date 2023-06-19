@@ -194,9 +194,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </div>
                       </div>
                     </div>
-                    <div class="form-row">
-                      <button type="submit" class="btn btn-primary" id="submitbtn" style="margin-right: 5px;">Confirmar</button>
-                      <a href="showequip.php"><input type="button" value="Voltar" class="btn btn-primary"></a>
+                    <div class="form-row justify-content-end">
+
+                      <button type="submit" class="btn btn-primary" id="submitbtn">Confirmar</button>
+                      <a href="showequip.php"><input type="button" value="Voltar" class="btn btn-danger" style="margin-left: 10px;"></a>
                     </div>
                   </form>
                 </div>
