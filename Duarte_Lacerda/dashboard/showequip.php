@@ -10,8 +10,8 @@ $query = "SELECT * FROM equipamentos ORDER BY id_equipa";
 $result = mysqli_query($conn, $query);
 $resultEquip = mysqli_query($conn, $query);
 $resultdelete = mysqli_query($conn, $query);
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -69,24 +69,29 @@ $resultdelete = mysqli_query($conn, $query);
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="mdi mdi-window-close"></span>
                   </button>
                 </div>
-
               <?php unset($_SESSION["message"]);
               }
               ?>
 
               <div class="card">
                 <div class="card-body">
-                  <h4 class="header-title">Equipamentos<a href="createequip.php" style="margin-left: 25px;"><button type="button" class="btn btn-primary btn-sm">Criar equipamento</button></a></h4>
-
+                  <div class="row">
+                    <h4 class="header-title">Equipamentos<a href="createequip.php" style="margin-left: 25px; margin-right: 25px;"><button type="button" class="btn btn-primary btn-sm">Criar equipamento</button></a></h4>
+                    <form class="form-inline" method="POST" action="showequip.php">
+                      <input type="search" name="inputsearch" class="form-control" placeholder="Nome..." aria-label="Search" aria-describedby="search-addon" />
+                      <button class="btn btn-primary" name="btnsearch" type="submit"><span class="mdi mdi-magnify"></span></button>
+                    </form>
+                  </div>
                   <br>
                   <div class="single-table">
                     <div class="table-responsive">
                       <table class="table table-responsive-lg text-center">
                         <thead class="text-uppercase bg-dark">
                           <tr class="text-white">
-
                             <th scope="col">Nome</th>
-                            <th scope="col">Descrição</th>
+                            <th scope="col">Descrição<br>
+                              <small>*clica para ver a msg</small>
+                            </th>
                             <th scope="col">Data de Publicação</th>
                             <th scope="col">Parceria</th>
                             <th scope="col">Editar</th>
@@ -95,31 +100,92 @@ $resultdelete = mysqli_query($conn, $query);
                         </thead>
                         <tbody>
                           <?php
-                          while ($row = mysqli_fetch_assoc($result)) {
-                            foreach ($row as $res => $key) {
-                              $id_equipa = $row['id_equipa'];
-                              $nome = $row['nome'];
-                              $desc = $row['descricao'];
-                              $data_pub = $row['data_pub'];
-                              $id_parceria = $row['id_parceria'];
-                            }
-                            echo "<tr>";
-                            echo "<td>" . $nome . "</td>";
-                            echo "<td>" . substr("$desc", 0, 75) . " <a style='cursor: pointer;' data-toggle='modal' data-target='#viewequip$id_equipa' class='text-primary' name='Menssage'>(...)</a> </td>";
-                            echo "<td>" . $data_pub . "</td>";
-                            $sql = "SELECT * FROM parcerias where id_parceria = '$id_parceria';";
-                            $resultP = mysqli_query($conn, $sql);
-                            while ($row = mysqli_fetch_assoc($resultP)) {
-                              foreach ($row as $res => $key) {
-                                $p = $row['nome'];
+                          $search = '';
+                          if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                            $search = $_POST['inputsearch'];
+                            $sql = "SELECT * FROM equipamentos WHERE nome LIKE '$search';";
+                            if (isset($_POST['btnsearch']) && $_POST['inputsearch'] != '') {
+                              $sucesso_query = mysqli_query($conn, $sql);
+                              if ($sucesso_query->num_rows != 0) {
+                                while ($row = mysqli_fetch_assoc($sucesso_query)) {
+                                  foreach ($row as $res => $key) {
+                                    $id_equipa = $row['id_equipa'];
+                                    $nome = $row['nome'];
+                                    $desc = $row['descricao'];
+                                    $data_pub = $row['data_pub'];
+                                    $id_parceria = $row['id_parceria'];
+                                  }
+                                  echo "<tr>";
+                                  echo "<td>" . $nome . "</td>";
+                                  echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#viewequip$id_equipa' class='text-primary' name='Menssage'>" . substr("$desc", 0, 75) . "</a> </td>";
+                                  echo "<td>" . $data_pub . "</td>";
+                                  $sql = "SELECT * FROM parcerias where id_parceria = '$id_parceria';";
+                                  $resultP = mysqli_query($conn, $sql);
+                                  while ($row = mysqli_fetch_assoc($resultP)) {
+                                    foreach ($row as $res => $key) {
+                                      $p = $row['nome'];
+                                    }
+                                  }
+                                  echo "<td>" . $p . "</td>";
+                                  echo "<td><a href='editequip.php?id_equipa=$id_equipa&id_parceria=$id_parceria' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
+                                  echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#deleteequip$id_equipa' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
+                                  echo "</tr>";
+                                }
+                              }
+                            } else if (isset($_POST['btnsearch']) && $_POST['inputsearch'] == '') {
+                              unset($_SESSION["message"]);
+                              while ($row = mysqli_fetch_assoc($result)) {
+                                foreach ($row as $res => $key) {
+                                  $id_equipa = $row['id_equipa'];
+                                  $nome = $row['nome'];
+                                  $desc = $row['descricao'];
+                                  $data_pub = $row['data_pub'];
+                                  $id_parceria = $row['id_parceria'];
+                                }
+                                echo "<tr>";
+                                echo "<td>" . $nome . "</td>";
+                                echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#viewequip$id_equipa' class='text-primary' name='Menssage'>" . substr("$desc", 0, 75) . "</a> </td>";
+                                echo "<td>" . $data_pub . "</td>";
+                                $sql = "SELECT * FROM parcerias where id_parceria = '$id_parceria';";
+                                $resultP = mysqli_query($conn, $sql);
+                                while ($row = mysqli_fetch_assoc($resultP)) {
+                                  foreach ($row as $res => $key) {
+                                    $p = $row['nome'];
+                                  }
+                                }
+                                echo "<td>" . $p . "</td>";
+                                echo "<td><a href='editequip.php?id_equipa=$id_equipa&id_parceria=$id_parceria' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
+                                echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#deleteequip$id_equipa' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
+                                echo "</tr>";
                               }
                             }
-                            echo "<td>" . $p . "</td>";
-                            echo "<td><a href='editequip.php?id_equipa=$id_equipa&id_parceria=$id_parceria' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
-                            echo "<td><a data-toggle='modal' data-target='#deleteequip$id_equipa' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
-                            echo "</tr>";
+                          } else {
+                            unset($_SESSION["message"]);
+                            while ($row = mysqli_fetch_assoc($result)) {
+                              foreach ($row as $res => $key) {
+                                $id_equipa = $row['id_equipa'];
+                                $nome = $row['nome'];
+                                $desc = $row['descricao'];
+                                $data_pub = $row['data_pub'];
+                                $id_parceria = $row['id_parceria'];
+                              }
+                              echo "<tr>";
+                              echo "<td>" . $nome . "</td>";
+                              echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#viewequip$id_equipa' class='text-primary' name='Menssage'>" . substr("$desc", 0, 75) . "</a> </td>";
+                              echo "<td>" . $data_pub . "</td>";
+                              $sql = "SELECT * FROM parcerias where id_parceria = '$id_parceria';";
+                              $resultP = mysqli_query($conn, $sql);
+                              while ($row = mysqli_fetch_assoc($resultP)) {
+                                foreach ($row as $res => $key) {
+                                  $p = $row['nome'];
+                                }
+                              }
+                              echo "<td>" . $p . "</td>";
+                              echo "<td><a href='editequip.php?id_equipa=$id_equipa&id_parceria=$id_parceria' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
+                              echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#deleteequip$id_equipa' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
+                              echo "</tr>";
+                            }
                           }
-
                           ?>
                         </tbody>
                       </table>
@@ -133,7 +199,7 @@ $resultdelete = mysqli_query($conn, $query);
         <!-- End Top -->
 
         <!-- Modal de ver equipamento -->
-        <?php while ($row = $row = mysqli_fetch_assoc($resultEquip)) {
+        <?php while ($row = mysqli_fetch_assoc($resultEquip)) {
           foreach ($row as $res => $key) {
             $id_equipa = $row['id_equipa'];
             $nome = $row['nome'];
@@ -154,6 +220,15 @@ $resultdelete = mysqli_query($conn, $query);
                   <div class="row">
                     <div class="col-md-12">
                       <span class="span-name"><?php echo $nome; ?></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal-body">
+                  <span>Parceria</span>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <span class="span-name"><?php echo $p; ?></span>
                     </div>
                   </div>
                 </div>
