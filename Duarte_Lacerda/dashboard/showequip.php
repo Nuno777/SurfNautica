@@ -103,7 +103,7 @@ $resultdelete = mysqli_query($conn, $query);
                           $search = '';
                           if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $search = $_POST['inputsearch'];
-                            $sql = "SELECT * FROM equipamentos WHERE nome LIKE '$search';";
+                            $sql = "SELECT * FROM equipamentos WHERE nome LIKE '%$search%';";
                             if (isset($_POST['btnsearch']) && $_POST['inputsearch'] != '') {
                               $sucesso_query = mysqli_query($conn, $sql);
                               if ($sucesso_query->num_rows != 0) {
