@@ -14,7 +14,7 @@ if ($user->num_rows) {
       </button>
       <ul class="dropdown-menu dropdown-menu-right">
         <li>
-          <a class="dropdown-link-item" href="logout.php">
+          <a class="dropdown-link-item" href="../logout.php">
             <i class="mdi mdi-logout"></i>
             <span class="nav-text">Log Out</span>
           </a>

@@ -37,7 +37,7 @@
         </li>
 
         <li class="active">
-            <a class="sidenav-item-link" href="showpracha.php">
+            <a class="sidenav-item-link" href="showprancha.php">
                 <i class="mdi mdi-phone"></i>
                 <span class="nav-text">Pranchas</span>
             </a>

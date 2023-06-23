@@ -103,7 +103,7 @@ $resultdelete = mysqli_query($conn, $query);
                           $search = '';
                           if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $search = $_POST['inputsearch'];
-                            $sql = "SELECT * FROM pranchas WHERE nome LIKE '%$search%';";
+                            $sql = "SELECT pranchas.id_prancha, pranchas.nome, pranchas.descricao, pranchas.data_pub, pranchas.id_parceria FROM pranchas LEFT JOIN parcerias ON pranchas.id_parceria = parcerias.id_parceria WHERE parcerias.nome LIKE '%$search%' OR pranchas.nome LIKE '%$search%';";
                             if (isset($_POST['btnsearch']) && $_POST['inputsearch'] != '') {
                               $sucesso_query = mysqli_query($conn, $sql);
                               if ($sucesso_query->num_rows != 0) {
