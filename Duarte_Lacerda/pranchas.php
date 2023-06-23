@@ -53,13 +53,13 @@ require('../conexao.php');
         </div>
         <div class="row tm-mb-90 tm-gallery">
             <?php
-            $sql = "select * from equipamentos;";
+            $sql = "select * from pranchas;";
             $result = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     foreach ($row as $res => $key) {
-                        $id_equipa = $row['id_equipa'];
+                        $id_prancha = $row['id_prancha'];
                         $nome = $row['nome'];
                         $img = $row['img'];
                         $data_pub = date("d/m/Y", strtotime($row['data_pub']));
@@ -69,7 +69,7 @@ require('../conexao.php');
                                 <img src="dashboard/upload/' . $img . '" alt="Image" style="width: 500px; height: 275px" class="img-fluid">
                                 <figcaption class="d-flex align-items-center justify-content-center">
                                     <h2>' . $nome . '</h2>
-                                    <a href="equipamentos_detail.php?id_equipa=' . $id_equipa . '">Ver Mais</a>
+                                    <a href="pranchas_detail.php?id_prancha=' . $id_prancha . '">Ver Mais</a>
                                 </figcaption>
                             </figure>
                             <div class="d-flex justify-content-between tm-text-gray">

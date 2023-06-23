@@ -7,12 +7,11 @@ require('../conexao.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equipamentos - SurfNautica</title>
+    <title>pranchas - SurfNautica</title>
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
     <link rel="stylesheet" href="css/equips.css">
-    <link rel="stylesheet" href="css/navbar.css">
     <!-- Favicons -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="img/favicon.png" rel="icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -24,6 +23,9 @@ require('../conexao.php');
     <link href="vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="css/navbar.css" rel="stylesheet">
 </head>
 
 <body>
@@ -41,25 +43,51 @@ require('../conexao.php');
     <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll" data-image-src="img/hero.jpg"></div>
 
     <div class="container-fluid tm-container-content tm-mt-60">
+        <?php
+        $id_prancha = $_GET['id_prancha'];
+
+        $sql = "select nome, descricao, img from pranchas where id_prancha = '$id_prancha';";
+        $result = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                foreach ($row as $res => $key) {
+                    $nome = $row['nome'];
+                    $desc = $row['descricao'];
+                    $img = $row['img'];
+                }
+                echo ("<div class='row mb-4'>
+                        <h2 class='col-12 tm-text-primary'>" . $nome . "</h2>
+                       </div>
+                        <div class='row tm-mb-90'>
+                            <div class='col-xl-8 col-lg-7 col-md-6 col-sm-12'>
+                                <img src='dashboard/upload/" . $img . "' alt='Image' class='img-fluid'>
+                            </div>
+                            <div class='col-xl-4 col-lg-5 col-md-6 col-sm-12'>
+                                <div class='tm-bg-gray tm-video-details'>
+                                    <p class='mb-12'>" . $desc . "</p>
+                                </div>
+                            </div>
+                        </div>");
+            }
+        } else {
+            echo ("Erro ao executar o select:" . mysqli_connect_error($conn));
+        }
+        ?>
         <div class="row mb-4">
-            <h2 class="col-6 tm-text-primary">
-                Equipamentos
+            <h2 class="col-12 tm-text-primary">
+                Mais pranchas
             </h2>
-            <div class="col-6 d-flex justify-content-end align-items-center">
-                <form action="" class="tm-text-primary">
-                    Página <input type="text" value="1" size="1" class="tm-input-paging tm-text-primary"> de 200
-                </form>
-            </div>
         </div>
-        <div class="row tm-mb-90 tm-gallery">
+        <div class="row mb-3 tm-gallery">
             <?php
-            $sql = "select * from equipamentos;";
+            $sql = "select * from pranchas order by id_prancha;";
             $result = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     foreach ($row as $res => $key) {
-                        $id_equipa = $row['id_equipa'];
+                        $id_prancha = $row['id_prancha'];
                         $nome = $row['nome'];
                         $img = $row['img'];
                         $data_pub = date("d/m/Y", strtotime($row['data_pub']));
@@ -69,7 +97,7 @@ require('../conexao.php');
                                 <img src="dashboard/upload/' . $img . '" alt="Image" style="width: 500px; height: 275px" class="img-fluid">
                                 <figcaption class="d-flex align-items-center justify-content-center">
                                     <h2>' . $nome . '</h2>
-                                    <a href="equipamentos_detail.php?id_equipa=' . $id_equipa . '">Ver Mais</a>
+                                    <a href="pranchas_detail.php?id_prancha=' . $id_prancha . '">Ver Mais</a>
                                 </figcaption>
                             </figure>
                             <div class="d-flex justify-content-between tm-text-gray">
@@ -84,18 +112,6 @@ require('../conexao.php');
             mysqli_close($conn);
             ?>
         </div>
-        <!-- <div class="row tm-mb-90">
-            <div class="col-12 d-flex justify-content-between align-items-center tm-paging-col">
-                <a href="javascript:void(0);" class="btn btn-primary tm-btn-prev mb-2 disabled">Anterior</a>
-                <div class="tm-paging d-flex">
-                    <a href="javascript:void(0);" class="active tm-paging-link">1</a>
-                    <a href="javascript:void(0);" class="tm-paging-link">2</a>
-                    <a href="javascript:void(0);" class="tm-paging-link">3</a>
-                    <a href="javascript:void(0);" class="tm-paging-link">4</a>
-                </div>
-                <a href="javascript:void(0);" class="btn btn-primary tm-btn-next">Seguinte</a>
-            </div>
-        </div> -->
     </div>
 
     <?php
