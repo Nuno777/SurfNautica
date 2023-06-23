@@ -51,7 +51,7 @@ if (isset($_SESSION['authenticated'])) {
                     <i class="bi bi-chevron-down"></i>
                 </a>
                 <ul>
-                    <li><a href="Diogo_Augusto/prancha.php">Pranchas</a></li>
+                    <li><a href="Duarte_Lacerda/pranchas.php">Pranchas</a></li>
                     <li><a href="Duarte_Lacerda/equipamentos.php">Equipamentos</a></li>
                 </ul>
             </li>
@@ -59,17 +59,17 @@ if (isset($_SESSION['authenticated'])) {
             <li><a class="nav-link scrollto" href="contacto.php">Contactos</a></li>
             <?php
             if (isset($_SESSION['authenticated'])) {
-                ?>
+            ?>
                 <li class="dropdown">
-                <a href="dashboard/dashboard.php" class="nav-link scrollto">
-                    <span><?php echo $nome?></span>
-                    <i class="bi bi-chevron-down"></i>
-                </a>
-                <ul>
-                    <li><a href="dashboard/user_profile.php">Perfil</a></li>
-                    <li><a href="dashboard/logout.php">Logout</a></li>
-                </ul>
-            </li>
+                    <a href="dashboard/dashboard.php" class="nav-link scrollto">
+                        <span><?php echo $nome ?></span>
+                        <i class="bi bi-chevron-down"></i>
+                    </a>
+                    <ul>
+                        <li><a href="dashboard/user_profile.php">Perfil</a></li>
+                        <li><a href="dashboard/logout.php">Logout</a></li>
+                    </ul>
+                </li>
             <?php
             } else {
                 echo '<li><a class="nav-link scrollto" href="login.php">Login</a></li>';
