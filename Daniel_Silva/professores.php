@@ -34,8 +34,18 @@ require_once 'sheets/head.php';
 </header>
 
 <div class="container-sm">
-        <img src="assets/img/22.jpg" class="d-block w-100 object-fit-cover">
+  <div style="position: relative;">
+    <img src="assets/img/22.jpg" class="d-block w-100 object-fit-cover">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+      <h1 style="color: white; font-weight: 950; font-size: 34pt; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Professores SurfNautica</h1>
+      <p style="color: white; font-weight: 600; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);">Aqui estão disponíveis todos os contatos dos nossos professores.</p>
+    </div>
+  </div>
 </div>
+
+
+
+
 
 
 <div class="container-sm">
@@ -55,11 +65,11 @@ require_once 'sheets/head.php';
             ?>
             <div class="col-lg-4">
               <div class="card border-0">
-                <img class="card-card-img-overlay rounded-circle" src="assets/img/<?php echo $foto; ?>" alt="Image" width="300" height="300" style="object-fit: cover;">
+                <img class="card-card-img-overlay rounded-circle mx-auto" src="assets/img/<?php echo $foto; ?>" alt="Image" width="300" height="300" style="object-fit: cover;">
                 <div class="card-body">
                   <h4 class="card-title text-center"><?php echo $nome; ?></h4>
-                  <p class="card-text"><strong>Email:</strong> <?php echo $email; ?></p>
-                  <p class="card-text"><strong>Especialidade:</strong> <?php echo $especialidade; ?></p>
+                  <p class="card-text text-center"><strong>Email:</strong> <?php echo $email; ?></p>
+                  <p class="card-text text-center"><strong>Especialidade:</strong> <?php echo $especialidade; ?></p>
                 </div>
               </div>
             </div>
@@ -68,11 +78,12 @@ require_once 'sheets/head.php';
     } else {
         echo "Erro ao executar o select: " . mysqli_connect_error($conn);
     }
-
     mysqli_close($conn);
     ?>
   </div>
 </div>
+
+</body>
 
 
 <footer id="footer">
@@ -80,10 +91,6 @@ require_once 'sheets/head.php';
   require_once 'sheets/footer.php';
   ?>
 </footer>
-
-
-  <a href="#" class="back-to-top d-flex align-items-center
-      justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
@@ -93,5 +100,5 @@ require_once 'sheets/head.php';
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/jquery-3.4.1.min.js"></script>
-</body>
+
 </html>

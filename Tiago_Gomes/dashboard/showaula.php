@@ -9,7 +9,6 @@ require_once '../../conexao.php';
 
 $sql = "SELECT id_diaAberto, titulo, data1, horas, diaaberto.id_prof, nome FROM diaAberto, professor WHERE diaaberto.id_prof=professor.id_prof ORDER BY data1 ASC;";
 $result = mysqli_query($conn, $sql);
-$resultAulas = mysqli_query($conn, $sql);
 $resultdelete = mysqli_query($conn, $sql);
 
 ?>
@@ -109,11 +108,10 @@ $resultdelete = mysqli_query($conn, $sql);
                             echo "<td>" . substr("$data1", 0, 75) . "</td>";
                             echo "<td>" . $horas . "</td>";
                             echo "<td>" . $prof_nome . "</td>";
-                            echo "<td><a href='editaula.php?id_diaAberto=$id_diaAberto&id_prof=$id_prof' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
-                            echo "<td><a href='deleteaula.php?id_diaAberto=$id_diaAberto&titulo=$titulo' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
+                            echo "<td><a href='editaula.php?id_diaAberto=$id_diaAberto&id_prof=$id_prof&data1=$data1' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
+                            echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#deleteaula$id_diaAberto' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
                             echo "</tr>";
                           }
-
                           ?>
                         </tbody>
                       </table>
@@ -124,6 +122,36 @@ $resultdelete = mysqli_query($conn, $sql);
             </div>
           </div>
         </div>
+
+<!-- Modal para eliminar -->
+<?php while ($row = mysqli_fetch_assoc($resultdelete)) {
+          foreach ($row as $res => $key) {
+            $id_diaAberto = $row['id_diaAberto'];
+            $titulo = $row['titulo'];
+          }
+        ?>
+          <div class="modal fade" id='deleteaula<?php echo $id_diaAberto ?>' tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Eliminar Aula</h5><span class="span-equip"><?php echo $titulo; ?></span>
+                </div>
+                <div class="modal-body">
+                  <p>Deseja eliminar esta aula?</p>
+                </div>
+                <div class="modal-footer">
+                  <a href='deleteaula.php?id_diaAberto=<?php echo $id_diaAberto . '&titulo=' . $titulo ?>' type='button' class='btn btn-primary'>Sim</a>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <?php
+        }
+        ?>
+
+
+
         <!-- End Top -->
 
         <footer class="footer mt-auto">

@@ -113,12 +113,9 @@ if ($conn->affected_rows > 0) {
                     <h4 class="header-title">Editar Aula</h4>
                     <br>
                     <div class="single-table">
-
                     <form id="editaula" action="editaula.php" method="POST">   
                     <div class="form-group">
-
                     <input type="text" class="form-control" id="id_diaAberto" name="id_diaAberto" value="<?= $id_aula ?>" required hidden>
-
 
                       <label for="inputtitulo">Titulo</label>
                       <input type="text" class="form-control" name="titulo" id="titulo" value="<?= $titulo; ?>" required>

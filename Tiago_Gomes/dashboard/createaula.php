@@ -96,68 +96,72 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
       <div class="content-wrapper">
-        <!-- Top -->
-        <div class="content">
-          <div class="row">
-            <div class="col-lg-12 mt-5">
-              <!-- Alerta - Operações (EDITAR) -->
-              <?php
-              if (isset($_SESSION["message"])) { ?>
-                <div class='alert alert-<?php echo $_SESSION["message"]["type"] ?> alert-dismissible fade show' role='alert'>
-                  <?php echo $_SESSION["message"]["content"]; ?>
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="mdi mdi-times"></span>
-                  </button>
+  <!-- Top -->
+  <div class="content">
+    <div class="row">
+      <div class="col-lg-12 mt-5">
+        <!-- Alerta - Operações (EDITAR) -->
+        <?php
+        if (isset($_SESSION["message"])) { ?>
+          <div class='alert alert-<?php echo $_SESSION["message"]["type"] ?> alert-dismissible fade show' role='alert'>
+            <?php echo $_SESSION["message"]["content"]; ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span class="mdi mdi-times"></span>
+            </button>
+          </div>
+        <?php
+          unset($_SESSION["message"]);
+        }
+        ?>
+        <div class="card">
+          <div class="card-body">
+            <h4 class="header-title">Criar Aula</h4>
+            <br>
+            <form action="createaula.php" method="POST">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputdata1">Data</label>
+                  <input type="date" class="form-control" name="inputdata1" id="inputdata1" rows="2" required>
                 </div>
-
-              <?php unset($_SESSION["message"]);
-              }
-              ?>
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="header-title">Criar Aula</h4>
-                  <br>
-                  <form action="createaula.php" method="POST">
-                    <div class="form-group">
-                      <label for="inputdata1">Data</label>
-                      <input type="date" class="form-control" name="inputdata1" id="inputdata1" rows="2" required>
-                    </div>
-                    <div class="form-row">
-                      <div class="form-group col-md-6">
-                        <label for="inputtitulo">Titulo</label>
-                        <input type="text" class="form-control" name="inputtitulo" id="inputtitulo" required>
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label for="inputhoras">Horas</label>
-                        <textarea type="text" class="form-control" name="inputhoras" id="inputhoras" required></textarea>
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label for="inputid_prof">Escolher Professor</label>
-                        <select name="inputid_prof" id="inputid_prof" class="form-control" required>
-                          <?php
-                          $sql = "SELECT * FROM professor;";
-                          $resultProfessor = mysqli_query($conn, $sql);
-                          while ($row = mysqli_fetch_assoc($resultProfessor)) {
-                            foreach ($row as $res => $key) {
-                              $id_prof = $row['id_prof'];
-                              $nome = $row['nome'];
-                            }
-                            echo "<option value='$id_prof'>$nome</option>";
-                          }
-                          ?>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="form-row justify-content-end">
-                    <button type="submit" class="btn btn-primary">Criar</button>
-                    <a href="showaula.php"><input type="button" value="Voltar" class="btn btn-primary" style="margin-left: 10px;"></a>
-                    </div>
-                    
-                  </form>
+                <div class="form-group col-md-6">
+                  <label for="inputtitulo">Titulo</label>
+                  <input type="text" class="form-control" name="inputtitulo" id="inputtitulo" required>
                 </div>
               </div>
-            </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputhoras">Horas</label>
+                  <input type="text" class="form-control" name="inputhoras" id="inputhoras" required></input>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputid_prof">Escolher Professor</label>
+                  <select name="inputid_prof" id="inputid_prof" class="form-control" required>
+                    <?php
+                    $sql = "SELECT * FROM professor;";
+                    $resultProfessor = mysqli_query($conn, $sql);
+                    while ($row = mysqli_fetch_assoc($resultProfessor)) {
+                      foreach ($row as $res => $key) {
+                        $id_prof = $row['id_prof'];
+                        $nome = $row['nome'];
+                      }
+                      echo "<option value='$id_prof'>$nome</option>";
+                    }
+                    ?>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row justify-content-end">
+                <button type="submit" class="btn btn-primary">Criar</button>
+                <a href="showaula.php"><input type="button" value="Voltar" class="btn btn-primary" style="margin-left: 10px;"></a>
+              </div>
+            </form>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
         <!-- End Top -->
         <br>
         <footer class="footer mt-auto">
