@@ -1,14 +1,14 @@
 <?php
 session_start();
 if (!isset($_SESSION['authenticated'])) {
-  header('Location: ../../login.php');
+  header('Location: ../../../login.php');
   exit(0);
 }
 
-require_once '../../conexao.php';
-$query = "SELECT * FROM equipamentos ORDER BY id_equipa";
+require_once '../../../conexao.php';
+$query = "SELECT * FROM pranchas ORDER BY id_prancha";
 $result = mysqli_query($conn, $query);
-$resultEquip = mysqli_query($conn, $query);
+$resultprancha = mysqli_query($conn, $query);
 $resultdelete = mysqli_query($conn, $query);
 ?>
 
@@ -16,9 +16,9 @@ $resultdelete = mysqli_query($conn, $query);
 <html lang="en" dir="ltr">
 
 <head>
-  <title>Dashboard - Equipamento</title>
+  <title>Dashboard - Pranchas</title>
   <?php
-  require_once 'sheets/dashboardHead.php';
+  require_once '../sheets/dashboardHead.php';
   ?>
 </head>
 
@@ -28,13 +28,13 @@ $resultdelete = mysqli_query($conn, $query);
       <div id="sidebar" class="sidebar sidebar-with-footer">
         <!-- Aplication Brand -->
         <div class="app-brand">
-          <a href="../../index.php">
-            <img src="assets/images/favicon.png" style="height: 65px;" alt="Mono">
+          <a href="../../../index.php">
+            <img src="../assets/images/favicon.png" style="height: 65px;" alt="Mono">
             <span class="brand-name text-light">SURFNAUTICA</span>
           </a>
         </div>
         <?php
-        require_once 'sheets/dashboardmenu.php';
+        require_once '../sheets/dashboardmenu_prachas.php';
         ?>
       </div>
     </aside>
@@ -49,7 +49,7 @@ $resultdelete = mysqli_query($conn, $query);
 
           <div class="navbar-right ">
             <?php
-            require_once 'sheets/dashboardNavbar.php';
+            require_once '../sheets/dashboardNavbar.php';
             ?>
           </div>
         </nav>
@@ -76,8 +76,8 @@ $resultdelete = mysqli_query($conn, $query);
               <div class="card">
                 <div class="card-body">
                   <div class="row">
-                    <h4 class="header-title">Equipamentos<a href="createequip.php" style="margin-left: 25px; margin-right: 25px;"><button type="button" class="btn btn-primary btn-sm">Criar equipamento</button></a></h4>
-                    <form class="form-inline" method="POST" action="showequip.php">
+                    <h4 class="header-title">Pranchas<a href="createprancha.php" style="margin-left: 25px; margin-right: 25px;"><button type="button" class="btn btn-primary btn-sm">Criar prancha</button></a></h4>
+                    <form class="form-inline" method="POST" action="showprancha.php">
                       <input type="search" name="inputsearch" class="form-control" placeholder="Nome..." aria-label="Search" aria-describedby="search-addon" />
                       <button class="btn btn-primary" name="btnsearch" type="submit"><span class="mdi mdi-magnify"></span></button>
                     </form>
@@ -103,13 +103,13 @@ $resultdelete = mysqli_query($conn, $query);
                           $search = '';
                           if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $search = $_POST['inputsearch'];
-                            $sql = "SELECT * FROM equipamentos WHERE nome LIKE '%$search%';";
+                            $sql = "SELECT pranchas.id_prancha, pranchas.nome, pranchas.descricao, pranchas.data_pub, pranchas.id_parceria FROM pranchas LEFT JOIN parcerias ON pranchas.id_parceria = parcerias.id_parceria WHERE parcerias.nome LIKE '%$search%' OR pranchas.nome LIKE '%$search%';";
                             if (isset($_POST['btnsearch']) && $_POST['inputsearch'] != '') {
                               $sucesso_query = mysqli_query($conn, $sql);
                               if ($sucesso_query->num_rows != 0) {
                                 while ($row = mysqli_fetch_assoc($sucesso_query)) {
                                   foreach ($row as $res => $key) {
-                                    $id_equipa = $row['id_equipa'];
+                                    $id_prancha = $row['id_prancha'];
                                     $nome = $row['nome'];
                                     $desc = $row['descricao'];
                                     $data_pub = $row['data_pub'];
@@ -117,7 +117,7 @@ $resultdelete = mysqli_query($conn, $query);
                                   }
                                   echo "<tr>";
                                   echo "<td>" . $nome . "</td>";
-                                  echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#viewequip$id_equipa' class='text-primary' name='Menssage'>" . substr("$desc", 0, 75) . "</a> </td>";
+                                  echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#viewprancha$id_prancha' class='text-primary' name='Menssage'>" . substr("$desc", 0, 75) . "</a> </td>";
                                   echo "<td>" . $data_pub . "</td>";
                                   $sql = "SELECT * FROM parcerias where id_parceria = '$id_parceria';";
                                   $resultP = mysqli_query($conn, $sql);
@@ -127,8 +127,8 @@ $resultdelete = mysqli_query($conn, $query);
                                     }
                                   }
                                   echo "<td>" . $p . "</td>";
-                                  echo "<td><a href='editequip.php?id_equipa=$id_equipa&id_parceria=$id_parceria' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
-                                  echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#deleteequip$id_equipa' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
+                                  echo "<td><a href='editprancha.php?id_prancha=$id_prancha&id_parceria=$id_parceria' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
+                                  echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#deleteprancha$id_prancha' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
                                   echo "</tr>";
                                 }
                               }
@@ -136,7 +136,7 @@ $resultdelete = mysqli_query($conn, $query);
                               unset($_SESSION["message"]);
                               while ($row = mysqli_fetch_assoc($result)) {
                                 foreach ($row as $res => $key) {
-                                  $id_equipa = $row['id_equipa'];
+                                  $id_prancha = $row['id_prancha'];
                                   $nome = $row['nome'];
                                   $desc = $row['descricao'];
                                   $data_pub = $row['data_pub'];
@@ -144,7 +144,7 @@ $resultdelete = mysqli_query($conn, $query);
                                 }
                                 echo "<tr>";
                                 echo "<td>" . $nome . "</td>";
-                                echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#viewequip$id_equipa' class='text-primary' name='Menssage'>" . substr("$desc", 0, 75) . "</a> </td>";
+                                echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#viewprancha$id_prancha' class='text-primary' name='Menssage'>" . substr("$desc", 0, 75) . "</a> </td>";
                                 echo "<td>" . $data_pub . "</td>";
                                 $sql = "SELECT * FROM parcerias where id_parceria = '$id_parceria';";
                                 $resultP = mysqli_query($conn, $sql);
@@ -154,8 +154,8 @@ $resultdelete = mysqli_query($conn, $query);
                                   }
                                 }
                                 echo "<td>" . $p . "</td>";
-                                echo "<td><a href='editequip.php?id_equipa=$id_equipa&id_parceria=$id_parceria' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
-                                echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#deleteequip$id_equipa' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
+                                echo "<td><a href='editprancha.php?id_prancha=$id_prancha&id_parceria=$id_parceria' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
+                                echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#deleteprancha$id_prancha' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
                                 echo "</tr>";
                               }
                             }
@@ -163,7 +163,7 @@ $resultdelete = mysqli_query($conn, $query);
                             unset($_SESSION["message"]);
                             while ($row = mysqli_fetch_assoc($result)) {
                               foreach ($row as $res => $key) {
-                                $id_equipa = $row['id_equipa'];
+                                $id_prancha = $row['id_prancha'];
                                 $nome = $row['nome'];
                                 $desc = $row['descricao'];
                                 $data_pub = $row['data_pub'];
@@ -171,7 +171,7 @@ $resultdelete = mysqli_query($conn, $query);
                               }
                               echo "<tr>";
                               echo "<td>" . $nome . "</td>";
-                              echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#viewequip$id_equipa' class='text-primary' name='Menssage'>" . substr("$desc", 0, 75) . "</a> </td>";
+                              echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#viewprancha$id_prancha' class='text-primary' name='Menssage'>" . substr("$desc", 0, 75) . "</a> </td>";
                               echo "<td>" . $data_pub . "</td>";
                               $sql = "SELECT * FROM parcerias where id_parceria = '$id_parceria';";
                               $resultP = mysqli_query($conn, $sql);
@@ -181,8 +181,8 @@ $resultdelete = mysqli_query($conn, $query);
                                 }
                               }
                               echo "<td>" . $p . "</td>";
-                              echo "<td><a href='editequip.php?id_equipa=$id_equipa&id_parceria=$id_parceria' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
-                              echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#deleteequip$id_equipa' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
+                              echo "<td><a href='editprancha.php?id_prancha=$id_prancha&id_parceria=$id_parceria' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
+                              echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#deleteprancha$id_prancha' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
                               echo "</tr>";
                             }
                           }
@@ -198,21 +198,21 @@ $resultdelete = mysqli_query($conn, $query);
         </div>
         <!-- End Top -->
 
-        <!-- Modal de ver equipamento -->
-        <?php while ($row = mysqli_fetch_assoc($resultEquip)) {
+        <!-- Modal de ver prancha -->
+        <?php while ($row = mysqli_fetch_assoc($resultprancha)) {
           foreach ($row as $res => $key) {
-            $id_equipa = $row['id_equipa'];
+            $id_prancha = $row['id_prancha'];
             $nome = $row['nome'];
             $desc = $row['descricao'];
             $img = $row['img'];
             $data_pub = $row['data_pub'];
           }
         ?>
-          <div class="modal fade" id='viewequip<?php echo $id_equipa ?>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" id='viewprancha<?php echo $id_prancha ?>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Equipamento</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">prancha</h5>
                 </div>
 
                 <div class="modal-body">
@@ -264,22 +264,22 @@ $resultdelete = mysqli_query($conn, $query);
         <!-- Modal para eliminar -->
         <?php while ($row = mysqli_fetch_assoc($resultdelete)) {
           foreach ($row as $res => $key) {
-            $id_equipa = $row['id_equipa'];
+            $id_prancha = $row['id_prancha'];
             $nome = $row['nome'];
           }
         ?>
-          <div class="modal fade" id='deleteequip<?php echo $id_equipa ?>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" id='deleteprancha<?php echo $id_prancha ?>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Eliminar equipamento</h5><span class="span-equip"><?php echo $nome; ?></span>
+                  <h5 class="modal-title" id="exampleModalLabel">Eliminar prancha</h5><span class="span-prancha"><?php echo $nome; ?></span>
                 </div>
                 <div class="modal-body">
-                  <p>Deseja eliminar este equipamento?</p>
+                  <p>Deseja eliminar este prancha?</p>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
-                  <a href='deleteequip.php?id_equipa=<?php echo $id_equipa . '&nome=' . $nome ?>' type='button' class='btn btn-primary'>Sim</a>
+                  <a href='deleteprancha.php?id_prancha=<?php echo $id_prancha . '&nome=' . $nome ?>' type='button' class='btn btn-primary'>Sim</a>
                 </div>
               </div>
             </div>
@@ -291,7 +291,7 @@ $resultdelete = mysqli_query($conn, $query);
         <br>
         <footer class="footer mt-auto">
           <?php
-          require_once 'sheets/dashboardFooter.php';
+          require_once '../sheets/dashboardFooter.php';
           ?>
         </footer>
 

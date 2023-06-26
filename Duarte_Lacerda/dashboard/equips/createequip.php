@@ -2,11 +2,11 @@
 session_start();
 $uploaded_image = isset($_SESSION['uploaded_image']) ? $_SESSION['uploaded_image'] : "";
 if (!isset($_SESSION['authenticated'])) {
-  header('Location: ../../login.php');
+  header('Location: ../../../login.php');
   exit(0);
 }
 
-require_once '../../conexao.php';
+require_once '../../../conexao.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
   <title>Dashboard - Equipamento</title>
   <?php
-  require_once 'sheets/dashboardHead.php';
+  require_once '../sheets/dashboardHead.php';
   ?>
 </head>
 
@@ -68,13 +68,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <div id="sidebar" class="sidebar sidebar-with-footer">
         <!-- Aplication Brand -->
         <div class="app-brand">
-          <a href="../../index.php">
-            <img src="assets/images/favicon.png" style="height: 65px;" alt="Mono">
+          <a href="../../../index.php">
+            <img src="../assets/images/favicon.png" style="height: 65px;" alt="Mono">
             <span class="brand-name text-light">SURFNAUTICA</span>
           </a>
         </div>
         <?php
-        require_once 'sheets/dashboardmenu.php';
+        require_once '../sheets/dashboardmenu.php';
         ?>
       </div>
     </aside>
@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
           <div class="navbar-right ">
             <?php
-            require_once 'sheets/dashboardNavbar.php';
+            require_once '../sheets/dashboardNavbar.php';
             ?>
           </div>
         </nav>
@@ -180,22 +180,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <br>
         <footer class="footer mt-auto">
           <?php
-          require_once 'sheets/dashboardFooter.php';
+          require_once '../sheets/dashboardFooter.php';
           ?>
         </footer>
 
       </div>
-      <script src="assets/plugins/jquery/jquery.min.js"></script>
-      <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-      <script src="assets/plugins/simplebar/simplebar.min.js"></script>
+      <script src="../assets/plugins/jquery/jquery.min.js"></script>
+      <script src="../assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="../assets/plugins/simplebar/simplebar.min.js"></script>
       <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
-      <script src="assets/plugins/apexcharts/apexcharts.js"></script>
-      <script src="assets/plugins/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
-      <script src="assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js"></script>
-      <script src="assets/plugins/jvectormap/jquery-jvectormap-world-mill.js"></script>
-      <script src="assets/plugins/jvectormap/jquery-jvectormap-us-aea.js"></script>
-      <script src="assets/plugins/daterangepicker/moment.min.js"></script>
-      <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
+      <script src="../assets/plugins/apexcharts/apexcharts.js"></script>
+      <script src="../assets/plugins/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
+      <script src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js"></script>
+      <script src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill.js"></script>
+      <script src="../assets/plugins/jvectormap/jquery-jvectormap-us-aea.js"></script>
+      <script src="../assets/plugins/daterangepicker/moment.min.js"></script>
+      <script src="../assets/plugins/daterangepicker/daterangepicker.js"></script>
       <script>
         jQuery(document).ready(function() {
           jQuery('input[name="dateRange"]').daterangepicker({
@@ -218,11 +218,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         });
       </script>
       <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-      <script src="assets/plugins/toaster/toastr.min.js"></script>
-      <script src="assets/js/mono.js"></script>
-      <script src="assets/js/chart.js"></script>
-      <script src="assets/js/map.js"></script>
-      <script src="assets/js/custom.js"></script>
+      <script src="../assets/plugins/toaster/toastr.min.js"></script>
+      <script src="../assets/js/mono.js"></script>
+      <script src="../assets/js/chart.js"></script>
+      <script src="../assets/js/map.js"></script>
+      <script src="../assets/js/custom.js"></script>
 
 </body>
 

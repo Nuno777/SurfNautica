@@ -22,6 +22,9 @@ if (isset($_POST['login'])) {
     <script src="assets/js/jquery-3.6.3.min.js"></script>
     <script src="assets/js/all.min.js"></script>
     <script defer src="assets/js/app.js"></script>
+
+    <link href="assets/img/favicon.ico" rel="icon">
+    <link href="assets/img/favicon.png" rel="apple-touch-icon">
 </head>
 
 <body>

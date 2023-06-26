@@ -13,6 +13,7 @@ require('../conexao.php');
     <link rel="stylesheet" href="css/navbar.css">
     <!-- Favicons -->
     <link href="img/favicon.ico" rel="icon">
+    <link href="assets/img/favicon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -45,13 +46,22 @@ require('../conexao.php');
             <h2 class="col-6 tm-text-primary">
                 Equipamentos
             </h2>
-            <div class="col-6 d-flex justify-content-end align-items-center">
+            <!-- <div class="col-6 d-flex justify-content-end align-items-center">
                 <form action="" class="tm-text-primary">
                     Página <input type="text" value="1" size="1" class="tm-input-paging tm-text-primary"> de 200
                 </form>
-            </div>
+            </div> -->
         </div>
         <div class="row tm-mb-90 tm-gallery">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="dashboard/upload/dasd76a8dasdad7d.jpg" alt="Image" style="width: 500px; height: 275px" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>Tipos de Pranchas</h2>
+                        <a href="pranchas.php">Ver Mais</a>
+                    </figcaption>
+                </figure>
+            </div>
             <?php
             $sql = "select * from equipamentos;";
             $result = mysqli_query($conn, $sql);
@@ -66,7 +76,7 @@ require('../conexao.php');
                     }
                     echo ('<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                             <figure class="effect-ming tm-video-item">
-                                <img src="dashboard/upload/' . $img . '" alt="Image" class="img-fluid">
+                                <img src="dashboard/upload/' . $img . '" alt="Image" style="width: 500px; height: 275px" class="img-fluid">
                                 <figcaption class="d-flex align-items-center justify-content-center">
                                     <h2>' . $nome . '</h2>
                                     <a href="equipamentos_detail.php?id_equipa=' . $id_equipa . '">Ver Mais</a>
@@ -84,7 +94,7 @@ require('../conexao.php');
             mysqli_close($conn);
             ?>
         </div>
-        <div class="row tm-mb-90">
+        <!-- <div class="row tm-mb-90">
             <div class="col-12 d-flex justify-content-between align-items-center tm-paging-col">
                 <a href="javascript:void(0);" class="btn btn-primary tm-btn-prev mb-2 disabled">Anterior</a>
                 <div class="tm-paging d-flex">
@@ -95,7 +105,7 @@ require('../conexao.php');
                 </div>
                 <a href="javascript:void(0);" class="btn btn-primary tm-btn-next">Seguinte</a>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <?php

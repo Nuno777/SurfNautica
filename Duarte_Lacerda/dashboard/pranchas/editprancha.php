@@ -2,14 +2,14 @@
 session_start();
 $uploaded_image = isset($_SESSION['uploaded_image']) ? $_SESSION['uploaded_image'] : "";
 if (!isset($_SESSION['authenticated'])) {
-  header('Location: ../../login.php');
+  header('Location: ../../../login.php');
   exit(0);
 }
 
-require_once '../../conexao.php';
+require_once '../../../conexao.php';
 
 $id_parceria = $_GET['id_parceria'];
-$id_equipa = $_GET['id_equipa'];
+$id_prancha = $_GET['id_prancha'];
 
 $sql = "SELECT * FROM parcerias WHERE id_parceria = " . $id_parceria . ";";
 $resultParceria = mysqli_query($conn, $sql);
@@ -19,7 +19,7 @@ while ($row = mysqli_fetch_assoc($resultParceria)) {
   }
 }
 
-$sql = "SELECT * FROM equipamentos WHERE id_equipa = " . $id_equipa . ";";
+$sql = "SELECT * FROM pranchas WHERE id_prancha = " . $id_prancha . ";";
 $result = mysqli_query($conn, $sql);
 while ($row = mysqli_fetch_assoc($result)) {
   foreach ($row as $res => $key) {
@@ -39,17 +39,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $tmp_name = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['tmp_name'] : "";
   $msg_erro = "";
 
-  $query = "UPDATE `equipamentos` SET `nome` = '$nome1', `descricao` = '$desc1',  `id_parceria` = $partner WHERE `id_equipa` = $id_equipa;";
+  $query = "UPDATE `pranchas` SET `nome` = '$nome1', `descricao` = '$desc1',  `id_parceria` = $partner WHERE `id_prancha` = $id_prancha;";
 
   if ($img1 != "" && getimagesize($tmp_name)) {
     // tratar upload da foto
     $diretoria_upload = "upload/";
     $extensao = pathinfo($img1, PATHINFO_EXTENSION);
     $imageDatabasePath = $diretoria_upload . sha1(microtime()) . "." . $extensao;
-    $newEquip = $imageDatabasePath;
+    $newBoard = $imageDatabasePath;
 
-    if (move_uploaded_file($tmp_name, $newEquip)) {
-      $query = "UPDATE `equipamentos` SET `nome` ='$nome1', `descricao` = '$desc1', `img` = '$newEquip', id_parceria` = '$partner' WHERE id_equipa = '$id_equipa';";
+    if (move_uploaded_file($tmp_name, $newBoard)) {
+      $query = "UPDATE `pranchas` SET `nome` ='$nome1', `descricao` = '$desc1', `img` = '$newBoard', id_parceria` = '$partner' WHERE id_prancha = '$id_prancha';";
     }
   }
 
@@ -57,16 +57,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($sucesso_query) {
     if ($conn->affected_rows > 0) {
       $_SESSION["message"] = array(
-        "content" => "O equipamento <b>" .  $nome . "</b> foi editado com sucesso!",
+        "content" => "A prancha <b>" .  $nome . "</b> foi editada com sucesso!",
         "type" => "success",
       );
     } else {
       $_SESSION["message"] = array(
-        "content" => "Ocorreu um erro ao editar o equipamento <b>" . $nome . "</b>!",
+        "content" => "Ocorreu um erro ao editar a prancha <b>" . $nome . "</b>!",
         "type" => "danger",
       );
     }
-    header("Location: showequip.php");
+    header("Location: showprancha.php");
     exit(0);
   } else {
     $code = $conn->error; // error code of the most recent operation
@@ -79,9 +79,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en" dir="ltr">
 
 <head>
-  <title>Dashboard - Equipamento</title>
+  <title>Dashboard - Pranchas</title>
   <?php
-  require_once 'sheets/dashboardHead.php';
+  require_once '../sheets/dashboardHead.php';
   ?>
 </head>
 
@@ -91,13 +91,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <div id="sidebar" class="sidebar sidebar-with-footer">
         <!-- Aplication Brand -->
         <div class="app-brand">
-          <a href="../../index.php">
-            <img src="assets/images/favicon.png" style="height: 65px;" alt="Mono">
+          <a href="../../../index.php">
+            <img src="../assets/images/favicon.png" style="height: 65px;" alt="Mono">
             <span class="brand-name text-light">SURFNAUTICA</span>
           </a>
         </div>
         <?php
-        require_once 'sheets/dashboardmenu.php';
+        require_once '../sheets/dashboardmenu_prachas.php';
         ?>
       </div>
     </aside>
@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
           <div class="navbar-right ">
             <?php
-            require_once 'sheets/dashboardNavbar.php';
+            require_once '../sheets/dashboardNavbar.php';
             ?>
           </div>
         </nav>
@@ -139,9 +139,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
               <div class="card">
                 <div class="card-body">
-                  <h4 class="header-title">Editar Equipamento</h4>
+                  <h4 class="header-title">Editar Prancha</h4>
                   <br>
-                  <form action="editequip.php?id_equipa=<?php echo $id_equipa; ?>&id_parceria=<?php echo $id_parceria; ?>" method="POST">
+                  <form action="editprancha.php?id_prancha=<?php echo $id_prancha; ?>&id_parceria=<?php echo $id_parceria; ?>" method="POST">
                     <div class="form-group">
                       <label for="inputname">Nome</label>
                       <input type="text" class="form-control" name="inputname" id="inputname" value="<?php echo ($nome); ?>" required>
@@ -197,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="form-row justify-content-end">
 
                       <button type="submit" class="btn btn-primary" id="submitbtn">Confirmar</button>
-                      <a href="showequip.php"><input type="button" value="Voltar" class="btn btn-danger" style="margin-left: 10px;"></a>
+                      <a href="showprancha.php"><input type="button" value="Voltar" class="btn btn-danger" style="margin-left: 10px;"></a>
                     </div>
                   </form>
                 </div>
@@ -209,7 +209,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <br>
         <footer class="footer mt-auto">
           <?php
-          require_once 'sheets/dashboardFooter.php';
+          require_once '../sheets/dashboardFooter.php';
           ?>
         </footer>
 

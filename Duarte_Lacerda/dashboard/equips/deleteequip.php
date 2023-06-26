@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../conexao.php';
+require_once '../../../conexao.php';
 $id_equipa = $_GET["id_equipa"];
 $nome = $_GET["nome"];
 
