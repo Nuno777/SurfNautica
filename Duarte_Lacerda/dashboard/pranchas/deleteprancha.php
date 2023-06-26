@@ -4,7 +4,7 @@ require_once '../../../conexao.php';
 $id_prancha = $_GET["id_prancha"];
 $nome = $_GET["nome"];
 
-$query = "DELETE FROM prachas WHERE id_prancha = '$id_prancha'";
+$query = "DELETE FROM pranchas WHERE id_prancha = '$id_prancha'";
 $result = mysqli_query($conn, $query);
 
 // Definir Alerta - Operações (EDITAR) 
