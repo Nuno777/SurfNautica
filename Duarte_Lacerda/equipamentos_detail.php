@@ -81,6 +81,18 @@ require('../conexao.php');
             </h2>
         </div>
         <div class="row mb-3 tm-gallery">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="dashboard/upload/dasd76a8dasdad7d.jpg" alt="Image" style="width: 500px; height: 275px" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>Tipos de Pranchas</h2>
+                        <a href="pranchas.php">Ver Mais</a>
+                    </figcaption>
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light"></span>
+                </div>
+            </div>
             <?php
             $sql = "select * from equipamentos order by id_equipa;";
             $result = mysqli_query($conn, $sql);
