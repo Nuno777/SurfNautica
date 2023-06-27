@@ -11,7 +11,7 @@ if (!isset($_SESSION['authenticated'])) {
 <html lang="en" dir="ltr">
 
 <head>
-  <title>Painel do Cliente</title>
+  <title>Painel do Cliente | Contactos</title>
   <?php
   require_once 'sheets/dashboardHead.php';
   ?>
@@ -40,7 +40,7 @@ if (!isset($_SESSION['authenticated'])) {
 
             <?php
             } else { ?>
-              <li class="">
+              <li>
                 <a class="sidenav-item-link" href="dashboard.php">
                   <i class="mdi mdi-monitor-dashboard"></i>
                   <span class="nav-text">Dashboard</span>
@@ -50,28 +50,28 @@ if (!isset($_SESSION['authenticated'])) {
             }
             ?>
 
-            <li class="active">
+            <li>
               <a class="sidenav-item-link" href="user_profile.php">
                 <i class="mdi mdi-monitor-dashboard"></i>
-                <span class="nav-text">Painel</span>
+                <span class="nav-text">Painel do Cliente</span>
               </a>
             </li>
 
-            <li class="">
+            <li>
               <a class="sidenav-item-link" href="">
                 <i class="mdi mdi-chart-line"></i>
                 <span class="nav-text">Aulas</span>
               </a>
             </li>
 
-            <li class>
-              <a class="sidenav-item-link" href="user_diasabertos.php">
+            <li class="active">
+              <a class="sidenav-item-link" href="">
                 <i class="mdi mdi-alpha-d-box-outline"></i>
                 <span class="nav-text">Dias Abertos</span>
               </a>
             </li>
 
-            <li class="">
+            <li>
               <a class="sidenav-item-link" href="user_contacto.php">
                 <i class="mdi mdi-phone"></i>
                 <span class="nav-text">Contactos</span>
@@ -114,56 +114,64 @@ if (!isset($_SESSION['authenticated'])) {
           }
           ?>
           <!-- Top -->
+          <div class="card">
+            <div class="card-body">
+              <h4 class="header-title">Dias Abertos</h4>
+              <br>
+              <div class="single-table">
+                <div class="table-responsive table-hover">
 
-          <!-- End Top -->
-          <!-- Table -->
+                
 
+                </div>
+              </div>
+            </div>
+          </div>
 
         </div>
-
-        <!-- End Table -->
-        <br>
-        <footer class="footer mt-auto">
-          <?php
-          require_once 'sheets/dashboardFooter.php';
-          ?>
-        </footer>
-
       </div>
-      <script src="assets/plugins/jquery/jquery.min.js"></script>
-      <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-      <script src="assets/plugins/simplebar/simplebar.min.js"></script>
-      <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
-      <script src="assets/plugins/apexcharts/apexcharts.js"></script>
-      <script src="assets/plugins/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
-      <script src="assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js"></script>
-      <script src="assets/plugins/jvectormap/jquery-jvectormap-world-mill.js"></script>
-      <script src="assets/plugins/jvectormap/jquery-jvectormap-us-aea.js"></script>
-      <script src="assets/plugins/daterangepicker/moment.min.js"></script>
-      <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
-      <script>
-        jQuery(document).ready(function() {
-          jQuery('input[name="dateRange"]').daterangepicker({
-            autoUpdateInput: false,
-            singleDatePicker: true,
-            locale: {
-              cancelLabel: 'Clear'
-            }
-          });
-          jQuery('input[name="dateRange"]').on('apply.daterangepicker', function(ev, picker) {
-            jQuery(this).val(picker.startDate.format('MM/DD/YYYY'));
-          });
-          jQuery('input[name="dateRange"]').on('cancel.daterangepicker', function(ev, picker) {
-            jQuery(this).val('');
-          });
+      <br>
+      <footer class="footer mt-auto">
+        <?php
+        require_once 'sheets/dashboardFooter.php';
+        ?>
+      </footer>
+
+    </div>
+    <script src="assets/plugins/jquery/jquery.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/plugins/simplebar/simplebar.min.js"></script>
+    <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
+    <script src="assets/plugins/apexcharts/apexcharts.js"></script>
+    <script src="assets/plugins/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src="assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js"></script>
+    <script src="assets/plugins/jvectormap/jquery-jvectormap-world-mill.js"></script>
+    <script src="assets/plugins/jvectormap/jquery-jvectormap-us-aea.js"></script>
+    <script src="assets/plugins/daterangepicker/moment.min.js"></script>
+    <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
+    <script>
+      jQuery(document).ready(function() {
+        jQuery('input[name="dateRange"]').daterangepicker({
+          autoUpdateInput: false,
+          singleDatePicker: true,
+          locale: {
+            cancelLabel: 'Clear'
+          }
         });
-      </script>
-      <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-      <script src="assets/plugins/toaster/toastr.min.js"></script>
-      <script src="assets/js/mono.js"></script>
-      <script src="assets/js/chart.js"></script>
-      <script src="assets/js/map.js"></script>
-      <script src="assets/js/custom.js"></script>
+        jQuery('input[name="dateRange"]').on('apply.daterangepicker', function(ev, picker) {
+          jQuery(this).val(picker.startDate.format('MM/DD/YYYY'));
+        });
+        jQuery('input[name="dateRange"]').on('cancel.daterangepicker', function(ev, picker) {
+          jQuery(this).val('');
+        });
+      });
+    </script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="assets/plugins/toaster/toastr.min.js"></script>
+    <script src="assets/js/mono.js"></script>
+    <script src="assets/js/chart.js"></script>
+    <script src="assets/js/map.js"></script>
+    <script src="assets/js/custom.js"></script>
 
 </body>
 

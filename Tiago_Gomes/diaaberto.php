@@ -37,7 +37,10 @@ require('conexao.php')
 </header>
 
 <?php
-$sql = "SELECT nome, titulo, data1, horas FROM diaaberto, professor WHERE diaaberto.id_prof = professor.id_prof ORDER BY data1 ASC;";
+$sql = "SELECT professor.nome, diaaberto.titulo, diaaberto.data1, diaaberto.horas 
+FROM diaaberto JOIN professor ON diaaberto.id_prof = professor.id_prof 
+WHERE professor.especialidade LIKE 'Surfista Instrutor' OR professor.especialidade LIKE 'Surfista Instrutora' 
+ORDER BY diaaberto.data1 ASC;";
 $result = mysqli_query($conn, $sql);
 
 ?>

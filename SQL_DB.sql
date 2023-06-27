@@ -51,7 +51,7 @@ DEFAULT CHARACTER SET = latin1;
 CREATE TABLE IF NOT EXISTS `surfnautica`.`diaaberto` (
   `id_diaAberto` INT(11) NOT NULL AUTO_INCREMENT,
   `titulo` VARCHAR(50) NOT NULL,
-  `data1` timestamp NOT NULL,
+  `data1` DATE NOT NULL,
   `horas` VARCHAR(50) NOT NULL,
   `foto` VARCHAR(250),
   `id_prof` INT(11) NOT NULL,
@@ -154,14 +154,35 @@ INSERT INTO users (email, nome, pass, permission) VALUES ('user1@example.com', '
 INSERT INTO users (email, nome, pass, permission) VALUES ('user2@example.com', 'Maria Santos', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
 INSERT INTO users (email, nome, pass, permission) VALUES ('user3@example.com', 'Pedro Costa', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
 INSERT INTO users (email, nome, pass, permission) VALUES ('admin@gmail.com', 'Admin', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 1);
+INSERT INTO users (email, nome, pass, permission) VALUES ('diogocosta@gmail.com', 'Diogo Costa', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
+INSERT INTO users (email, nome, pass, permission) VALUES ('luisperdiz@gmail.com', 'Luis Perdiz', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
+INSERT INTO users (email, nome, pass, permission) VALUES ('diogofrancisco@gmail.com', 'Diogo Francisco', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
+INSERT INTO users (email, nome, pass, permission) VALUES ('joaodionisio@gmail.com', 'João Dionísio', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
+INSERT INTO users (email, nome, pass, permission) VALUES ('joaopedro@gmail.com', 'João Pedro', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
+INSERT INTO users (email, nome, pass, permission) VALUES ('angelomiguel@gmail.com', 'Ângelo Miguel', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
+INSERT INTO users (email, nome, pass, permission) VALUES ('miguelcosta@gmail.com', 'Miguel Costa', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
 
 
 INSERT INTO professor (nome, email, foto, especialidade, id) 
 VALUES ('João Silva', 'joao@example.com', 'foto1.jpg', 'Surfista Profissional', 1);
 INSERT INTO professor (nome, email, foto, especialidade, id) 
-VALUES ('Maria Santos', 'maria@example.com', 'foto2.jpg', 'Surfista Instrutora', 2);
+VALUES ('Maria Santos', 'maria@example.com', 'foto2.jpg', 'Surfista Instrutor', 2);
 INSERT INTO professor (nome, email, foto, especialidade, id) 
 VALUES ('Pedro Costa', 'pedro@example.com', 'foto3.jpg', 'Surfista Competitivo', 3);
+INSERT INTO professor (nome, email, foto, especialidade, id) 
+VALUES ('Diogo Costa', 'diogocosta@gmail.com', 'foto4.jpg', 'Surfista Instrutor', 5);
+INSERT INTO professor (nome, email, foto, especialidade, id) 
+VALUES ('Luis Perdiz', 'luisperdiz@gmail.com', 'foto5.jpg', 'Surfista Competitivo', 6);
+INSERT INTO professor (nome, email, foto, especialidade, id) 
+VALUES ('Diogo Francisco', 'diogofrancisco@gmail.com', 'foto6.jpg', 'Surfista Profissional', 7);
+INSERT INTO professor (nome, email, foto, especialidade, id) 
+VALUES ('João Dionísio', 'joaodionisio@gmail.com', 'foto7.jpg', 'Surfista Instrutor', 8);
+INSERT INTO professor (nome, email, foto, especialidade, id) 
+VALUES ('João Pedro', 'joaopedro@gmail.com', 'foto8.jpg', 'Surfista Instrutor', 9);
+INSERT INTO professor (nome, email, foto, especialidade, id) 
+VALUES ('Ângelo Miguel', 'angelomiguel@gmail.com', 'foto9.jpg', 'Surfista Competitivo', 10);
+INSERT INTO professor (nome, email, foto, especialidade, id) 
+VALUES ('Miguel Costa', 'miguelcosta@gmail.com', 'foto10.jpg', 'Surfista Instrutor', 11);
 
 insert into parcerias (nome, descricao, img) values ('RipCurl', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'www.jpg');
 
