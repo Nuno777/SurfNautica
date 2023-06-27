@@ -23,14 +23,14 @@
         </li>
 
         <li>
-            <a class="sidenav-item-link" href="../../Duarte_Lacerda/dashboard/showequip.php">
+            <a class="sidenav-item-link" href="../../Duarte_Lacerda/dashboard/equips/showequip.php">
                 <i class="mdi mdi-tshirt-crew"></i>
                 <span class="nav-text">Equipamentos</span>
             </a>
         </li>
 
         <li>
-            <a class="sidenav-item-link" href="contacts.html">
+            <a class="sidenav-item-link" href="../../Duarte_Lacerda/dashboard/pranchas/showprancha.php">
                 <i class="mdi mdi-phone"></i>
                 <span class="nav-text">Pranchas</span>
             </a>

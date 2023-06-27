@@ -103,10 +103,10 @@ $resultdelete = mysqli_query($conn, $query);
                             }
                             echo "<tr>";
                             echo "<td>" . $nome . "</td>";
-                            echo "<td>" . substr("$desc", 0, 75) . " <a style='cursor: pointer;' data-toggle='modal' data-target='#viewpartner$id_parceria' class='text-primary' name='Menssage'>(...)</a> </td>";
+                            echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#viewpartner$id_parceria' class='text-primary' name='Menssage'>".substr("$desc",0,75)."</a> </td>";
                             echo "<td>" . $img . "</td>";
                             echo "<td><a href='editpartners.php?id_parceria=$id_parceria' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
-                            echo "<td><a href='deletepartners.php?id_parceria=$id_parceria&nome=$nome' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
+                            echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#deletepartners$id_parceria' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
                             echo "</tr>";
                           }
 
@@ -117,7 +117,8 @@ $resultdelete = mysqli_query($conn, $query);
                   </div>
 
                   <br>
-                  <h6><span style="color:red">*</span>Não eliminar parceria caso esta esteja a ser utilizada na tabela equips/pranchas.</h6>
+                  <h6><span style="color:red">*</span>Caso deseje ver a Descrição clique no texto.</h6>
+                  <h6><span style="color:red">*</span>Não eliminar parceria caso esta esteja ligada a um ou mais equipamentos/pranchas.</h6>
                 </div>
               </div>
             </div>
@@ -185,18 +186,18 @@ $resultdelete = mysqli_query($conn, $query);
             $nome = $row['nome'];
           }
         ?>
-          <div class="modal fade" id='deletepartner<?php echo $id_parceria ?>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" id='deletepartners<?php echo $id_parceria ?>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Eliminar parcerias</h5><span class="span-partner"><?php echo $nome; ?></span>
+                  <h5 class="modal-title" id="exampleModalLabel">Eliminar parceria</h5><span class="span-equip"><?php echo $nome; ?></span>
                 </div>
                 <div class="modal-body">
-                  <p>Deseja eliminar este parcerias?</p>
+                  <p>Deseja eliminar este parceria?</p>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
-                  <a href='deletepartners.php?id_cont=<?php echo $id_parceria . '&nome=' . $nome ?>' type='button' class='btn btn-primary'>Sim</a>
+                  <a href='deletepartners.php?id_parceria=<?php echo $id_parceria . '&nome=' . $nome ?>' type='button' class='btn btn-primary'>Sim</a>
                 </div>
               </div>
             </div>

@@ -10,9 +10,13 @@ require_once '../../conexao.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-  $name = $_POST['inputname'];
-  $desc = $_POST['inputdesc'];
 
+  $partner = array_key_exists('inputpartner', $_POST) ? $_POST['inputpartner'] : "";
+  $name = array_key_exists('inputname', $_POST) ? $_POST['inputname'] : "";
+  $img = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['name'] : "";
+  $desc = array_key_exists('inputdesc', $_POST) ? $_POST['inputdesc'] : "";
+  $tmp_name = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['tmp_name'] : "";
+  $msg_erro = "";
   //upload IMAGE
   $img_name = $_FILES['inputImg']['name'];
   $tmp_name = $_FILES['inputImg']['tmp_name'];
@@ -114,11 +118,17 @@ if ($sucesso_query) {
                     <div class="form-group">
                       <label for="inputname">Nome</label>
                       <input type="text" class="form-control" name="inputname" id="inputname" required>
+                      <small id="name">
+                        Por favor preencha o campo
+                      </small>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="inputdesc">Descrição</label>
                         <textarea type="text" class="form-control" name="inputdesc" id="inputdesc" rows="12" style="resize: vertical;" required></textarea>
+                        <small id="desc">
+                          Por favor preencha o campo
+                        </small>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="inputImg">Imagem</label>
@@ -126,13 +136,16 @@ if ($sucesso_query) {
                           <input type="file" name="inputImg" class="custom-file-input" id="inputImg" accept="image/png, image/jpeg" required>
                           <label class="custom-file-label" for="inputImg"><?php echo "Selecione a imagem..."; ?></label>
                         </div>
+                        <small id="img">
+                          Por favor escolha uma imagem
+                        </small>
                       </div>
                     </div>
                     <div class="form-row  justify-content-end">
-                      <button type="submit" class="btn btn-primary">Criar</button>
-                    <a href="showpartners.php"><input type="button" value="Voltar" class="btn btn-primary " style="margin-left: 10px;"></a>
+                      <button type="submit" id="submitbtn" class="btn btn-primary">Criar</button>
+                      <a href="showpartners.php"><input type="button" value="Voltar" class="btn btn-primary " style="margin-left: 10px;"></a>
                     </div>
-                    
+
                   </form>
                 </div>
               </div>
@@ -186,7 +199,7 @@ if ($sucesso_query) {
       <script src="assets/js/chart.js"></script>
       <script src="assets/js/map.js"></script>
       <script src="assets/js/custom.js"></script>
-      <script src="assets/js/validation.js"></script>
+      <script src="assets/js/dash_script.js"></script>
 
 
     </div>
