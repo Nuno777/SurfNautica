@@ -36,7 +36,7 @@ if (isset($_SESSION['authenticated'])) {
                 </ul>
             </li>
             <li class="dropdown">
-                <a href="Tiago_Gomes/escolasurf.html" class="nav-link scrollto">
+                <a href="Tiago_Gomes/escolasurf.php" class="nav-link scrollto">
                     <span>Escola de Surf</span>
                     <i class="bi bi-chevron-down"></i>
                 </a>
