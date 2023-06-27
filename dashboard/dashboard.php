@@ -81,12 +81,12 @@ if ($levelperm['permission'] == 0) {
                   </div>
                 </div>
                 <?php
-                  $query = "SELECT id FROM users WHERE permission='1' ORDER BY id";
-                  $totalprof = mysqli_query($conn, $query);
-                  $prof = mysqli_num_rows($totalprof);
-                  ?>
+                $query = "SELECT id FROM users WHERE permission='1' ORDER BY id";
+                $totalprof = mysqli_query($conn, $query);
+                $prof = mysqli_num_rows($totalprof);
+                ?>
                 <div class="card-body">
-                  <p>Total de Professores: <?php echo $prof?> </p>
+                  <p>Total de Professores: <?php echo $prof ?> </p>
                   <div class="chart-wrapper">
                   </div>
                 </div>
@@ -107,7 +107,7 @@ if ($levelperm['permission'] == 0) {
                   $totalaulas = mysqli_query($conn, $query);
                   $aulas = mysqli_num_rows($totalaulas);
                   ?>
-                  <p>Total de Aulas: <?php echo $aulas?></p>
+                  <p>Total de Aulas: <?php echo $aulas ?></p>
                   <div class="chart-wrapper">
                   </div>
                 </div>
@@ -123,12 +123,12 @@ if ($levelperm['permission'] == 0) {
                   </div>
                 </div>
                 <div class="card-body">
-                <?php
+                  <?php
                   $query = "SELECT id_parceria FROM parcerias ORDER BY id_parceria";
-                  $totalparc= mysqli_query($conn, $query);
+                  $totalparc = mysqli_query($conn, $query);
                   $parcerias = mysqli_num_rows($totalparc);
                   ?>
-                  <p>Total de Parcerias: <?php echo $parcerias?></p>
+                  <p>Total de Parcerias: <?php echo $parcerias ?></p>
                   <div class="chart-wrapper">
                   </div>
                 </div>
@@ -149,7 +149,7 @@ if ($levelperm['permission'] == 0) {
                   $totalnot = mysqli_query($conn, $query);
                   $noticia = mysqli_num_rows($totalnot);
                   ?>
-                  <p>Total de Notícias: <?php echo $noticia?></p>
+                  <p>Total de Notícias: <?php echo $noticia ?></p>
                   <div class="chart-wrapper">
                   </div>
                 </div>
@@ -183,7 +183,7 @@ if ($levelperm['permission'] == 0) {
                     </thead>
                     <tbody>
                       <?php
-                      $query = "SELECT id,nome,email,permission, CASE WHEN permission = 2 THEN 'Administrador' WHEN permission = 1 THEN 'Professor'  WHEN permission = 0 THEN 'Cliente' ELSE permission END AS permission FROM users WHERE permission='0' OR permission='1' ORDER BY permission <1";
+                      $query = "SELECT id,nome,email,permission, CASE WHEN permission = 1 THEN 'Administrador' WHEN permission = 2 THEN 'Professor'  WHEN permission = 0 THEN 'Cliente' ELSE permission END AS permission FROM users WHERE permission='0' OR permission='1' ORDER BY permission <1";
                       $result = mysqli_query($conn, $query);
                       $resultdelete = mysqli_query($conn, $query);
                       while ($row = $result->fetch_object()) {
