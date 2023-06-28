@@ -77,7 +77,7 @@ if ($levelperm['permission'] == 0) {
                 <div class="card-header">
                   <h2>Criar Professor</h2>
                   <div class="sub-title">
-                    <a href=""><span class="mr-1">Criar novo Professor</span></a>
+                    <a href="../Duarte_Lacerda/dashboard/prof/showprof.php"><span class="mr-1">Criar novo Professor</span></a>
                   </div>
                 </div>
                 <?php

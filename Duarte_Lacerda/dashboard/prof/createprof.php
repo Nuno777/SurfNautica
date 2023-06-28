@@ -8,48 +8,25 @@ if (!isset($_SESSION['authenticated'])) {
 
 require_once '../../../conexao.php';
 
-$id_parceria = $_GET['id_parceria'];
-$id_prancha = $_GET['id_prancha'];
-
-$sql = "SELECT * FROM parcerias WHERE id_parceria = " . $id_parceria . ";";
-$resultParceria = mysqli_query($conn, $sql);
-while ($row = mysqli_fetch_assoc($resultParceria)) {
-  foreach ($row as $res => $key) {
-    $p = $row['nome'];
-  }
-}
-
-$sql = "SELECT * FROM pranchas WHERE id_prancha = " . $id_prancha . ";";
-$result = mysqli_query($conn, $sql);
-while ($row = mysqli_fetch_assoc($result)) {
-  foreach ($row as $res => $key) {
-    $nome = $row['nome'];
-    $desc = $row['descricao'];
-    $img = $row['img'];
-    $data_pub = $row['data_pub'];
-  }
-}
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   $partner = array_key_exists('inputpartner', $_POST) ? $_POST['inputpartner'] : "";
-  $nome1 = array_key_exists('inputname', $_POST) ? $_POST['inputname'] : "";
-  $img1 = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['name'] : "";
-  $desc1 = array_key_exists('inputdesc', $_POST) ? $_POST['inputdesc'] : "";
+  $nome = array_key_exists('inputname', $_POST) ? $_POST['inputname'] : "";
+  $img = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['name'] : "";
+  $desc = array_key_exists('inputemail', $_POST) ? $_POST['inputemail'] : "";
   $tmp_name = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['tmp_name'] : "";
   $msg_erro = "";
 
-  $query = "UPDATE `pranchas` SET `nome` = '$nome1', `descricao` = '$desc1',  `id_parceria` = $partner WHERE `id_prancha` = $id_prancha;";
+  $query = "INSERT INTO `pranchas` (`nome`, `descricao`, `id_parceria`) VALUES ('$nome', '$desc', '$partner');";
 
-  if ($img1 != "" && getimagesize($tmp_name)) {
+  if ($img != "" && getimagesize($tmp_name)) {
     // tratar upload da foto
-    $diretoria_upload = "upload/";
-    $extensao = pathinfo($img1, PATHINFO_EXTENSION);
-    $imageDatabasePath = $diretoria_upload . sha1(microtime()) . "." . $extensao;
-    $newBoard = $imageDatabasePath;
+    $extensao = pathinfo($img, PATHINFO_EXTENSION);
+    $imageDatabasePath = sha1(microtime()) . "." . $extensao;
+    $newPrancha = $imageDatabasePath;
 
-    if (move_uploaded_file($tmp_name, $newBoard)) {
-      $query = "UPDATE `pranchas` SET `nome` ='$nome1', `descricao` = '$desc1', `img` = '$newBoard', id_parceria` = '$partner' WHERE id_prancha = '$id_prancha';";
+    if (move_uploaded_file($tmp_name, $newPrancha)) {
+      $query = "INSERT INTO `pranchas` (`nome`, `descricao`, `img`, `id_parceria`) VALUES ('$nome', '$desc', '$newPrancha', '$partner')";
     }
   }
 
@@ -57,16 +34,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($sucesso_query) {
     if ($conn->affected_rows > 0) {
       $_SESSION["message"] = array(
-        "content" => "A prancha <b>" .  $nome . "</b> foi editada com sucesso!",
+        "content" => "A prancha <b>" .  $nome . "</b> foi criada com sucesso!",
         "type" => "success",
       );
     } else {
       $_SESSION["message"] = array(
-        "content" => "Ocorreu um erro ao editar a prancha <b>" . $nome . "</b>!",
+        "content" => "Ocorreu um erro ao criar a prancha <b>" . $nome . "</b>!",
         "type" => "danger",
       );
     }
-    header("Location: showprancha.php");
+    header("Location: showprof.php");
     exit(0);
   } else {
     $code = $conn->error; // error code of the most recent operation
@@ -79,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en" dir="ltr">
 
 <head>
-  <title>Dashboard - Pranchas</title>
+  <title>Dashboard - Professores</title>
   <?php
   require_once '../sheets/dashboardHead.php';
   ?>
@@ -136,68 +113,52 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               <?php unset($_SESSION["message"]);
               }
               ?>
-
               <div class="card">
                 <div class="card-body">
-                  <h4 class="header-title">Editar Prancha</h4>
+                  <h4 class="header-title">Criar Professor</h4>
                   <br>
-                  <form action="editprancha.php?id_prancha=<?php echo $id_prancha; ?>&id_parceria=<?php echo $id_parceria; ?>" method="POST">
-                    <div class="form-group">
-                      <label for="inputname">Nome</label>
-                      <input type="text" class="form-control" name="inputname" id="inputname" value="<?php echo ($nome); ?>" required>
-                      <small id="name">
-                        Por favor preencha o campo
-                      </small>
-                    </div>
-                    <div class="form-row">
-                      <div class="form-group col-md-6">
-                        <label for="inputdesc">Descrição</label>
-                        <textarea type="text" class="form-control" name="inputdesc" id="inputdesc" rows="12" style="resize: vertical;" require><?php echo ($desc); ?></textarea>
-                        <small id="desc">
-                          Por favor preencha o campo
-                        </small>
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label for="inputpartner">Parceria</label>
-                        <select name="inputpartner" id="inputpartner" class="form-control">
+                  <form action="createprancha.php" method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                      <div class="form-group col-md-12">
+                        <label for="inputpartner">Professores <small>*Escolha o utilizador</small></label>
+                        <select name="inputpartner" id="inputpartner" class="form-control" required>
+                          <option value=""></option>
                           <?php
-                          $sql = "SELECT * FROM parcerias WHERE id_parceria = " . $id_parceria . ";";
+                          $sql = "SELECT * FROM users;";
                           $resultParceria = mysqli_query($conn, $sql);
                           while ($row = mysqli_fetch_assoc($resultParceria)) {
                             foreach ($row as $res => $key) {
-                              $p = $row['nome'];
+                              $id = $row['id'];
+                              $user = $row['nome'];
                             }
-                            echo "<option selected value='$id_parceria'>$p</option>";
-                          }
-                          $sql = "SELECT * FROM parcerias where nome <> '$p';";
-                          $resultP = mysqli_query($conn, $sql);
-                          while ($row = mysqli_fetch_assoc($resultP)) {
-                            foreach ($row as $res => $key) {
-                              $id = $row['id_parceria'];
-                              $parceria = $row['nome'];
-                            }
-                            echo "<option value='$id'>$parceria</option>";
+                            echo "<option value='$id'>$user</option>";
                           }
                           ?>
                         </select>
                         <small id="partner">
                           Por favor preencha o campo
                         </small>
-                        <br>
-                        <label for="">Imagem</label>
-                        <div class="custom-file form-group">
-                          <input type="file" name="inputImg" class="custom-file-input" accept=".png, .jpg, .jpeg" id="inputImg">
-                          <label class="custom-file-label" for="inputImg"><?php echo $img; ?></label>
-                          <small id="img">
-                            Por favor preencha o campo
-                          </small>
-                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-md-6">
+                        <label for="inputname">Nome</label>
+                        <input type="text" class="form-control" name="inputname" id="inputname" required>
+                        <small id="name">
+                          Por favor preencha o campo
+                        </small>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputemail">Email</label>
+                        <input type="text" class="form-control" name="inputemail" id="inputemail" style="resize: vertical;" required></input>
+                        <small id="desc">
+                          Por favor preencha o campo
+                        </small>
                       </div>
                     </div>
                     <div class="form-row justify-content-end">
-
                       <button type="submit" class="btn btn-primary" id="submitbtn">Confirmar</button>
-                      <a href="showprancha.php"><input type="button" value="Voltar" class="btn btn-danger" style="margin-left: 10px;"></a>
+                      <a href="showprof.php"><input type="button" value="Voltar" class="btn btn-danger" style="margin-left: 10px;"></a>
                     </div>
                   </form>
                 </div>

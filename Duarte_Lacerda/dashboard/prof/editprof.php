@@ -8,10 +8,10 @@ if (!isset($_SESSION['authenticated'])) {
 
 require_once '../../../conexao.php';
 
-$id_parceria = $_GET['id_parceria'];
-$id_prancha = $_GET['id_prancha'];
+$id_prof = $_GET['id_prof'];
+$id_user = $_GET['id_user'];
 
-$sql = "SELECT * FROM parcerias WHERE id_parceria = " . $id_parceria . ";";
+$sql = "SELECT * FROM users WHERE id = " . $id_user . ";";
 $resultParceria = mysqli_query($conn, $sql);
 while ($row = mysqli_fetch_assoc($resultParceria)) {
   foreach ($row as $res => $key) {
@@ -19,14 +19,13 @@ while ($row = mysqli_fetch_assoc($resultParceria)) {
   }
 }
 
-$sql = "SELECT * FROM pranchas WHERE id_prancha = " . $id_prancha . ";";
+$sql = "SELECT * FROM professor WHERE id = " . $id_user . ";";
 $result = mysqli_query($conn, $sql);
 while ($row = mysqli_fetch_assoc($result)) {
   foreach ($row as $res => $key) {
     $nome = $row['nome'];
-    $desc = $row['descricao'];
-    $img = $row['img'];
-    $data_pub = $row['data_pub'];
+    $email = $row['email'];
+    $especialidade = $row['especialidade'];
   }
 }
 
@@ -39,17 +38,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $tmp_name = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['tmp_name'] : "";
   $msg_erro = "";
 
-  $query = "UPDATE `pranchas` SET `nome` = '$nome1', `descricao` = '$desc1',  `id_parceria` = $partner WHERE `id_prancha` = $id_prancha;";
+  $query = "UPDATE `pranchas` SET `nome` = '$nome1', `descricao` = '$desc1',  `id_prof` = $partner WHERE `id_user` = $id_user;";
 
   if ($img1 != "" && getimagesize($tmp_name)) {
     // tratar upload da foto
-    $diretoria_upload = "upload/";
     $extensao = pathinfo($img1, PATHINFO_EXTENSION);
-    $imageDatabasePath = $diretoria_upload . sha1(microtime()) . "." . $extensao;
+    $imageDatabasePath = sha1(microtime()) . "." . $extensao;
     $newBoard = $imageDatabasePath;
 
     if (move_uploaded_file($tmp_name, $newBoard)) {
-      $query = "UPDATE `pranchas` SET `nome` ='$nome1', `descricao` = '$desc1', `img` = '$newBoard', id_parceria` = '$partner' WHERE id_prancha = '$id_prancha';";
+      $query = "UPDATE `pranchas` SET `nome` ='$nome1', `descricao` = '$desc1', `img` = '$newBoard', id_prof` = '$partner' WHERE id_user = '$id_user';";
     }
   }
 
@@ -141,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="card-body">
                   <h4 class="header-title">Editar Prancha</h4>
                   <br>
-                  <form action="editprancha.php?id_prancha=<?php echo $id_prancha; ?>&id_parceria=<?php echo $id_parceria; ?>" method="POST">
+                  <form action="editprancha.php?id_user=<?php echo $id_user; ?>&id_prof=<?php echo $id_prof; ?>" method="POST">
                     <div class="form-group">
                       <label for="inputname">Nome</label>
                       <input type="text" class="form-control" name="inputname" id="inputname" value="<?php echo ($nome); ?>" required>
@@ -161,19 +159,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <label for="inputpartner">Parceria</label>
                         <select name="inputpartner" id="inputpartner" class="form-control">
                           <?php
-                          $sql = "SELECT * FROM parcerias WHERE id_parceria = " . $id_parceria . ";";
+                          $sql = "SELECT * FROM parcerias WHERE id_prof = " . $id_prof . ";";
                           $resultParceria = mysqli_query($conn, $sql);
                           while ($row = mysqli_fetch_assoc($resultParceria)) {
                             foreach ($row as $res => $key) {
                               $p = $row['nome'];
                             }
-                            echo "<option selected value='$id_parceria'>$p</option>";
+                            echo "<option selected value='$id_prof'>$p</option>";
                           }
                           $sql = "SELECT * FROM parcerias where nome <> '$p';";
                           $resultP = mysqli_query($conn, $sql);
                           while ($row = mysqli_fetch_assoc($resultP)) {
                             foreach ($row as $res => $key) {
-                              $id = $row['id_parceria'];
+                              $id = $row['id_prof'];
                               $parceria = $row['nome'];
                             }
                             echo "<option value='$id'>$parceria</option>";
