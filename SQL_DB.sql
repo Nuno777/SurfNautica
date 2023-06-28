@@ -164,25 +164,25 @@ INSERT INTO users (email, nome, pass, permission) VALUES ('miguelcosta@gmail.com
 
 
 INSERT INTO professor (nome, email, foto, especialidade, id) 
-VALUES ('João Silva', 'joao@example.com', 'foto1.jpg', 'Surfista Profissional', 1);
+VALUES ('João Silva', 'joao@example.com', 'joao.jpg', 'Surfista Profissional', 1);
 INSERT INTO professor (nome, email, foto, especialidade, id) 
-VALUES ('Maria Santos', 'maria@example.com', 'foto2.jpg', 'Surfista Instrutor', 2);
+VALUES ('Maria Santos', 'maria@example.com', 'maria.jpg', 'Surfista Instrutor', 2);
 INSERT INTO professor (nome, email, foto, especialidade, id) 
-VALUES ('Pedro Costa', 'pedro@example.com', 'foto3.jpg', 'Surfista Competitivo', 3);
+VALUES ('Pedro Costa', 'pedro@example.com', 'pedro.jpg', 'Surfista Competitivo', 3);
 INSERT INTO professor (nome, email, foto, especialidade, id) 
-VALUES ('Diogo Costa', 'diogocosta@gmail.com', 'foto4.jpg', 'Surfista Instrutor', 5);
+VALUES ('Diogo Costa', 'diogocosta@gmail.com', 'diogo.jpg', 'Surfista Instrutor', 5);
 INSERT INTO professor (nome, email, foto, especialidade, id) 
-VALUES ('Luis Perdiz', 'luisperdiz@gmail.com', 'foto5.jpg', 'Surfista Competitivo', 6);
+VALUES ('Luis Perdiz', 'luisperdiz@gmail.com', 'luis.jpg', 'Surfista Competitivo', 6);
 INSERT INTO professor (nome, email, foto, especialidade, id) 
-VALUES ('Diogo Francisco', 'diogofrancisco@gmail.com', 'foto6.jpg', 'Surfista Profissional', 7);
+VALUES ('Diogo Francisco', 'diogofrancisco@gmail.com', 'diogof.jpg', 'Surfista Profissional', 7);
 INSERT INTO professor (nome, email, foto, especialidade, id) 
-VALUES ('João Dionísio', 'joaodionisio@gmail.com', 'foto7.jpg', 'Surfista Instrutor', 8);
+VALUES ('João Dionísio', 'joaodionisio@gmail.com', 'dionisio.jpg', 'Surfista Instrutor', 8);
 INSERT INTO professor (nome, email, foto, especialidade, id) 
-VALUES ('João Pedro', 'joaopedro@gmail.com', 'foto8.jpg', 'Surfista Instrutor', 9);
+VALUES ('João Pedro', 'joaopedro@gmail.com', 'joaop.jpg', 'Surfista Instrutor', 9);
 INSERT INTO professor (nome, email, foto, especialidade, id) 
-VALUES ('Ângelo Miguel', 'angelomiguel@gmail.com', 'foto9.jpg', 'Surfista Competitivo', 10);
+VALUES ('Ângelo Miguel', 'angelomiguel@gmail.com', 'angelo.jpg', 'Surfista Competitivo', 10);
 INSERT INTO professor (nome, email, foto, especialidade, id) 
-VALUES ('Miguel Costa', 'miguelcosta@gmail.com', 'foto10.jpg', 'Surfista Instrutor', 11);
+VALUES ('Miguel Costa', 'miguelcosta@gmail.com', 'miguel.jpg', 'Surfista Instrutor', 11);
 
 insert into parcerias (nome, descricao, img) values ('RipCurl', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'www.jpg');
 

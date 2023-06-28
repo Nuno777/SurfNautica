@@ -63,14 +63,6 @@ if (!isset($_SESSION['authenticated'])) {
                 <span class="nav-text">Aulas</span>
               </a>
             </li>
-
-            <li class>
-              <a class="sidenav-item-link" href="user_diasabertos.php">
-                <i class="mdi mdi-alpha-d-box-outline"></i>
-                <span class="nav-text">Dias Abertos</span>
-              </a>
-            </li>
-
             <li class="">
               <a class="sidenav-item-link" href="user_contacto.php">
                 <i class="mdi mdi-phone"></i>

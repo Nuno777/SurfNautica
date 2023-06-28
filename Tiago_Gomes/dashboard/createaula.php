@@ -95,8 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       </header>
 
 
-      <div class="content-wrapper">
-  <!-- Top -->
+<div class="content-wrapper">
   <div class="content">
     <div class="row">
       <div class="col-lg-12 mt-5">
@@ -161,14 +160,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
   </div>
 </div>
+<br>
 
-        <!-- End Top -->
-        <br>
-        <footer class="footer mt-auto">
-          <?php
-          require_once 'sheets/dashboardFooter.php';
-          ?>
-        </footer>
+<footer class="footer mt-auto">
+<?php
+  require_once 'sheets/dashboardFooter.php';
+?>
+</footer>
 
       </div>
       <script src="assets/plugins/jquery/jquery.min.js"></script>
