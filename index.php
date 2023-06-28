@@ -26,7 +26,7 @@
 
   <main id="main">
 
-    <!-- <section id="about" class="about">
+    <section id="about" class="about">
       <div class="container">
 
         <div class="row no-gutters">
@@ -211,7 +211,7 @@
         </div>
 
       </div>
-    </section> -->
+    </section>
 
   </main>
 

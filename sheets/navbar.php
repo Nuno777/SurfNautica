@@ -30,7 +30,6 @@ if (isset($_SESSION['authenticated'])) {
                     <i class="bi bi-chevron-down"></i>
                 </a>
                 <ul>
-                    <li><a href="#">História do Clube</a></li>
                     <li><a href="TiagoQuintino/partners.php">Parcerias</a></li>
                     <li><a href="Tiago_Gomes/professores.php">Professores</a></li>
                 </ul>
@@ -42,7 +41,6 @@ if (isset($_SESSION['authenticated'])) {
                 </a>
                 <ul>
                     <li><a href="Tiago_Gomes/diaaberto.php">Dias Abertos</a></li>
-                    <li><a href="#">Aulas</a></li>
                 </ul>
             </li>
             <li class="dropdown">

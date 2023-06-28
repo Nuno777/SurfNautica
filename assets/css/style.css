@@ -315,8 +315,8 @@ h6 {
   transition: 0.3s;
 }
 
-.navbar a:hover{
-color: #fff;
+.navbar a:hover {
+  color: #fff;
 }
 
 .navbar a i,
