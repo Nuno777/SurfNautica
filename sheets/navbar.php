@@ -32,7 +32,7 @@ if (isset($_SESSION['authenticated'])) {
                 <ul>
                     <li><a href="#">História do Clube</a></li>
                     <li><a href="TiagoQuintino/partners.php">Parcerias</a></li>
-                    <li><a href="Daniel_Silva/professores.php">Professores</a></li>
+                    <li><a href="Tiago_Gomes/professores.php">Professores</a></li>
                 </ul>
             </li>
             <li class="dropdown">

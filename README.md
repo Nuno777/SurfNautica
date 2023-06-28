@@ -1,2 +1,0 @@
-# SurfNautica
-Projeto SurfNautica
