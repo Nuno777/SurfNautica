@@ -20,7 +20,7 @@
     <div class="hero-container">
       <h1>Surf Em Peniche</h1>
       <h2>A vida é melhor quando fazes surf</h2>
-      <a href="Tiago_Gomes/diaaberto.php" class="btn-get-started scrollto"><i class="bx bx-chevron-down"></i></a>
+      <a href="#about" class="btn-get-started scrollto"><i class="bx bx-chevron-down"></i></a>
     </div>
   </section>
 
@@ -119,13 +119,12 @@
 
     <section id="cta" class="cta">
       <div class="container" data-aos="zoom-in">
-
-        <div class="text-center">
-          <h3>Call To Action</h3>
-          <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <a class="cta-btn" href="#">Call To Action</a>
+        <div class="section-title text-center">
+          <h2>Dias Abertos</h2>
+          <p>Quer aprender a surfar? Para você temos aulas de dias abertos gratuitamente, basta fazer a inscrição.</p>
+          <p>Para ver mais informações sobre os dias abertos, clique no <a href="Tiago_Gomes/diaaberto.php" class="cta-a"><b>ver mais</b></a>.</p>
+          <a class="cta-btn" href="Tiago_Gomes/diaaberto.php">Ver Mais</a>
         </div>
-
       </div>
     </section>
 
