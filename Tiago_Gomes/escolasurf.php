@@ -15,18 +15,9 @@ require('conexao.php')
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dia Aberto</title>
-  <link rel="stylesheet" href="css/diaaberto.css">
-  <link href="assets/css/navbar.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-  <link href="assets/img/favicon.ico" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-  <link rel="stylesheet" href="css/escolasurf.css">
+  <title>Escola de Surf</title>
+  <link rel="stylesheet" href="css/escoladesurf.css">
+
 </head>
 
 <body>
@@ -41,7 +32,9 @@ require('conexao.php')
     <div class="container-sm">
       <div class="container-fluid">
         <div class="embed-responsive embed-responsive-16by9">
-          <iframe class="embed-responsive-item" width="1280" height="720" src="https://www.youtube.com/embed/Qgix7zo3HUg" title="Video Promocional SurfNautica" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <div class="padding" style="padding-top: 150px;">
+            <iframe class="embed-responsive-item" width="1280" height="720" src="https://www.youtube.com/embed/Qgix7zo3HUg" title="Video Promocional SurfNautica" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
         </div>
       </div>
     </div>
@@ -67,6 +60,25 @@ require('conexao.php')
           </div>
         </div>
       </div>
+      <div class="card1 d-flex justify-content-center">
+        <div class="card mb-3 border-0">
+          <div class="row g-0 align-items-center">
+            <div class="col-md-8">
+              <div class="card-body">
+                <h4 class="card-title">O nosso website está a crescer</h4>
+                <p class="card-text">A SurfNautica já conta com algumas parcerias de grande nome.<br>
+                  Mais de 10 professores já estão ligados ao SurfNautica. Junta-te a nós!<br>
+                </p>
+                <p class="card-text"><small class="text-body-secondary">SurfNautica</small></p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <img src="img/homens-e-meninas-estao-surfando.jpg" class="img-fluid object-fit-cover">
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
     <footer id="footer">
       <?php
