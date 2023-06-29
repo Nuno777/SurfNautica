@@ -10,7 +10,6 @@ require('../conexao.php');
     <title>Equipamentos - SurfNautica</title>
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
     <link rel="stylesheet" href="css/equips.css">
-    <link rel="stylesheet" href="css/navbar.css">
     <!-- Favicons -->
     <link href="img/favicon.ico" rel="icon">
     <link href="assets/img/favicon.png" rel="apple-touch-icon">
@@ -25,6 +24,9 @@ require('../conexao.php');
     <link href="vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="css/navbar.css" rel="stylesheet">
 </head>
 
 <body>

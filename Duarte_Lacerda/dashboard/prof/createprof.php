@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           </a>
         </div>
         <?php
-        require_once '../sheets/dashboardmenu_prachas.php';
+        require_once '../sheets/dashboardmenu_prof.php';
         ?>
       </div>
     </aside>

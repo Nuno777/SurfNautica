@@ -7,11 +7,11 @@ require('../conexao.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>pranchas - SurfNautica</title>
+    <title>Pranchas - SurfNautica</title>
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
     <link rel="stylesheet" href="css/equips.css">
     <!-- Favicons -->
-    <link href="img/favicon.png" rel="icon">
+    <link href="img/favicon.ico" rel="icon">
     <link href="assets/img/favicon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->

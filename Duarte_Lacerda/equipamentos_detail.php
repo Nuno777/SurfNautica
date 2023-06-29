@@ -11,7 +11,7 @@ require('../conexao.php');
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
     <link rel="stylesheet" href="css/equips.css">
     <!-- Favicons -->
-    <link href="img/favicon.png" rel="icon">
+    <link href="img/favicon.ico" rel="icon">
     <link href="assets/img/favicon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
