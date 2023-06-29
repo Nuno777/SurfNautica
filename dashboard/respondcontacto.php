@@ -12,6 +12,14 @@ if (isset($_POST["editcontato"])) {
   $query = "UPDATE contacto SET resposta='$resposta' WHERE id_cont='$id_cont'";
   $result = mysqli_query($conn, $query);
 
+  //perms
+  $query = "SELECT permission from users where email = '{$_SESSION['email']}'";
+  $perms = mysqli_query($conn, $query);
+  $levelperm = mysqli_fetch_assoc($perms);
+  if ($levelperm['permission'] == 0) {
+    header('Location: ../dashboard/user_profile.php');
+  }
+
   // Definir Alerta - Operações (EDITAR) 
   if ($conn->affected_rows > 0) {
     $_SESSION["message"] = array(
@@ -153,9 +161,9 @@ if (isset($_POST["editcontato"])) {
 
                         </div>
                         <a href="dashboardContacto.php" class="btn btn-secondary" name="voltarcontato" type="submit">Voltar</a>
-                        <button type="submit"  class="btn btn-primary" name="editcontato" id="respondbutton" disabled>Submeter</button>
+                        <button type="submit" class="btn btn-primary" name="editcontato" id="respondbutton" disabled>Responder</button>
 
-                        
+
                       </form>
                     </div>
                   </div>

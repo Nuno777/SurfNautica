@@ -58,12 +58,6 @@ if (!isset($_SESSION['authenticated'])) {
             </li>
 
             <li class="">
-              <a class="sidenav-item-link" href="">
-                <i class="mdi mdi-chart-line"></i>
-                <span class="nav-text">Aulas</span>
-              </a>
-            </li>
-            <li class="">
               <a class="sidenav-item-link" href="user_contacto.php">
                 <i class="mdi mdi-phone"></i>
                 <span class="nav-text">Contactos</span>

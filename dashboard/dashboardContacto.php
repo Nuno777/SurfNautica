@@ -11,6 +11,14 @@ $result = mysqli_query($conn, $query);
 $resultMenssage = mysqli_query($conn, $query);
 $resultRespond = mysqli_query($conn, $query);
 $resultdelete = mysqli_query($conn, $query);
+
+//perms
+$query = "SELECT permission from users where email = '{$_SESSION['email']}'";
+$perms = mysqli_query($conn, $query);
+$levelperm = mysqli_fetch_assoc($perms);
+if ($levelperm['permission'] == 0) {
+  header('Location: ../dashboard/user_profile.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -80,16 +88,16 @@ $resultdelete = mysqli_query($conn, $query);
                   <br>
                   <div class="single-table">
                     <div class="table-responsive table-hover">
-                    
                       <table class="table text-center ">
                         <thead class="text-uppercase bg-dark">
                           <tr class="text-white">
 
                             <th scope="col">Nome</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Assunto</th>
-                            <th scope="col">Resposta</th>
-                            <th scope="col"></th>
+                            <th scope="col">Assunto <br><small>*clica para ver a mensagem</small></th>
+                            <th scope="col">Data da Mensagem</th>
+                            <th scope="col">Resposta<br><small>*clica para ver a resposta</small></th>
+                            <th scope="col">Eliminar</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -98,13 +106,12 @@ $resultdelete = mysqli_query($conn, $query);
                             echo "<tr>";
                             echo "<td>" . $row->nome . "</td>";
                             echo "<td>" . $row->email . "</td>";
-                            echo "<td><a data-toggle='modal' data-target='#viewmensagem$row->id_cont' class='text-primary' name='Menssage'><span class='txtcontact'>" .substr("$row->assunto", 0, 75). "...</span></a></td>";
-                            echo "<td><a data-toggle='modal' data-target='#viewrespond$row->id_cont' class='text-primary' name='Menssage'><i class='mdi mdi-comment-text-outline'></i></a></td>";
-                            // echo "<td><a href='respondcontacto.php?id_cont=$row->id_cont' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
+                            echo "<td><a data-toggle='modal' data-target='#viewmensagem$row->id_cont' class='text-primary' name='Menssage'><span class='txtcontact text-primary'><i class='mdi mdi-comment-text-outline'></i> " . substr("$row->assunto", 0, 25) . "...</span></a></td>";
+                            echo "<td>" . $row->data_pub . "</td>";
+                            echo "<td><a data-toggle='modal' data-target='#viewrespond$row->id_cont' class='text-primary' name='resposta'><span class='txtcontact text-primary' ><i class='mdi mdi-comment-text-outline'></i> " . substr("$row->resposta", 0, 25) . "...</span></a></td>";
                             echo "<td><a data-toggle='modal' data-target='#deletecontato$row->id_cont' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
                             echo "</tr>";
                           }
-
                           ?>
                         </tbody>
                       </table>
@@ -121,12 +128,13 @@ $resultdelete = mysqli_query($conn, $query);
         <?php while ($row = $resultMenssage->fetch_object()) {
           $mensagem = $row->mensagem;
           $assunto = $row->assunto;
+          $data = $row->data_pub;
         ?>
           <div class="modal fade" id='viewmensagem<?php echo $row->id_cont ?>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Mensagem de <b><?php echo $row->nome; ?></b></h5><span class="span-contat"><?php echo $row->email; ?></span>
+                  <h5 class="modal-title" id="exampleModalLabel">Mensagem de <b><?php echo $row->nome; ?></b></h5><span class="span-contat"><?php echo $row->email; ?><br><small><?php echo $row->data_pub;?></small></span>
                 </div>
                 <!-- assunto -->
                 <div class="modal-body">
@@ -147,9 +155,10 @@ $resultdelete = mysqli_query($conn, $query);
                     </div>
                   </div>
                 </div>
+                
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
                   <?php echo "<a href='respondcontacto.php?id_cont=$row->id_cont' type='button' class='btn btn-primary'>Responder</a>"; ?>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
                 </div>
               </div>
             </div>
@@ -162,12 +171,13 @@ $resultdelete = mysqli_query($conn, $query);
         <!-- Modal de ver resposta -->
         <?php while ($row = $resultRespond->fetch_object()) {
           $resposta = $row->resposta;
+
         ?>
           <div class="modal fade" id='viewrespond<?php echo $row->id_cont ?>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Resposta ao <b><?php echo $row->nome; ?></b></h5><span class="span-contat"><?php echo $row->email; ?></span>
+                  <h5 class="modal-title" id="exampleModalLabel">Resposta ao <b><?php echo $row->nome; ?></b></h5><span class="span-contat"><?php echo $row->email; ?><br><small><?php echo $row->data_pub;?></small></span>
                 </div>
 
                 <!-- mensagem -->
@@ -202,8 +212,8 @@ $resultdelete = mysqli_query($conn, $query);
                   <p>Deseja eliminar esta mensagem?</p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
                   <a href='deletecontato.php?id_cont=<?php echo $row->id_cont . '&email=' . $row->email ?>' type='button' class='btn btn-primary'>Sim</a>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
                 </div>
               </div>
             </div>

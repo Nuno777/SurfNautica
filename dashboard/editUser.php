@@ -12,6 +12,15 @@ if (isset($_POST["editUser"])) {
   $nome = $_POST["nome"];
   $query = "UPDATE users SET nome='$nome' WHERE id='$id'";
   $result = mysqli_query($conn, $query);
+
+  //perms
+  $query = "SELECT permission from users where email = '{$_SESSION['email']}'";
+  $perms = mysqli_query($conn, $query);
+  $levelperm = mysqli_fetch_assoc($perms);
+  if ($levelperm['permission'] == 0) {
+    header('Location: ../dashboard/user_profile.php');
+  }
+
   // Definir Alerta - Operações (UPDATE) 
   if ($conn->affected_rows > 0) {
     $_SESSION["message"] = array(
@@ -115,7 +124,7 @@ if (isset($_POST["editUser"])) {
                           <div class="col-sm-6">
                             <div class="form-group">
                               <label for="fname">Nome</label>
-                              <input type="text" class="form-control" placeholder="Nome" id="nome" name="nome" value="<?= $nome ?>" >
+                              <input type="text" class="form-control" placeholder="Nome" id="nome" name="nome" value="<?= $nome ?>">
                             </div>
                           </div>
 

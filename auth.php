@@ -81,7 +81,7 @@ if (count($_SESSION['errors']) != 0) {
       <div class="row justify-content-center mt-5">
         <div class="text-center page-404">
           <h1 class="error-title">Erro</h1>
-          <p class="pt-4 pb-5 error-subtitle">Cliente não registado.</p>
+          <p class="pt-4 pb-5 error-subtitle">Ocorreu um erro.</p>
           <a href="index.php" class="btn btn-primary btn-pill">Página Inicial</a>
         </div>
       </div>

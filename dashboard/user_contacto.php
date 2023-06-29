@@ -1,17 +1,21 @@
 <?php
 session_start();
-require_once '../conexao.php';
 if (!isset($_SESSION['authenticated'])) {
   header('Location: ../login.php');
   exit(0);
 }
 
+require_once '../conexao.php';
+$query = "SELECT * FROM contacto WHERE email = '{$_SESSION['email']}' ORDER BY id_cont DESC";
+$result = mysqli_query($conn, $query);
+$resultMenssage = mysqli_query($conn, $query);
+?>
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
-  <title>Painel do Cliente | Contactos</title>
+  <title>Painel do Cliente | Mensagem</title>
   <?php
   require_once 'sheets/dashboardHead.php';
   ?>
@@ -54,20 +58,6 @@ if (!isset($_SESSION['authenticated'])) {
               <a class="sidenav-item-link" href="user_profile.php">
                 <i class="mdi mdi-monitor-dashboard"></i>
                 <span class="nav-text">Painel</span>
-              </a>
-            </li>
-
-            <li class="">
-              <a class="sidenav-item-link" href="">
-                <i class="mdi mdi-chart-line"></i>
-                <span class="nav-text">Aulas</span>
-              </a>
-            </li>
-
-            <li>
-              <a class="sidenav-item-link" href="">
-                <i class="mdi mdi-wechat"></i>
-                <span class="nav-text">Dias Abertos</span>
               </a>
             </li>
 
@@ -116,17 +106,86 @@ if (!isset($_SESSION['authenticated'])) {
           <!-- Top -->
           <div class="card">
             <div class="card-body">
-              <h4 class="header-title">Contactos</h4>
+              <h4 class="header-title">Mensagem</h4>
               <br>
               <div class="single-table">
-                <div class="table-responsive table-hover">
+                <?php
+                while ($row = $result->fetch_object()) {
+                ?>
+                  <div class="card d-inline-block" style="width: 18rem;">
+                    <div class="card-body">
+                      <span>Assunto</span>
+                      <h5 class="card-title"><?php echo substr("$row->assunto", 0, 25); ?></h5>
+                      <br>
+                      <span>Resposta</span>
+                      <p class="card-text" style="color: black;"><?php echo substr("$row->resposta", 0, 50); ?> ...</p>
+                      <br>
+                      <small><?php echo $row->data_pub; ?></small>
+                      <br>
 
-                
 
-                </div>
+                      <?php echo "<a data-toggle='modal' data-target='#viewmensagem$row->id_cont' class='text-primary' name='Menssage'>Ver Mais</a>"; ?><br>
+                    </div>
+                  </div>
+                <?php
+                } ?>
+
               </div>
             </div>
           </div>
+          <!-- Modal de ver mensagem -->
+          <?php while ($row = $resultMenssage->fetch_object()) {
+            $mensagem = $row->mensagem;
+            $assunto = $row->assunto;
+            $data = $row->data_pub;
+            $resposta = $row->resposta;
+          ?>
+            <div class="modal fade" id='viewmensagem<?php echo $row->id_cont ?>' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Mensagem</h5><span class="span-contat"><?php echo $row->email; ?><br><small><?php echo $data; ?></small></span>
+                  </div>
+                  <!-- assunto -->
+                  <div class="modal-body">
+                    <span>Assunto</span>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <textarea type="text" class="form-control" rows="3" style="resize: none" disabled><?= $assunto ?></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- mensagem -->
+                  <div class="modal-body">
+                    <span>Mensagem</span>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <textarea type="text" class="form-control" rows="7" style="resize: none" disabled><?= $mensagem ?></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- mensagem -->
+                  <div class="modal-body">
+                    <span>Resposta</span>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <textarea type="text" class="form-control" rows="7" style="resize: none" disabled><?= $resposta ?></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <?php
+          }
+          ?>
+          <!-- Modal de ver mensagem fechou -->
 
         </div>
       </div>
