@@ -10,36 +10,24 @@ require_once '../../../conexao.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-  $partner = array_key_exists('inputpartner', $_POST) ? $_POST['inputpartner'] : "";
+  $id_user = array_key_exists('inputuser', $_POST) ? $_POST['inputuser'] : "";
   $nome = array_key_exists('inputname', $_POST) ? $_POST['inputname'] : "";
-  $img = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['name'] : "";
-  $desc = array_key_exists('inputemail', $_POST) ? $_POST['inputemail'] : "";
-  $tmp_name = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['tmp_name'] : "";
+  $email = array_key_exists('inputemail', $_POST) ? $_POST['inputemail'] : "";
+  $espec = array_key_exists('inputspec', $_POST) ? $_POST['inputspec'] : "";
   $msg_erro = "";
 
-  $query = "INSERT INTO `pranchas` (`nome`, `descricao`, `id_parceria`) VALUES ('$nome', '$desc', '$partner');";
-
-  if ($img != "" && getimagesize($tmp_name)) {
-    // tratar upload da foto
-    $extensao = pathinfo($img, PATHINFO_EXTENSION);
-    $imageDatabasePath = sha1(microtime()) . "." . $extensao;
-    $newPrancha = $imageDatabasePath;
-
-    if (move_uploaded_file($tmp_name, $newPrancha)) {
-      $query = "INSERT INTO `pranchas` (`nome`, `descricao`, `img`, `id_parceria`) VALUES ('$nome', '$desc', '$newPrancha', '$partner')";
-    }
-  }
-
+  $query = "INSERT INTO `professor` (`nome`, `email`, `especialidade`, `id`) VALUES ('$nome', '$email', '$espec', '$id_user');";
   $sucesso_query = mysqli_query($conn, $query);
+
   if ($sucesso_query) {
     if ($conn->affected_rows > 0) {
       $_SESSION["message"] = array(
-        "content" => "A prancha <b>" .  $nome . "</b> foi criada com sucesso!",
+        "content" => "O professor <b>" .  $nome . "</b> foi criado com sucesso!",
         "type" => "success",
       );
     } else {
       $_SESSION["message"] = array(
-        "content" => "Ocorreu um erro ao criar a prancha <b>" . $nome . "</b>!",
+        "content" => "Ocorreu um erro ao criar o professor <b>" . $nome . "</b>!",
         "type" => "danger",
       );
     }
@@ -117,11 +105,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="card-body">
                   <h4 class="header-title">Criar Professor</h4>
                   <br>
-                  <form action="createprancha.php" method="POST" enctype="multipart/form-data">
+                  <form action="createprof.php" method="POST" enctype="multipart/form-data">
                     <div class="row">
-                      <div class="form-group col-md-12">
-                        <label for="inputpartner">Professores <small>*Escolha o utilizador</small></label>
-                        <select name="inputpartner" id="inputpartner" class="form-control" required>
+                      <div class="form-group col-md-6">
+                        <label for="inputuser">Professores <small>*Escolha o utilizador</small></label>
+                        <select name="inputuser" id="inputuser" class="form-control" required>
                           <option value=""></option>
                           <?php
                           $sql = "SELECT * FROM users;";
@@ -135,7 +123,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                           }
                           ?>
                         </select>
-                        <small id="partner">
+                        <small id="user">
+                          Por favor preencha o campo
+                        </small>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputspec">Especialidade</label>
+                        <input type="text" class="form-control" name="inputspec" id="inputspec" required>
+                        <small id="espec">
                           Por favor preencha o campo
                         </small>
                       </div>
@@ -151,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       <div class="form-group col-md-6">
                         <label for="inputemail">Email</label>
                         <input type="text" class="form-control" name="inputemail" id="inputemail" style="resize: vertical;" required></input>
-                        <small id="desc">
+                        <small id="email">
                           Por favor preencha o campo
                         </small>
                       </div>
@@ -200,10 +195,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           });
           jQuery('input[name="dateRange"]').on('cancel.daterangepicker', function(ev, picker) {
             jQuery(this).val('');
-          });
-          $(".custom-file-input").on("change", function() {
-            var fileName = $(this).val().split("\\").pop();
-            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
           });
         });
       </script>

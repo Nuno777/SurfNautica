@@ -31,40 +31,28 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-  $partner = array_key_exists('inputpartner', $_POST) ? $_POST['inputpartner'] : "";
-  $nome1 = array_key_exists('inputname', $_POST) ? $_POST['inputname'] : "";
-  $img1 = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['name'] : "";
-  $desc1 = array_key_exists('inputdesc', $_POST) ? $_POST['inputdesc'] : "";
-  $tmp_name = array_key_exists('inputImg', $_FILES) ? $_FILES['inputImg']['tmp_name'] : "";
+  $id = array_key_exists('inputuser', $_POST) ? $_POST['inputuser'] : "";
+  $nome = array_key_exists('inputname', $_POST) ? $_POST['inputname'] : "";
+  $email = array_key_exists('inputemail', $_POST) ? $_POST['inputemail'] : "";
+  $espec = array_key_exists('inputspec', $_POST) ? $_POST['inputspec'] : "";
   $msg_erro = "";
 
-  $query = "UPDATE `pranchas` SET `nome` = '$nome1', `descricao` = '$desc1',  `id_prof` = $partner WHERE `id_user` = $id_user;";
-
-  if ($img1 != "" && getimagesize($tmp_name)) {
-    // tratar upload da foto
-    $extensao = pathinfo($img1, PATHINFO_EXTENSION);
-    $imageDatabasePath = sha1(microtime()) . "." . $extensao;
-    $newBoard = $imageDatabasePath;
-
-    if (move_uploaded_file($tmp_name, $newBoard)) {
-      $query = "UPDATE `pranchas` SET `nome` ='$nome1', `descricao` = '$desc1', `img` = '$newBoard', id_prof` = '$partner' WHERE id_user = '$id_user';";
-    }
-  }
-
+  $query = "UPDATE `professor` SET `nome` = '$nome', `email` = '$email1',  `especialidade` = '$espec', `id` = '$id_user' WHERE `id_user` = $id;";
   $sucesso_query = mysqli_query($conn, $query);
+
   if ($sucesso_query) {
     if ($conn->affected_rows > 0) {
       $_SESSION["message"] = array(
-        "content" => "A prancha <b>" .  $nome . "</b> foi editada com sucesso!",
+        "content" => "O professor <b>" .  $nome . "</b> foi alterado com sucesso!",
         "type" => "success",
       );
     } else {
       $_SESSION["message"] = array(
-        "content" => "Ocorreu um erro ao editar a prancha <b>" . $nome . "</b>!",
+        "content" => "Ocorreu um erro ao alterar o professor <b>" . $nome . "</b>!",
         "type" => "danger",
       );
     }
-    header("Location: showprancha.php");
+    header("Location: showprof.php");
     exit(0);
   } else {
     $code = $conn->error; // error code of the most recent operation
@@ -134,68 +122,69 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               <?php unset($_SESSION["message"]);
               }
               ?>
-
               <div class="card">
                 <div class="card-body">
-                  <h4 class="header-title">Editar Prancha</h4>
+                  <h4 class="header-title">Criar Professor</h4>
                   <br>
-                  <form action="editprancha.php?id_user=<?php echo $id_user; ?>&id_prof=<?php echo $id_prof; ?>" method="POST">
-                    <div class="form-group">
-                      <label for="inputname">Nome</label>
-                      <input type="text" class="form-control" name="inputname" id="inputname" value="<?php echo ($nome); ?>" required>
-                      <small id="name">
-                        Por favor preencha o campo
-                      </small>
-                    </div>
-                    <div class="form-row">
+                  <form action="createprof.php" method="POST" enctype="multipart/form-data">
+                    <div class="row">
                       <div class="form-group col-md-6">
-                        <label for="inputdesc">Descrição</label>
-                        <textarea type="text" class="form-control" name="inputdesc" id="inputdesc" rows="12" style="resize: vertical;" require><?php echo ($desc); ?></textarea>
-                        <small id="desc">
-                          Por favor preencha o campo
-                        </small>
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label for="inputpartner">Parceria</label>
-                        <select name="inputpartner" id="inputpartner" class="form-control">
+                        <label for="inputuser">Professores <small>*Escolha o utilizador</small></label>
+                        <select name="inputuser" id="inputuser" class="form-control" required>
                           <?php
-                          $sql = "SELECT * FROM parcerias WHERE id_prof = " . $id_prof . ";";
+                          $sql = "SELECT * FROM users WHERE id = '$id_user';";
+                          $resultUser = mysqli_query($conn, $sql);
+                          while ($row = mysqli_fetch_assoc($resultUser)) {
+                            foreach ($row as $res => $key) {
+                              $id = $row['id'];
+                              $user = $row['nome'];
+                            }
+                          }
+                          ?>
+                          <option value="<?php echo ($id); ?>"><?php echo ($user); ?></option>
+                          <?php
+                          $sql = "SELECT * FROM users;";
                           $resultParceria = mysqli_query($conn, $sql);
                           while ($row = mysqli_fetch_assoc($resultParceria)) {
                             foreach ($row as $res => $key) {
-                              $p = $row['nome'];
+                              $id = $row['id'];
+                              $user = $row['nome'];
                             }
-                            echo "<option selected value='$id_prof'>$p</option>";
-                          }
-                          $sql = "SELECT * FROM parcerias where nome <> '$p';";
-                          $resultP = mysqli_query($conn, $sql);
-                          while ($row = mysqli_fetch_assoc($resultP)) {
-                            foreach ($row as $res => $key) {
-                              $id = $row['id_prof'];
-                              $parceria = $row['nome'];
-                            }
-                            echo "<option value='$id'>$parceria</option>";
+                            echo "<option value='$id'>$user</option>";
                           }
                           ?>
                         </select>
-                        <small id="partner">
+                        <small id="user">
                           Por favor preencha o campo
                         </small>
-                        <br>
-                        <label for="">Imagem</label>
-                        <div class="custom-file form-group">
-                          <input type="file" name="inputImg" class="custom-file-input" accept=".png, .jpg, .jpeg" id="inputImg">
-                          <label class="custom-file-label" for="inputImg"><?php echo $img; ?></label>
-                          <small id="img">
-                            Por favor preencha o campo
-                          </small>
-                        </div>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputspec">Especialidade</label>
+                        <input type="text" class="form-control" name="inputspec" id="inputspec" value="<?php echo ($especialidade) ?>" required>
+                        <small id="espec">
+                          Por favor preencha o campo
+                        </small>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-md-6">
+                        <label for="inputname">Nome</label>
+                        <input type="text" class="form-control" name="inputname" id="inputname" value="<?php echo ($nome) ?>" required>
+                        <small id="name">
+                          Por favor preencha o campo
+                        </small>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputemail">Email</label>
+                        <input type="text" class="form-control" name="inputemail" id="inputemail" style="resize: vertical;" value="<?php echo ($email) ?>" required></input>
+                        <small id="email">
+                          Por favor preencha o campo
+                        </small>
                       </div>
                     </div>
                     <div class="form-row justify-content-end">
-
                       <button type="submit" class="btn btn-primary" id="submitbtn">Confirmar</button>
-                      <a href="showprancha.php"><input type="button" value="Voltar" class="btn btn-danger" style="margin-left: 10px;"></a>
+                      <a href="showprof.php"><input type="button" value="Voltar" class="btn btn-danger" style="margin-left: 10px;"></a>
                     </div>
                   </form>
                 </div>
@@ -237,10 +226,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           });
           jQuery('input[name="dateRange"]').on('cancel.daterangepicker', function(ev, picker) {
             jQuery(this).val('');
-          });
-          $(".custom-file-input").on("change", function() {
-            var fileName = $(this).val().split("\\").pop();
-            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
           });
         });
       </script>
