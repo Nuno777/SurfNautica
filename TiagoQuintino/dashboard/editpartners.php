@@ -9,7 +9,6 @@ if (!isset($_SESSION['authenticated'])) {
 require_once '../../conexao.php';
 
 $id_parceria = $_GET['id_parceria'];
-$id_parceria = $_GET['id_parceria'];
 
 $sql = "SELECT * FROM parcerias WHERE id_parceria = " . $id_parceria . ";";
 $resultParceria = mysqli_query($conn, $sql);
@@ -23,7 +22,7 @@ $sql = "SELECT * FROM parcerias WHERE id_parceria = " . $id_parceria . ";";
 $result = mysqli_query($conn, $sql);
 while ($row = mysqli_fetch_assoc($result)) {
   foreach ($row as $res => $key) {
-    $nome2 = $row['nome'];
+    $nome1 = $row['nome'];
     $desc = $row['descricao'];
     $img = $row['img'];
   }
@@ -42,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   if ($img1 != "" && getimagesize($tmp_name)) {
     // tratar upload da foto
-    $diretoria_upload = "upload/";
+    $diretoria_upload = "../assets/img/";
     $extensao = pathinfo($img1, PATHINFO_EXTENSION);
     $imageDatabasePath = $diretoria_upload . sha1(microtime()) . "." . $extensao;
     $newPar = $imageDatabasePath;
@@ -78,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en" dir="ltr">
 
 <head>
-  <title>Dashboard - Equipamento</title>
+  <title>Dashboard - Parcerias</title>
   <?php
   require_once 'sheets/dashboardHead.php';
   ?>
@@ -138,12 +137,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
               <div class="card">
                 <div class="card-body">
-                  <h4 class="header-title">Editar Equipamento</h4>
+                  <h4 class="header-title">Editar Parceria</h4>
                   <br>
                   <form action="editpartners.php?id_parceria=<?php echo $id_parceria; ?>&id_parceria=<?php echo $id_parceria; ?>" method="POST">
                     <div class="form-group">
                       <label for="inputname">Nome</label>
-                      <input type="text" class="form-control" name="inputname" id="inputname" value="<?php echo ($nome2); ?>" required>
+                      <input type="text" class="form-control" name="inputname" id="inputname" value="<?php echo ($nome1); ?>" required>
                       <small id="name">
                         Por favor preencha o campo
                       </small>
@@ -157,10 +156,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </small>
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="">Imagem</label>
+                        <label for="inputImg">Imagem</label>
                         <div class="custom-file form-group">
                           <input type="file" name="inputImg" class="custom-file-input" accept=".png, .jpg, .jpeg" id="inputImg">
-                          <label class="custom-file-label" for="inputImg"><?php echo $img; ?></label>
+                          <label class="custom-file-label" for="inputImg" value="<?php echo ($img); ?>"><?php echo ($img); ?></label>
                           <small id="img">
                             Por favor preencha o campo
                           </small>
@@ -169,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <div class="form-row justify-content-end">
                       <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Confirmar</button>
-                      <a href="showpartners.php"><input type="button" value="Voltar" class="btn btn-primary" style="margin-left: 10px;"></a>
+                      <a href="showpartners.php"><input type="button" value="Voltar" class="btn btn-danger" style="margin-left: 10px;"></a>
                     </div>
                   </form>
                 </div>

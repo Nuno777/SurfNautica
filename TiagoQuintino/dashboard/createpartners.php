@@ -143,7 +143,7 @@ if ($sucesso_query) {
                     </div>
                     <div class="form-row  justify-content-end">
                       <button type="submit" id="submitbtn" class="btn btn-primary">Criar</button>
-                      <a href="showpartners.php"><input type="button" value="Voltar" class="btn btn-primary " style="margin-left: 10px;"></a>
+                      <a href="showpartners.php"><input type="button" value="Voltar" class="btn btn-danger" style="margin-left: 10px;"></a>
                     </div>
 
                   </form>

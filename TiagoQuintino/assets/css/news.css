@@ -2,36 +2,6 @@ body {
     font-family: "Open Sans", sans-serif;
     color: #444444;
   }
-  
-
-
-
-  .tabela-pranchas {
-    width: 60%;
-    border-collapse: collapse;
-    border: 2px solid black;
-    margin: auto;
-  }
-  
-  .tabela-pranchas th {
-    background-color: #67b0d1;
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #dee2e6;
-  }
-  
-  .tabela-pranchas td {
-    padding: 8px;
-    border-bottom: 1px solid #dee2e6;
-  }
-  
-  .tabela-pranchas tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-
-
-
 
   a {
     text-decoration: none;
@@ -115,16 +85,13 @@ body {
   
 }
 
+p{
 
+  font-weight: bold;
+}
 .box h2{
   color: white;
 }
-
-
-
-
-
-
 
   /*  header */
   #header {
@@ -178,8 +145,6 @@ th, td {
     text-align: left;
 }
  
-
-
 
   @media (max-width: 768px) {
     #header.header-scrolled {

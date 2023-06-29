@@ -45,7 +45,7 @@ require('database.php');
                         $descri = $row['descricao'];
                     }
                     echo ("  <div class='col-lg-4'>
-                <img class='bd-placeholder-img rounded-circle' src='assets/img/" . $pic . "' alt='Image' width='140' height='140'> </img>
+                <img class='bd-placeholder-img rounded-circle object-fit-contain border rounded' src='assets/img/" . $pic . "' alt='Image' width='140' height='140'> </img>
                 <h2>" . $name . "</h2>
                 <p>" . $descri . "</p>
             </div>");
@@ -57,41 +57,19 @@ require('database.php');
             mysqli_close($connection);
             ?>
 
-
-            <!--  <div class="row mt-md-5">
-            <div class="col-lg-4">
-                <img class="bd-placeholder-img rounded-circle" src="img/<?php /* echo ($pic); */ ?>" alt="Image" width="140" height="140"> </img>
-                <h2><?php /*  echo ($name); */ ?></h2>
-                <p><?php /* echo ($descri); */ ?></p>
-            </div>
-
-            <div class="col-lg-4">
-                <img class="bd-placeholder-img rounded-circle" src="img/<?php /* echo ($pic); */ ?>" alt="Image" width="140" height="140"> </img>
-                <h2><?php /*  echo ($name); */ ?></h2>
-                <p><?php /* echo ($descri); */ ?></p>
-            </div>
-
-            <div class="col-lg-4">
-                <img class="bd-placeholder-img rounded-circle" src="img/<?php /* echo ($pic); */ ?>" alt="Image" width="140" height="140"> </img>
-                <h2><?php /*  echo ($name); */ ?></h2>
-                <p><?php /* echo ($descri); */ ?></p>
-            </div>
-         </div> -->
         </div>
         <hr class="featurette-divider">
 
         <div class="row featurette">
             <div class="col-md-7">
                 <!-- Nova Parceira com IPL em que os estudantes tem desconto de 10% a 15% + imagem do IPL  -->
-                <h2 class="featurette-heading">Novo Parceiro. <span class="text-muted">IPL.</span></h2>
-                <p class="lead">descricao do Parceiro.</p>
-                <p><a class="btn btn-secondary" href="#">Visitar &raquo;</a></p>
+                <h2 class="featurette-heading">Novo Parceiro. <span class="text-muted">Instituto Politecnico de Leiria(IPL).</span></h2>
+                <p class="lead">O IPL oferece uma ampla gama de cursos nas áreas de ciências, tecnologia, artes, saúde, educação, negócios e turismo.
+                    Os estudantes Poderão participar de aulas e ter um desconto.</p>
+                <p><a class="btn btn-secondary" href="https://www.ipleiria.pt/">Visitar &raquo;</a></p>
             </div>
             <div class="col-md-5">
-                <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#eee" /><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
-                </svg>
+                <img src="assets/img/ipl.png" class="featurette-image img-fluid mx-auto" width="500" height="500"></img>
 
             </div>
         </div>

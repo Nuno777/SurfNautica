@@ -45,24 +45,25 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="assets/img/surf.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>1 noticia</h5>
-              <p>################</p>
+            <img src="assets/imgnews/MEO_RIPCURL.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block bg-gray object-fit-cover">
+              <h5 class="mt-5px">1 noticia</h5>
+              <p> MEO Rip Curl Pro Portugal</p>
             </div>
           </div>
           <div class="carousel-item">
-            <img src="assets/img/surf.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
+            <img src="assets/imgnews/france.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block object-fit-cover">
               <h5>2 noticia</h5>
-              <p>>################</p>
+              <p class="font-weight-bold"> França pode ser Campeã Mundial ISA em El Salvador caso Erin Brooks seja desclassificada
+              </p>
             </div>
           </div>
           <div class="carousel-item">
-            <img src="assets/img/surf.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
+            <img src="assets/imgnews/portugal.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block object-fit-cover">
               <h5>3 noticia</h5>
-              <p>>################</p>
+              <p class="font-weight-bold"> Portugal recebe etapa do circuito mundial entre 8 e 16 de Março de 2023 </p>
               </p>
             </div>
           </div>
@@ -83,28 +84,56 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col">
           <div class="card shadow-sm">
-            <img src="assets/img/teresa.jpg" alt="">
+            <img src="assets/imgnews/kui.jpg" alt="">
+            <div class="card-body">
+              <p class="card-text">Dia de abertura com excelentes condições em Krui Pro QS 5.000</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="https://www.worldsurfleague.com/posts/517390/opening-day-delights-with-excellent-conditions-at-krui-pro-qs-5-000"><button type="button" class="btn btn-sm btn-outline-secondary border-0">Ver</button></a>
+                </div>
+                <small class="text-body-secondary"></small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="assets/imgnews/layback.jpg" alt="">
+            <div class="card-body">
+              <p class="card-text">Títulos do LayBack Pro Prainha serão decididos neste sábado no Rio de Janeiro</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="https://www.worldsurfleague.com/posts/517194/t-tulos-do-layback-pro-prainha-ser-o-decididos-neste-s-bado-no-rio-de-janeiroF"><button type="button" class="btn btn-sm btn-outline-secondary border-0">Ver</button></a>
+                </div>
+                <small class="text-body-secondary"></small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="assets/imgnews/teresa.jpg" alt="">
             <div class="card-body">
               <p class="card-text">Surf: Teresa Bonvalot garante qualificação olímpica</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <a href="https://maisfutebol.iol.pt/modalidades/surf/surf-teresa-bonvalot-garante-qualificacao-olimpica"><button type="button" class="btn btn-sm btn-outline-secondary border-0">Ver</button></a>
-
                 </div>
                 <small class="text-body-secondary"></small>
               </div>
             </div>
           </div>
         </div>
+
         <div class="col">
           <div class="card shadow-sm">
-            <img src="assets/img/teresa.jpg" alt="">
+            <img src="assets/imgnews/WSL.png" alt="">
             <div class="card-body">
-              <p class="card-text">Surf: Teresa Bonvalot garante qualificação olímpica</p>
+              <p class="card-text">2019 WSL Championship Tour: Em dezembro de 2019, Italo Ferreira, do Brasil, venceu o World Surf League (WSL) Men's Championship Tour, enquanto Carissa Moore, do Havaí, conquistou o Women's Championship Tour.
+              </p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a href="https://maisfutebol.iol.pt/modalidades/surf/surf-teresa-bonvalot-garante-qualificacao-olimpica"><button type="button" class="btn btn-sm btn-outline-secondary border-0">Ver</button></a>
-
+                  <a href="https://www.worldsurfleague.com/watch/406076/2019-championship-tour"><button type="button" class="btn btn-sm btn-outline-secondary border-0">Ver</button></a>
                 </div>
                 <small class="text-body-secondary"></small>
               </div>
@@ -113,60 +142,28 @@
         </div>
         <div class="col">
           <div class="card shadow-sm">
-            <img src="assets/img/teresa.jpg" alt="">
+            <img src="assets/imgnews/kuiwinners.jpg" alt="">
             <div class="card-body">
-              <p class="card-text">Surf: Teresa Bonvalot garante qualificação olímpica</p>
+              <p class="card-text">Vencedores do Krui Pro QS 5.000 e Pro Junior de 2023 são coroados</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a href="https://maisfutebol.iol.pt/modalidades/surf/surf-teresa-bonvalot-garante-qualificacao-olimpica"><button type="button" class="btn btn-sm btn-outline-secondary border-0">Ver</button></a>
+                  <a href="https://www.worldsurfleague.com/posts/517571/2023-krui-pro-qs-5-000-and-pro-junior-winners-crowned"><button type=" button" class="btn btn-sm btn-outline-secondary border-0">Ver</button></a>
 
                 </div>
                 <small class="text-body-secondary"></small>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="assets/img/pedro.jpg" alt="">
-            <div class="card-body">
-              <p class="card-text">Morreu Pedro Martins de Lima, o 'pai' do surf em Portugal</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <a href="https://www.noticiasaominuto.com/desporto/2213526/morreu-pedro-martins-de-lima-o-pai-do-surf-em-portugal"><button type="button" class="btn btn-sm btn-outline-secondary border-0">Ver</button></a>
-
-                </div>
-                <small class="text-body-secondary"></small>
-              </div>
-            </div>
-          </div>
         </div>
         <div class="col">
           <div class="card shadow-sm">
-            <img src="assets/img/pedro.jpg" alt="">
+            <img src="assets/imgnews/pedro.jpg" alt="">
             <div class="card-body">
               <p class="card-text">Morreu Pedro Martins de Lima, o 'pai' do surf em Portugal</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <a href="https://www.noticiasaominuto.com/desporto/2213526/morreu-pedro-martins-de-lima-o-pai-do-surf-em-portugal"><button type="button" class="btn btn-sm btn-outline-secondary border-0">Ver</button></a>
-
-                </div>
-                <small class="text-body-secondary"></small>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="assets/img/pedro.jpg" alt="">
-            <div class="card-body">
-              <p class="card-text">Morreu Pedro Martins de Lima, o 'pai' do surf em Portugal</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <a href="https://www.noticiasaominuto.com/desporto/2213526/morreu-pedro-martins-de-lima-o-pai-do-surf-em-portugal"><button type="button" class="btn btn-sm btn-outline-secondary border-0">Ver</button></a>
-
                 </div>
                 <small class="text-body-secondary"></small>
               </div>
@@ -182,32 +179,22 @@
       <div class="box mx-auto mt-5 mb-4">
 
         <div class="video-list">
-          <video class="active" src="assets/img/vid1.mp4" muted></video>
-          <video src="assets/img/vid2.mp4" muted></video>
-          <video src="assets/img/vid3.mp4" muted></video>
-          <video src="assets/img/vid4.mp4" muted></video>
-          <video src="assets/img/vid5.mp4" muted></video>
+          <video class="active" src="assets/imgnews/vid1.mp4" muted></video>
+          <video src="assets/imgnews/vid2.mp4" muted></video>
+          <video src="assets/imgnews/vid3.mp4" muted></video>
+          <video src="assets/imgnews/vid4.mp4" muted></video>
+          <video src="assets/imgnews/vid5.mp4" muted></video>
 
         </div>
 
 
         <div class="main-video">
-          <video src="assets/img/vid1.mp4" muted controls autoplay></video>
-
-
-
+          <video src="assets/imgnews/vid1.mp4" muted controls autoplay></video>
         </div>
-
       </div>
     </div>
 
   </main>
-
-
-
-
-
-
 
   <?php
   include_once("footer.php");
@@ -220,6 +207,7 @@
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/js/jquery-3.6.3.min.js"></script>
   <script src="assets/js/news.js"></script>
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
 </body>
