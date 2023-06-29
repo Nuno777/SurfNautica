@@ -131,8 +131,8 @@ require('conexao.php')
   </div>
 
   <div style="background-image: url('img/banner.jpg'); background-size: cover; background-position: center center; text-align: center; padding: 20px;">
-    <h3 style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Faz Login para poderes inscrever-te!</h3>
-    <a href="../login.php" class="btn btn-light" style="background-color: #263f49; color: white;">Ir para o Login</a>
+    <h3 style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Vê todos os Professores associados ao nosso website</h3>
+    <a href="../login.php" class="btn btn-light" style="background-color: #263f49; color: white;">Página dos Professores</a>
   </div>
 
 
