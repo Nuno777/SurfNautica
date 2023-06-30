@@ -38,15 +38,13 @@ if (isset($_POST['login'])) {
                         <i class="fa-solid fa-envelope icon"></i>
                         <input type="email" name="email" id="email" value="<?php if (isset($_COOKIE["email"])) {
                                                                                 echo $_COOKIE["email"];
-                                                                            } ?>" pattern="^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3})|(aero|coop|info|museum|name))$" required>
-                        <label for="">Email</label>
+                                                                            } ?>" placeholder="Email" pattern="^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3})|(aero|coop|info|museum|name))$" required>
                     </div>
                     <div class="inputbox">
                         <i class="fa-solid fa-lock icon"></i>
                         <input type="password" name="password" id="password" value="<?php if (isset($_COOKIE["password"])) {
                                                                                         echo $_COOKIE["password"];
-                                                                                    } ?>" required>
-                        <label for="">Password</label>
+                                                                                    } ?>" placeholder="Password" required>
                     </div>
                     <div class="remember">
                         <label for=""><input type="checkbox" name="rememberMe">&nbspLembrar-me&nbsp</label>

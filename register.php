@@ -74,23 +74,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <h2>Registo</h2>
           <div class="inputbox">
             <i class="fa-solid fa-signature icon"></i>
-            <input type="text" name="nome" id="nome" required>
-            <label for="">Name</label>
+            <input type="text" name="nome" id="nome" placeholder="Nome" required>
           </div>
           <div class="inputbox">
             <i class="fa-solid fa-envelope icon"></i>
-            <input type="email" name="email" id="email" pattern="^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3})|(aero|coop|info|museum|name))$" required>
-            <label for="">Email</label>
+            <input type="email" name="email" id="email" placeholder="Email" pattern="^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3})|(aero|coop|info|museum|name))$" required>
           </div>
           <div class="inputbox">
             <i class="fa-solid fa-lock icon"></i>
-            <input type="password" name="password" id="password" required>
-            <label for="">Password</label>
+            <input type="password" name="password" id="password" placeholder="Password" required>
           </div>
           <div class="inputbox">
             <i class="fa-solid fa-lock icon"></i>
-            <input type="password" name="cpassword" id="cpassword" required>
-            <label for="">Confirmar Password</label>
+            <input type="password" name="cpassword" id="cpassword" placeholder="Confirmar Password" required>
           </div>
           <div class="button">
             <button class="submit" id="register" name="register">Registar</button>

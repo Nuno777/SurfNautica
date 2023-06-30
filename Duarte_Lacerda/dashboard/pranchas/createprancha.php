@@ -223,6 +223,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <script src="../assets/js/chart.js"></script>
       <script src="../assets/js/map.js"></script>
       <script src="../assets/js/custom.js"></script>
+      <script defer src="../assets/js/dash_script.js"></script>
 </body>
 
 </html>

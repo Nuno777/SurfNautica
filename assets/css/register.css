@@ -127,6 +127,11 @@ input::-webkit-inner-spin-button {
     border: none;
 }
 
+::placeholder {
+    color: #fff;
+    opacity: 1;
+}
+
 .button {
     position: relative;
     width: 100%;

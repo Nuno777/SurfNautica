@@ -16,4 +16,3 @@
 
 <script src="../assets/plugins/nprogress/nprogress.js"></script>
 <script src="../assets/js/jquery-3.4.1.min.js"></script>
-<script defer src="../assets/js/dash_script.js"></script>
