@@ -708,7 +708,7 @@ section {
 .about .content .about-btn {
   display: inline-block;
   background: #67b0d1;
-  padding: 6px 44px 8px 30px;
+  padding: 6px 30px 8px 30px;
   color: #fff;
   border-radius: 50px;
   transition: 0.3s;

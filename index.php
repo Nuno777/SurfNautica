@@ -1,3 +1,9 @@
+<?php
+require_once 'conexao.php';
+$query = "SELECT nome, titulo, data1, horas FROM diaaberto, professor WHERE diaaberto.id_prof = professor.id_prof ORDER BY data1 DESC;";
+$result = mysqli_query($conn, $query);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,35 +38,34 @@
         <div class="row no-gutters">
           <div class="content col-xl-5 d-flex align-items-stretch" data-aos="fade-up">
             <div class="content">
-              <h3>Voluptatem dignissimos provident quasi</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-              </p>
-              <a href="#" class="about-btn">About us <i class="bx bx-chevron-right"></i></a>
+              <h3>Nossa Escola de Surf</h3>
+              <p> Vem já melhorar ou praticar o teu surf nos dias de melhores ondas que o mar litoral tem para oferecer</p>
+              <a href="Tiago_Gomes/escolasurf.php" class="about-btn">Ver Mais</a>
             </div>
           </div>
           <div class="col-xl-7 d-flex align-items-stretch">
             <div class="icon-boxes d-flex flex-column justify-content-center">
               <div class="row">
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
-                  <i class="bx bx-receipt"></i>
-                  <h4>Corporis voluptates sit</h4>
-                  <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+                  <i class='bx bx-home-alt-2'></i>
+                  <h4>Professores</h4>
+                  <p>Na nossa escola de surf temos vários professores qualificados na área do surf</p>
                 </div>
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
                   <i class="bx bx-cube-alt"></i>
-                  <h4>Ullamco laboris nisi</h4>
-                  <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+                  <h4>Parcerias</h4>
+                  <p>Pode ver algumas parcerias que vão ajudar na nossa escola de surf </p>
                 </div>
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
-                  <i class="bx bx-images"></i>
-                  <h4>Labore consequatur</h4>
-                  <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+                  <img src="assets/img/board.png" alt="">
+                  <br><br>
+                  <h4>Pranchas</h4>
+                  <p>Pode ver vários tipos de pranchas que são patrocinados pelas nossas parcerias</p>
                 </div>
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
                   <i class="bx bx-shield"></i>
-                  <h4>Beatae veritatis</h4>
-                  <p>Expedita veritatis consequuntur nihil tempore laudantium vitae denat pacta</p>
+                  <h4>Equipamentos</h4>
+                  <p>Temos vários equipamentos de surf que são patrocinados pelas nossas parcerias</p>
                 </div>
               </div>
             </div>
@@ -70,49 +75,47 @@
       </div>
     </section>
 
-    <section id="services" class="services">
+    <section id="services" class="services section-bg">
       <div class="container">
 
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-          <h2>Services</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <h2>Nossos Serviços</h2>
         </div>
 
         <div class="row">
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box" data-aos="fade-up">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+              <div class="icon"><i class='bx bxs-lock-open-alt'></i></div>
+              <h4 class="title"><a href="Tiago_Gomes/diaaberto.php">Dias Abertos</a></h4>
+              <p class="description">Se quiser aprender a surfar tem aulas de surf no dia aberto totalmente grátis </p>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+              <div class="icon"><i class='bx bxs-group'></i></div>
+              <h4 class="title"><a href="Tiago_Gomes/diaaberto.php">Aulas em Grupo</a></h4>
+              <p class="description">Se quiser aprender mais um pouco tem aulas de grupo com um professor de surf</p>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4 class="title"><a href="">Magni Dolores</a></h4>
-              <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+              <div class="icon"><i class='bx bxs-user'></i></div>
+              <h4 class="title"><a href="Tiago_Gomes/diaaberto.php">Aulas Privadas</a></h4>
+              <p class="description">Se quiseres ter mais privacidade e aprender mais tem aulas privadas com um personal trainer</p>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-              <div class="icon"><i class="bx bx-world"></i></div>
-              <h4 class="title"><a href="">Nemo Enim</a></h4>
-              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+              <div class="icon"><i class='bx bxs-clinic'></i></div>
+              <h4 class="title"><a href="Tiago_Gomes/diaaberto.php">Clínicas de Surf</a></h4>
+              <p class="description">Se quiser passar umas semanas só com a natureza pode visitar a nossa clínica nas ferias </p>
             </div>
           </div>
 
         </div>
-
       </div>
     </section>
 
@@ -128,87 +131,49 @@
       </div>
     </section>
 
-
-    <section id="testimonials" class="testimonials section-bg">
+    <section id="services" class="services">
       <div class="container">
 
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-          <h2>Testimonials</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <h2>Aulas de Dias Abertos</h2>
         </div>
+        <div class="row">
+          <?php
+          $counter = 0;
 
-        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                <h3>Saul Goodman</h3>
-                <h4>Ceo &amp; Founder</h4>
+          while ($row = $result->fetch_object()) {
+            if ($counter >= 4) {
+              break; 
+            }
+          ?>
+            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+              <div class="icon-box" data-aos="fade-up">
+                <div class="icon"><i class='bx bxs-lock-open-alt'></i></div>
+                <h4 class="title"><a href="Tiago_Gomes/diaaberto.php">Dia Aberto</a></h4>
+                <p class="description">Aula com o(a) professor(a) <?php echo $row->nome?> na <?php echo $row->titulo?> às <?php echo $row->horas?></p>
+                <small class="description"><?php echo  $row->data1;?></small>
               </div>
             </div>
+          <?php
+            $counter++;
+          }
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                <h3>Sara Wilsson</h3>
-                <h4>Designer</h4>
+          if ($counter == 0) {
+          ?>
+            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+              <div class="icon-box" data-aos="fade-up">
+                <div class="icon"><i class='bx bxs-lock-open-alt'></i></div>
+                <h4 class="title"><a href="Tiago_Gomes/diaaberto.php">Dias Abertos</a></h4>
+                <p class="description">Não temos nenhum dia aberto disponível neste momento </p>
               </div>
             </div>
+          <?php
+          }
+          ?>
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-                <h4>Store Owner</h4>
-              </div>
-            </div>
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                <h3>Matt Brandon</h3>
-                <h4>Freelancer</h4>
-              </div>
-            </div>
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
-              </div>
-            </div>
-
-          </div>
-          <div class="swiper-pagination"></div>
         </div>
-
       </div>
     </section>
 

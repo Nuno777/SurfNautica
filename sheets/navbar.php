@@ -53,7 +53,7 @@ if (isset($_SESSION['authenticated'])) {
                     <li><a href="Duarte_Lacerda/equipamentos.php">Equipamentos</a></li>
                 </ul>
             </li>
-            <li><a class="nav-link scrollto" href="noticias.php">Noticias</a></li>
+            <li><a class="nav-link scrollto" href="TiagoQuintino/Noticias.php">Noticias</a></li>
             <li><a class="nav-link scrollto" href="contacto.php">Contactos</a></li>
             <?php
             if (isset($_SESSION['authenticated'])) {
