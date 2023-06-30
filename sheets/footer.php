@@ -19,13 +19,13 @@
                 <h4>Informações</h4>
                 <ul>
                     <li><i class="bx bx-chevron-right"></i> <a href="Tiago_Gomes/diaaberto.php">Dias Abertos</a></li>
-                    <li><i class="bx bx-chevron-right"></i> <a href="#">Notícias</a></li>
+                    <li><i class="bx bx-chevron-right"></i> <a href="TiagoQuintino/Noticias.php">Notícias</a></li>
                 </ul>
             </div>
             <div class="col-lg-3 col-md-6 footer-links">
                 <h4>Outros Links</h4>
                 <ul>
-                    <li><i class="bx bx-chevron-right"></i> <a href="#">Parcerias</a></li>
+                    <li><i class="bx bx-chevron-right"></i> <a href="TiagoQuintino/partners.php">Parcerias</a></li>
                     <li><i class="bx bx-chevron-right"></i> <a href="contacto.php">Contacto</a></li>
                 </ul>
             </div>
