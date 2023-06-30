@@ -121,16 +121,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       <div class="form-group col-md-6">
                         <label for="inputdata1">Data</label>
                         <input type="date" class="form-control" name="inputdata1" id="inputdata1" rows="2" required>
+                        <small id="data">
+                          Por favor preencha o campo
+                        </small>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="inputtitulo">Titulo</label>
                         <input type="text" class="form-control" name="inputtitulo" id="inputtitulo" required>
+                        <small id="titulo">
+                          Por favor preencha o campo
+                        </small>
                       </div>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="inputhoras">Horas</label>
                         <input type="text" class="form-control" name="inputhoras" id="inputhoras" required></input>
+                        <small id="horas">
+                          Por favor preencha o campo
+                        </small>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="inputid_prof">Escolher Professor</label>
@@ -147,11 +156,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                           }
                           ?>
                         </select>
+                        <small id="professor">
+                          Por favor preencha o campo
+                        </small>
                       </div>
                     </div>
                     <div class="form-row justify-content-end">
-                      <button type="submit" class="btn btn-primary">Criar</button>
-                      <a href="showaula.php"><input type="button" value="Voltar" class="btn btn-primary" style="margin-left: 10px;"></a>
+                      <button type="submit" id="submitbtn" class="btn btn-primary">Criar</button>
+                      <a href="showaula.php"><input type="button" value="Voltar" class="btn btn-danger" style="margin-left: 10px;"></a>
                     </div>
                   </form>
                 </div>
