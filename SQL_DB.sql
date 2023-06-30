@@ -184,7 +184,19 @@ VALUES ('Ângelo Miguel', 'angelomiguel@gmail.com', 'angelo.jpg', 'Surfista Comp
 INSERT INTO professor (nome, email, foto, especialidade, id) 
 VALUES ('Miguel Costa', 'miguelcosta@gmail.com', 'miguel.jpg', 'Surfista Instrutor', 11);
 
-insert into parcerias (nome, descricao, img) values ('RipCurl', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'www.jpg');
+insert into parcerias (nome, descricao, img) values ('RipCurl', 'Distribui equipamentos de surf', 'RipCurl.jpg');/* CSI;RIPCURL;JSI;LS;FS*/
+insert into parcerias (nome, descricao, img) values ('Channel Islands Surfboards', 'Fabrica pranchas de surf', 'CSI_AMS.png');
+insert into parcerias (nome, descricao, img) values ('Rusty Surfboards', 'Distribui equipamentos de surf', 'RS.jpg');
+insert into parcerias (nome, descricao, img) values ('Firewire Surfboards', 'Fabrica pranchas de surf', 'FS.svg');
+insert into parcerias (nome, descricao, img) values ('Billabong', 'Distribui equipamentos de surf', 'Bill.png');
+insert into parcerias (nome, descricao, img) values ('JS Industries', 'Fabrica pranchas de surf', 'JSI.png');
+insert into parcerias (nome, descricao, img) values ('Quiksilver', 'Distribui equipamentos de surf', 'Quik.png');
+insert into parcerias (nome, descricao, img) values ('Lost Surfboards', 'Fabrica pranchas de surf', 'LS.svg');
+insert into parcerias (nome, descricao, img) values ('O´Neill', 'Distribui equipamentos de surf', 'ON.png');
+insert into parcerias (nome, descricao, img) values ('Al Merrick Surfboards', 'Fabrica pranchas de surf', 'CSI_AMS.png');
+
+
+
 
 insert into equipamentos (nome, descricao, img, id_parceria) values ('Fato', 'Apesar de muitos surfistas negligenciarem o uso de roupas adequadas, esse aspecto também é muito relevante para a segurança, principalmente em relação à temperatura da água.Uma boa wetsuit (roupa de borracha ou neoprene) é essencial para surfar em águas frias, pois esse tipo de roupa deixa o corpo do surfista mais protegido e evita, por exemplo, a ocorrência de uma hipotermia. Já quando a água está com uma temperatura mais elevada e o sol está muito forte, o indicado é combinar o uso de uma bermuda bastante confortável com uma camiseta de lycra que deixe o surfista protegido da radiação solar.', 'qedhb2hbb3b4.jpg', 1);
 insert into equipamentos (nome, descricao, img, id_parceria) values ('Leach', 'Este é um equipamento essencial para o surf. A leash nada mais é que aquela corda que fica com uma ponta fixada à prancha e a outra presa ao tornozelo do surfista. As principais funções da leash são evitar que o surfista perca o contato com a sua prancha e auxiliá-lo no retorno para cima dela após uma queda.', 'y2u23g44h3h1b312.jpg', 1);
