@@ -21,3 +21,15 @@
     margin: 50px;
 }
 
+
+@media (max-width: 767px) {
+    .container-sm,
+    .container-fluid {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  
+    .embed-responsive::before {
+      padding-top: 75%;
+    }
+  }

@@ -10,7 +10,7 @@
                     <i class="bi bi-chevron-down"></i></a>
                 <ul>
                     <li><a href="../TiagoQuintino/partners.php">Parcerias</a></li>
-                    <li><a href="../professores.php">Professores</a></li>
+                    <li><a href="../../Tiago_Gomes/professores.php">Professores</a></li>
                 </ul>
             </li>
             <li class="dropdown"><a href="../../Tiago_Gomes/escolasurf.php" class="nav-link scrollto"><span>Escola
