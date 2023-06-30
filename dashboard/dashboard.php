@@ -183,7 +183,7 @@ if ($levelperm['permission'] == 0) {
                     </thead>
                     <tbody>
                       <?php
-                      $query = "SELECT id,nome,email,permission, CASE WHEN permission = 1 THEN 'Administrador' WHEN permission = 2 THEN 'Professor'  WHEN permission = 0 THEN 'Cliente' ELSE permission END AS permission FROM users WHERE permission='0' OR permission='1' ORDER BY permission <1";
+                      $query = "SELECT id,nome,email,permission, CASE WHEN permission = 1 THEN 'Professor' WHEN permission = 2 THEN 'Administrador'  WHEN permission = 0 THEN 'Cliente' ELSE permission END AS permission FROM users WHERE permission='0' OR permission='1' ORDER BY permission <1";
                       $result = mysqli_query($conn, $query);
                       $resultdelete = mysqli_query($conn, $query);
                       while ($row = $result->fetch_object()) {

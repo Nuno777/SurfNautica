@@ -150,17 +150,17 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 
-INSERT INTO users (email, nome, pass, permission) VALUES ('user1@example.com', 'João Silva', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
-INSERT INTO users (email, nome, pass, permission) VALUES ('user2@example.com', 'Maria Santos', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
-INSERT INTO users (email, nome, pass, permission) VALUES ('user3@example.com', 'Pedro Costa', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
-INSERT INTO users (email, nome, pass, permission) VALUES ('admin@gmail.com', 'Admin', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 1);
-INSERT INTO users (email, nome, pass, permission) VALUES ('diogocosta@gmail.com', 'Diogo Costa', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
-INSERT INTO users (email, nome, pass, permission) VALUES ('luisperdiz@gmail.com', 'Luis Perdiz', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
-INSERT INTO users (email, nome, pass, permission) VALUES ('diogofrancisco@gmail.com', 'Diogo Francisco', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
-INSERT INTO users (email, nome, pass, permission) VALUES ('joaodionisio@gmail.com', 'João Dionísio', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
-INSERT INTO users (email, nome, pass, permission) VALUES ('joaopedro@gmail.com', 'João Pedro', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
-INSERT INTO users (email, nome, pass, permission) VALUES ('angelomiguel@gmail.com', 'Ângelo Miguel', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
-INSERT INTO users (email, nome, pass, permission) VALUES ('miguelcosta@gmail.com', 'Miguel Costa', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 0);
+INSERT INTO users (email, nome, pass, permission) VALUES ('user1@example.com', 'João Silva', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 1);
+INSERT INTO users (email, nome, pass, permission) VALUES ('user2@example.com', 'Maria Santos', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 1);
+INSERT INTO users (email, nome, pass, permission) VALUES ('user3@example.com', 'Pedro Costa', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 1);
+INSERT INTO users (email, nome, pass, permission) VALUES ('admin@gmail.com', 'Admin', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 2);
+INSERT INTO users (email, nome, pass, permission) VALUES ('diogocosta@gmail.com', 'Diogo Costa', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 1);
+INSERT INTO users (email, nome, pass, permission) VALUES ('luisperdiz@gmail.com', 'Luis Perdiz', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 1);
+INSERT INTO users (email, nome, pass, permission) VALUES ('diogofrancisco@gmail.com', 'Diogo Francisco', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 1);
+INSERT INTO users (email, nome, pass, permission) VALUES ('joaodionisio@gmail.com', 'João Dionísio', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 1);
+INSERT INTO users (email, nome, pass, permission) VALUES ('joaopedro@gmail.com', 'João Pedro', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 1);
+INSERT INTO users (email, nome, pass, permission) VALUES ('angelomiguel@gmail.com', 'Ângelo Miguel', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 1);
+INSERT INTO users (email, nome, pass, permission) VALUES ('miguelcosta@gmail.com', 'Miguel Costa', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 1);
 
 
 INSERT INTO professor (nome, email, foto, especialidade, id) 
@@ -215,3 +215,7 @@ INSERT INTO diaaberto (titulo, data1, horas, id_prof)
 VALUES ('Quintas', '2023-07-18 00:00:00', '17h-18h', 2);
 INSERT INTO diaaberto (titulo, data1, horas, id_prof) 
 VALUES ('Sábado', '2023-07-20 00:00:00', '17h-18h', 3);
+
+INSERT INTO contacto (email, nome, assunto, mensagem) VALUES ('angelomiguel@gmail.com', 'Ângelo Miguel', 'Sobre os dias abertos', 'Queria perguntar se é possível fazer um dia aberto para sábado dia 1. Se for possível às 15h agradecia.');
+INSERT INTO contacto (email, nome, assunto, mensagem) VALUES ('maria@example.com', 'Maria Santos', 'Prancha Gun', 'Queria saber a parceria da prancha gun, estou interessado e queria entrar em contacto com a parceria da prancha gun.');
+
