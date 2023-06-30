@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       <div class="form-group col-md-6">
                         <label for="inputImg">Imagem</label>
                         <div class="custom-file form-group">
-                          <input type="file" name="inputImg" class="custom-file-input" accept=".png, .jpg, .jpeg" id="inputImg">
+                          <input type="file" name="inputImg" class="custom-file-input" accept=".png, .jpg, .jpeg, svg" id="inputImg">
                           <label class="custom-file-label" for="inputImg" value="<?php echo ($img); ?>"><?php echo ($img); ?></label>
                           <small id="img">
                             Por favor preencha o campo
@@ -167,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       </div>
                     </div>
                     <div class="form-row justify-content-end">
-                      <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Confirmar</button>
+                      <button type="submit" class="btn btn-primary" id="submitbtn">Confirmar</button>
                       <a href="showpartners.php"><input type="button" value="Voltar" class="btn btn-danger" style="margin-left: 10px;"></a>
                     </div>
                   </form>
