@@ -76,8 +76,13 @@ $resultdelete = mysqli_query($conn, $query);
 
               <div class="card">
                 <div class="card-body">
-                  <h4 class="header-title">Parcerias<a href="createpartners.php" style="margin-left: 25px;"><button type="button" class="btn btn-primary btn-sm">Criar parcerias</button></a></h4>
-
+                  <div class="row">
+                    <h4 class="header-title">Parcerias<a href="createpartners.php" style="margin-left: 25px; margin-right: 25px;"><button type="button" class="btn btn-primary btn-sm">Criar Parceiro</button></a></h4>
+                    <form class="form-inline" method="POST" action="showpartners.php">
+                      <input type="search" name="inputsearch" class="form-control" placeholder="Nome..." aria-label="Search" aria-describedby="search-addon" />
+                      <button class="btn btn-primary" name="btnsearch" type="submit"><span class="mdi mdi-magnify"></span></button>
+                    </form>
+                  </div>
                   <br>
                   <div class="single-table">
                     <div class="table-responsive">
@@ -88,12 +93,72 @@ $resultdelete = mysqli_query($conn, $query);
                             <th scope="col">Nome</th>
                             <th scope="col">Descrição</th>
                             <th scope="col">Imagem</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
+                            <th scope="col">Editar</th>
+                            <th scope="col">Eliminar</th>
                           </tr>
                         </thead>
                         <tbody>
                           <?php
+                          $search = '';
+                          if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                            $search = $_POST['inputsearch'];
+                            $sql = "SELECT parcerias.id_parceria, parcerias.nome, parcerias.descricao, parcerias.img FROM parcerias WHERE parcerias.nome LIKE '%$search%';";
+                            if (isset($_POST['btnsearch']) && $_POST['inputsearch'] != '') {
+                              $sucesso_query = mysqli_query($conn, $sql);
+                              if ($sucesso_query->num_rows != 0) {
+                                while ($row = mysqli_fetch_assoc($sucesso_query)) {
+                                  foreach ($row as $res => $key) {
+                                    $id_parceria = $row['id_parceria'];
+                                    $nome = $row['nome'];
+                                    $desc = $row['descricao'];
+                                    $img = $row['img'];
+                                  }
+                                  echo "<tr>";
+                                  echo "<td>" . $nome . "</td>";
+                                  echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#viewpartner$id_parceria' class='text-primary' name='Menssage'>" . substr("$desc", 0, 75) . "</a> </td>";
+                                  echo "<td>" . $img . "</td>";
+
+                                  echo "<td><a href='editpartners.php?id_parceria=$id_parceria' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
+                                  echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#deletepartners$id_parceria' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
+                                  echo "</tr>";
+                                }
+                              }
+                            } else if (isset($_POST['btnsearch']) && $_POST['inputsearch'] == '') {
+                              unset($_SESSION["message"]);
+                              while ($row = mysqli_fetch_assoc($result)) {
+                                foreach ($row as $res => $key) {
+                                  $id_parceria = $row['id_parceria'];
+                                  $nome = $row['nome'];
+                                  $desc = $row['descricao'];
+                                  $img = $row['img'];
+                                  }
+                                echo "<tr>";
+                                echo "<td>" . $nome . "</td>";
+                                echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#viewpartners$id_parceria' class='text-primary' name='Menssage'>" . substr("$desc", 0, 75) . "</a> </td>";
+                                echo "<td>" . $img . "</td>";
+                                echo "<td><a href='editpartners.php?id_parceria=$id_parceria' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
+                                echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#deletepartners$id_parceria' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
+                                echo "</tr>";
+                              }
+                            }
+                          } else {
+                            unset($_SESSION["message"]);
+                            while ($row = mysqli_fetch_assoc($result)) {
+                              foreach ($row as $res => $key) {
+                                $id_parceria = $row['id_parceria'];
+                                $nome = $row['nome'];
+                                $desc = $row['descricao'];
+                                $img = $row['img'];
+                              }
+                              echo "<tr>";
+                              echo "<td>" . $nome . "</td>";
+                              echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#viewpartners$id_parceria' class='text-primary' name='Menssage'>" . substr("$desc", 0, 75) . "</a> </td>";
+                              echo "<td>" . $img . "</td>";
+                              echo "<td><a href='editpartners.php?id_parceria=$id_parceria' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
+                              echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#deletepartners$id_parceria' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";
+                              echo "</tr>";
+                            }
+                          }
                           while ($row = mysqli_fetch_assoc($result)) {
                             foreach ($row as $res => $key) {
                               $id_parceria = $row['id_parceria'];
@@ -103,7 +168,7 @@ $resultdelete = mysqli_query($conn, $query);
                             }
                             echo "<tr>";
                             echo "<td>" . $nome . "</td>";
-                            echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#viewpartner$id_parceria' class='text-primary' name='Menssage'>".substr("$desc",0,75)."</a> </td>";
+                            echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#viewpartner$id_parceria' class='text-primary' name='Menssage'>" . substr("$desc", 0, 75) . "</a> </td>";
                             echo "<td>" . $img . "</td>";
                             echo "<td><a href='editpartners.php?id_parceria=$id_parceria' class='text-warning' name='edit'><i class='mdi mdi-pencil'></i></a></td>";
                             echo "<td><a style='cursor: pointer;' data-toggle='modal' data-target='#deletepartners$id_parceria' class='text-danger' name='delete'><i class='mdi mdi-trash-can-outline'></i></a></td>";

@@ -59,11 +59,11 @@ function validateDesc() {
 // Validate Image
 $("#img").hide();
 let imgError = true;
-$("#imputImg").keyup(function () {
+$("#inputImg").keyup(function () {
   validateImg();
 });
 function validateImg() {
-  let imgValue = $("#imputImg").val();
+  let imgValue = $("#inputImg").val();
   if (imgValue === "") {
     $("#img").show();
     imgError = true;
@@ -78,11 +78,10 @@ function validateImg() {
 // Submit button
 $("#submitbtn").click(function () {
   let nameValid = validateName();
-  let partnerValid = validatePartner();
   let descValid = validateDesc();
   let imgValid = validateImg();
 
-  if (nameValid && partnerValid && descValid && imgValid) {
+  if (nameValid && descValid && imgValid) {
     return true;
   } else {
     return false;
