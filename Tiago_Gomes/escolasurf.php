@@ -66,8 +66,10 @@ require('conexao.php')
             <div class="col-md-8">
               <div class="card-body">
                 <h4 class="card-title">O nosso website está a crescer</h4>
-                <p class="card-text">A SurfNautica já conta com algumas parcerias de grande nome.<br>
+                <p class="card-text">A SurfNautica já conta com algumas parcerias de grande nome como a RipCurl e a SportZone.<br>
                   Mais de 10 professores já estão ligados ao SurfNautica. Junta-te a nós!<br>
+                  <br>
+                  Informamos-te sobre as <a href="../TiagoQuintino/Noticias.php">notícias</a> mais recentes do mundo do surf.
                 </p>
                 <p class="card-text"><small class="text-body-secondary">SurfNautica</small></p>
               </div>
